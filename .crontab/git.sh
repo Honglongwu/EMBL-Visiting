@@ -3,5 +3,6 @@
 cd /g/steinmetz/hsun/
 git add *.py
 git add *.sh
+git add *.R
 git commit -a -m 'hanice'
 git push origin master
