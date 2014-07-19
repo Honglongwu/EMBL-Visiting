@@ -1,3 +1,4 @@
+#!/bin/bash
 cd /g/steinmetz/hsun/NGLY1/Virus/NGLY1-unmapped-bam-fasta
 db=/g/steinmetz/hsun/NGLY1/Genome/viral.1.1.genomic.fna.fa
 query=ngly1_CP1_20uM_AzaC_rep2_lane7.fasta

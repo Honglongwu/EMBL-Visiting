@@ -1,0 +1,1 @@
+sh ngly1_ngly1_MCP1_DMSO_rep2_lane7.blat.sh
