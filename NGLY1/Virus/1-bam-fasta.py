@@ -2,8 +2,8 @@ import subprocess
 inFile = open('NGLY1-unmapped-file-list')
 for line in inFile:
     file = line.strip()
-    sp = subprocess.call(['samtools', 'view', file], stdout=subprocess.PIPE, bufsize=1)
-    for  x in sp:
+    sp = subprocess.Popen(['samtools', 'view', file], stdout=subprocess.PIPE)
+    for  x in sp.stdout:
         fields = x.split('\t')
-        ouFile.write(fields[0]+'\n')
+        print(fields[9])
 inFile.close()
