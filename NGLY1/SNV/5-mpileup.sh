@@ -1,0 +1,25 @@
+/g/steinmetz/hsun/NGLY1/SNV
+python 5-mpileup.py 19_AzaC_20uM_biorep1.bam
+python 5-mpileup.py 19_AzaC_20uM_biorep2.bam
+python 5-mpileup.py 19_DMSO_biorep1.bam
+python 5-mpileup.py 19_DMSO_biorep2.bam
+python 5-mpileup.py CP1_AzaC_20uM_biorep1.bam
+python 5-mpileup.py CP1_AzaC_20uM_biorep2.bam
+python 5-mpileup.py CP1_DMSO_biorep1.bam
+python 5-mpileup.py CP1_DMSO_biorep2.bam
+python 5-mpileup.py CP2_AzaC_20uM_biorep1.bam
+python 5-mpileup.py CP2_AzaC_20uM_biorep2.bam
+python 5-mpileup.py CP2_DMSO_biorep1.bam
+python 5-mpileup.py CP2_DMSO_biorep2.bam
+python 5-mpileup.py CP3_AzaC_20uM_biorep1.bam
+python 5-mpileup.py CP3_AzaC_20uM_biorep2.bam
+python 5-mpileup.py CP3_DMSO_biorep1.bam
+python 5-mpileup.py CP3_DMSO_biorep2.bam
+python 5-mpileup.py FCP1_AzaC_20uM_biorep1.bam
+python 5-mpileup.py FCP1_AzaC_20uM_biorep2.bam
+python 5-mpileup.py FCP1_DMSO_biorep1.bam
+python 5-mpileup.py FCP1_DMSO_biorep2.bam
+python 5-mpileup.py MCP1_AzaC_20uM_biorep1.bam
+python 5-mpileup.py MCP1_AzaC_20uM_biorep2.bam
+python 5-mpileup.py MCP1_DMSO_biorep1.bam
+python 5-mpileup.py MCP1_DMSO_biorep2.bam
