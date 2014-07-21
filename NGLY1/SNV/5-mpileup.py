@@ -1,12 +1,18 @@
-import os
-Fs = os.listdir('.')
-for F in Fs:
-    if F[-4:] == '.bam':
-        raw = F[0:-4] + '.raw.vcf'
-        filtered = F[0:-4] + '.flt.vcf'
-        ouFile = open(F[0:-4] + '.sh', 'w')
-        ouFile.write('cd /g/steinmetz/hsun/NGLY1/SNV/\n')
-        ouFile.write('#samtools mpileup -uDf /g/steinmetz/hsun/NGLY1/SNV/Homo_sapiens.GRCh37.68.dna.chromosomes.withIVTs.fa %s | bcftools view -bvcg - > %s \n'%(F, raw))
-        ouFile.write('bcftools view %s |vcfutils.pl varFilter  > %s\n'%(raw, filtered))
-        ouFile.close()
+import sys
+import subprocess
 
+CHR = '1'
+MIN = 17475
+MAX = 18475
+bam = sys.argv[1]
+ouFile = open(bam+'.chr%s_%s_%s.mpileup'%(CHR,MIN,MAX), 'w')
+sp = subprocess.Popen(['samtools', 'mpileup', '-f', '/g/steinmetz/hsun/NGLY1/SNV/Homo_sapiens.GRCh37.68.dna.chromosomes.withIVTs.fa',bam], stdout=subprocess.PIPE, bufsize=1)
+for line in sp.stdout:
+    fields = line.split('\t')
+    if len(fields) > 4:
+        if fields[0] == CHR: 
+            if MIN <= int(fields[1]) <= MAX:
+                ouFile.write(line)
+            elif int(fields[1]) >= MAX+1:
+                break
+ouFile.close()
