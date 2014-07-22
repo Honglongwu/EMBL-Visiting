@@ -3,7 +3,7 @@
 ###############################################################################
 
 folder = "/g/steinmetz/wmueller/NGLY1"
-sampleAnnot = read.delim(file=file.path(folder, "sampleAnnot.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+sampleAnnot = read.delim(file=file.path(folder, "sampleAnnot-CP4.txt"), stringsAsFactors=FALSE, check.names=FALSE)
 
 
 tmpstr = sub("ngly1_(.*?)_(.*)_rep(\\d)_lane(\\d+)","\\1\t\\2\tbiorep\\3\ttechrep\\4",sampleAnnot$fixedName)
@@ -15,4 +15,4 @@ newAnnot=cbind(sampleAnnot, annot)
 
 newAnnot$label = with(newAnnot,paste(individual, treatment, biorep,sep="_"))
 newAnnot= newAnnot[order(newAnnot$label, newAnnot$techrep),]
-write.table( newAnnot, file=file.path(folder, "samples.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
+write.table( newAnnot, file=file.path(folder, "samples-CP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
