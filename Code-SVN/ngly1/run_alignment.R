@@ -1,9 +1,10 @@
 # Author: czhu
 ###############################################################################
 
-seqFolders = c("/g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX",
-    "/g/steinmetz/incoming/solexa/2014-03-25-C365AACXX",
-    "/g/steinmetz/incoming/solexa/2014-05-23-C3PJ2ACXX")
+seqFolders = c(#"/g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX",
+    #"/g/steinmetz/incoming/solexa/2014-03-25-C365AACXX",
+    #"/g/steinmetz/incoming/solexa/2014-05-23-C3PJ2ACXX"),
+    "/g/steinmetz/incoming/solexa/2014-07-22-C3NVAACXX")
 
 get_demultiplxed_fileinfo = function(x){
     cmd = paste("find",x, "-type f -name *barcode* 2>/dev/null")
@@ -17,7 +18,7 @@ fileAnnot$lane = sub(".*(lane\\d).*","\\1", fileAnnot$file)
 fileAnnot$name = with(fileAnnot, paste(sampleName,lane,sep="_"))
 
 folder = "/g/steinmetz/wmueller/NGLY1"
-outfile = file.path(folder, "sampleAnnot.txt")
+outfile = file.path(folder, "sampleAnnot-CP4.txt")
 if(file.exists(outfile)){
     stop("Are you sure you want to rewrite the annotation file?\n")
 } else {
