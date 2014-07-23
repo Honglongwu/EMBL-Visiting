@@ -37,7 +37,7 @@ run_tophat = function(x,o,ncpu=25) {
     system(cmd)
 }
 
-outfolder = "/g/steinmetz/wmueller/NGLY1/alignments"
+outfolder = "/g/steinmetz/wmueller/NGLY1/alignments/CP4"
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 for(i in 1:nrow(fileAnnot)){
