@@ -44,5 +44,5 @@ for(i in 1:length(tmplst)){
     #..#    paste(dir(tmpfolder, full.names=TRUE), collapse=" "))
     #..#cat(cmd, "\n")    
     #..#system(cmd)
-    unlink(tmpfolder,recursive = TRUE)    
+    #..#unlink(tmpfolder,recursive = TRUE)    
 }
