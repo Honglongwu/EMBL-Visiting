@@ -55,4 +55,4 @@ intronCounts <- summarizeOverlaps( intronsByGene, bamLst,
     singleEnd=TRUE,
     ignore.strand=TRUE)
 
-save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts,  pd, file=file.path(folder, "counts.rda"))
+save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts,  pd, file=file.path(folder, "counts-CP4.rda"))
