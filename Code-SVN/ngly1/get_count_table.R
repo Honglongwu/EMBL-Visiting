@@ -37,7 +37,7 @@ exonCounts <- summarizeOverlaps( unlist(exonsByGene), bamLst,
     inter.feature=FALSE)
 
 ## pheno data
-pd = read.delim(file=file.path(folder, "samples.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+pd = read.delim(file=file.path(folder, "samples-CP4.txt"), stringsAsFactors=FALSE, check.names=FALSE)
 pd = pd[,c("individual", "treatment", "biorep", "techrep", "label")]
 
 ## introns 

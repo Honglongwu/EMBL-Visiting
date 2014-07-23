@@ -1,7 +1,7 @@
 ## form the sample annotation
 folder = "/g/steinmetz/wmueller/NGLY1/"
 
-load(file.path(folder, "counts.rda"))
+load(file.path(folder, "counts-CP4.rda"))
 
 sampleAnnot = unique(pd[,c("individual", "treatment", "biorep", "label")])
 sampleAnnot$treatment = factor(sampleAnnot$treatment, levels=c("DMSO", "AzaC_20uM"))

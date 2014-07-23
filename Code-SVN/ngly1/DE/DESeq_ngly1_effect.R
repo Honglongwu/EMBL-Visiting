@@ -6,7 +6,7 @@ library(DESeq2)
 
 folder = "/g/steinmetz/wmueller/NGLY1"
 
-outfolder = file.path(folder, "DE_ngly1")
+outfolder = file.path(folder, "DE_ngly1-CP4")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 load(file.path(folder, "counts.rda"))
