@@ -2,9 +2,9 @@
 # Author: czhu
 ###############################################################################
 folder = "/g/steinmetz/wmueller/NGLY1"
-sampleAnnot = read.delim(file=file.path(folder, "samples.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+sampleAnnot = read.delim(file=file.path(folder, "samples-CP4.txt"), stringsAsFactors=FALSE, check.names=FALSE)
 
-jobsHasFinished = file.exists(file.path(folder, "alignments", sampleAnnot$name, "accepted_hits.bam"))
+jobsHasFinished = file.exists(file.path(folder, "alignments/CP4", sampleAnnot$name, "accepted_hits.bam"))
 
 outfolder = file.path(folder, "alignment_filtered")
 if (!file.exists(outfolder))  dir.create(outfolder)
