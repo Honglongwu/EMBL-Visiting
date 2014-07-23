@@ -32,17 +32,17 @@ for(i in 1:length(tmplst)){
     thisChunk = tmplst[[i]]
     for(j in 1:nrow(thisChunk)) {
         run_samtools_filter_by_mapping_quality(
-            file.path(folder,"alignments", thisChunk$name[j], "accepted_hits.bam"), 
+            file.path(folder,"alignments/CP4", thisChunk$name[j], "accepted_hits.bam"), 
             30, 
             file.path(tmpfolder,paste0(with(thisChunk[j,], paste(individual, treatment, biorep, techrep,sep="_")), ".bam")),
             10
             )
     }
     
-    cmd = paste(
-        "samtools merge -r -@ 10 -1", file.path(outfolder, paste0(names(tmplst)[i], ".bam")),
-        paste(dir(tmpfolder, full.names=TRUE), collapse=" "))
-    cat(cmd, "\n")    
-    system(cmd)
+    #..#cmd = paste(
+    #..#   "samtools merge -r -@ 10 -1", file.path(outfolder, paste0(names(tmplst)[i], ".bam")),
+    #..#    paste(dir(tmpfolder, full.names=TRUE), collapse=" "))
+    #..#cat(cmd, "\n")    
+    #..#system(cmd)
     unlink(tmpfolder,recursive = TRUE)    
 }
