@@ -9,7 +9,7 @@ register(MulticoreParam(workers = 20))
 
 folder = "/g/steinmetz/wmueller/NGLY1"
 
-outfolder = file.path(folder, "exon")
+outfolder = file.path(folder, "exon-CP4")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 hsa=loadDb(file=file.path(folder, "genome/refGene.sqlite"))
@@ -25,4 +25,4 @@ exonCounts <- summarizeOverlaps(exonicParts, bamLst,
     ## this is for split reads
     inter.feature=FALSE)
 
-save(exonCounts, exonicParts, file=file.path(folder, "exon/exonCounts.rda"))
+save(exonCounts, exonicParts, file=file.path(folder, "exon-CP4/exonCounts-CP4.rda"))

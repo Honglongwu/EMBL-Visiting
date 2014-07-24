@@ -3,11 +3,11 @@
 ###############################################################################
 library(DEXSeq)
 
-folder = "/g/steinmetz/wmueller/NGLY1/"
-outfolder = file.path(folder, "exon")
+folder = "/g/steinmetz/wmueller/NGLY1"
+outfolder = file.path(folder, "exon-CP4")
 
-load(file.path(outfolder, "exonCounts.rda"))
-load(file.path(folder, "sampleAnnot.rda"))
+load(file.path(outfolder, "exonCounts-CP4.rda"))
+load(file.path(folder, "sampleAnnot-CP4.rda"))
 
 ## first look at gene counts
 mat = assay(exonCounts)
