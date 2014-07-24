@@ -9,8 +9,8 @@ folder = "/g/steinmetz/wmueller/NGLY1"
 outfolder = file.path(folder, "DE_ngly1-CP4")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
-load(file.path(folder, "counts.rda"))
-load(file.path(folder, "sampleAnnot.rda"))
+load(file.path(folder, "counts-CP4.rda"))
+load(file.path(folder, "sampleAnnot-CP4.rda"))
 
 ## first look at gene counts
 mat = assay(geneCounts)

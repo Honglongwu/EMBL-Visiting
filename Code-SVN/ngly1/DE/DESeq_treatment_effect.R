@@ -5,8 +5,8 @@ library(GenomicRanges)
 library(DESeq2)
 
 folder = "/g/steinmetz/wmueller/NGLY1/"
-load(file.path(folder, "counts.rda"))
-load(file.path(folder, "sampleAnnot.rda"))
+load(file.path(folder, "counts-CP4.rda"))
+load(file.path(folder, "sampleAnnot-CP4.rda"))
 
 outfolder = file.path(folder, "drug_effect")
 if (!file.exists(outfolder))  dir.create(outfolder)
