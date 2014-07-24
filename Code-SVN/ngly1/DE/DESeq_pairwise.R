@@ -137,7 +137,7 @@ hclust.col <- hclust(as.dist(1-cor(count.norm, method="spearman")), method="comp
 plot.cols <- rev(colorRampPalette(brewer.pal(10, "RdBu"))(256))
 
 ##plot heatmap
-pdf('/g/steinmetz/wmueller/NGLY1/hcluster/hcluster.heatplot.new.pdf',width=8,height=8)
+pdf('/g/steinmetz/wmueller/NGLY1/hcluster-CP4/hcluster.heatplot.new.pdf',width=8,height=8)
 
 heatmap.2(count.norm, Colv = as.dendrogram(hclust.col), Rowv = as.dendrogram(hclust.row), col = plot.cols, scale = 'none', trace = "none", density.info = "none")
 
@@ -145,7 +145,7 @@ dev.off()
 
 #### to test sample clustering robust by bootstrap
 fit.col <- pvclust(count.norm, method.hclust="complete",method.dist="correlation",use.cor='everything')
-pdf('/g/steinmetz/wmueller/NGLY1/hcluster/pvclust.sample.pdf')
+pdf('/g/steinmetz/wmueller/NGLY1/hcluster-CP4/pvclust.sample.pdf')
 plot(fit.col)
 pvrect(fit.col,alpha=0.9)
 dev.off()
@@ -155,16 +155,16 @@ dev.off()
 #########################plot the normalized reads in up/down regulated genes################
 gene.count.plot.func <- function(gene.list,pdf.name){
   
-  pdf(paste('/g/steinmetz/wmueller/NGLY1/hcluster/',pdf.name,sep=''),height=10,width=10)
+  pdf(paste('/g/steinmetz/wmueller/NGLY1/hcluster-CP4/',pdf.name,sep=''),height=10,width=10)
   par(mfrow=c(3,3),mar=c(5,2,4,2))
-  point.cols <- c('brown','green4')[rep(c(1,1,2,2),times=5)]
+  point.cols <- c('brown','green4')[rep(c(1,1,2,2),times=6)]
   sample.labels <- unique(sub('DMSO.*','DMSO',sub('AzaC.*','AzaC',colnames(dds.norm))))
   
   lapply(gene.list,function(gene.name){
         
         gene.counts <- dds.norm[gene.name,]
-        plot(rep(1:10,each=2),gene.counts,xaxt='n',xlab='',ylab='Normalized counts',main=gene.name,col=point.cols,cex=2)
-        axis(side=1,labels=sample.labels,at=1:10,las=3)
+        plot(rep(1:12,each=2),gene.counts,xaxt='n',xlab='',ylab='Normalized counts',main=gene.name,col=point.cols,cex=2)
+        axis(side=1,labels=sample.labels,at=1:12,las=3)
         
       })
   
@@ -177,14 +177,14 @@ gene.count.plot.func(up.genes,'up.gene.count.norm.pdf')
 gene.count.plot.func(down.genes,'down.gene.count.norm.pdf')
 
 #########################plot the normalized reads in up/down regulated genes between CP and MCP/FCP################
-up.cp.genes.all <- names(table(unlist(up.gene.list[1:3])))[table(unlist(up.gene.list[1:3])) == 3]
-up.fm.genes.all <- names(table(unlist(up.gene.list[4:5])))[table(unlist(up.gene.list[4:5])) == 2]
-up.cp.uni.genes <- up.cp.genes.all[!up.cp.genes.all %in% unique(unlist(up.gene.list[4:5]))]
+up.cp.genes.all <- names(table(unlist(up.gene.list[1:4])))[table(unlist(up.gene.list[1:4])) == 4]
+up.fm.genes.all <- names(table(unlist(up.gene.list[5:6])))[table(unlist(up.gene.list[5:6])) == 2]
+up.cp.uni.genes <- up.cp.genes.all[!up.cp.genes.all %in% unique(unlist(up.gene.list[5:6]))]
 gene.count.plot.func(up.cp.uni.genes,'up.cp.uni.gene.count.norm.pdf')
 
-down.cp.genes.all <- names(table(unlist(down.gene.list[1:3])))[table(unlist(down.gene.list[1:3])) == 3]
-down.fm.genes.all <- names(table(unlist(down.gene.list[4:5])))[table(unlist(down.gene.list[4:5])) == 2]
-down.cp.uni.genes <- down.cp.genes.all[!down.cp.genes.all %in% unique(unlist(down.gene.list[4:5]))]
+down.cp.genes.all <- names(table(unlist(down.gene.list[1:4])))[table(unlist(down.gene.list[1:4])) == 4]
+down.fm.genes.all <- names(table(unlist(down.gene.list[5:6])))[table(unlist(down.gene.list[5:6])) == 2]
+down.cp.uni.genes <- down.cp.genes.all[!down.cp.genes.all %in% unique(unlist(down.gene.list[5:6]))]
 gene.count.plot.func(down.cp.uni.genes,'down.cp.uni.gene.count.norm.pdf')
 
 
