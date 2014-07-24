@@ -20,9 +20,9 @@ load(file.path(folder, "gtf.rda"))
 mat = assay(geneCounts)
 
 ## remove 19 for the moment
-wh = which(sampleAnnot$individual != 19 )
-sampleAnnot = droplevels(sampleAnnot[wh,])
-mat = mat[, wh]
+#wh = which(sampleAnnot$individual != 19 )
+#sampleAnnot = droplevels(sampleAnnot[wh,])
+#mat = mat[, wh]
 
 ## pairwise comparison
 pairwise.comp.func <- function(indi.name){
@@ -46,7 +46,7 @@ outfolder="/g/steinmetz/wmueller/NGLY1/hcluster-CP4/"
 
 ## find the shared up/down genes
 ## for up
-venn.cols <- brewer.pal(12, 'Set3')[3:7]
+venn.cols <- brewer.pal(12, 'Set3')[3:9]
 up.gene.list <- lapply(de.pw.indi.list,function(x){rownames(subset(x,padj < 0.01 & log2FoldChange > 0))})
 names(up.gene.list) <- unique(sampleAnnot$individual)
 

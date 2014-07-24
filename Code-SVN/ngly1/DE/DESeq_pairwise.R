@@ -46,7 +46,7 @@ outfolder="/g/steinmetz/wmueller/NGLY1/hcluster-CP4/"
 
 ## find the shared up/down genes
 ## for up
-venn.cols <- brewer.pal(12, 'Set3')[3:7]
+venn.cols <- brewer.pal(12, 'Set3')[3:8]
 up.gene.list <- lapply(de.pw.indi.list,function(x){rownames(subset(x,padj < 0.01 & log2FoldChange > 0))})
 names(up.gene.list) <- unique(sampleAnnot$individual)
 
