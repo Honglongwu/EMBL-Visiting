@@ -63,8 +63,8 @@ pdf(file.path(outfolder,'venn.down.pdf'))
 grid.draw(down.tmp)
 dev.off()
 
-up.genes <- names(table(unlist(up.gene.list,use.name=FALSE)))[table(unlist(up.gene.list,use.name=FALSE)) == 5]
-down.genes <- names(table(unlist(down.gene.list,use.name=FALSE)))[table(unlist(down.gene.list,use.name=FALSE)) == 5]
+up.genes <- names(table(unlist(up.gene.list,use.name=FALSE)))[table(unlist(up.gene.list,use.name=FALSE)) == 6]
+down.genes <- names(table(unlist(down.gene.list,use.name=FALSE)))[table(unlist(down.gene.list,use.name=FALSE)) == 6]
 
 
 
@@ -236,27 +236,4 @@ dxd = DEXSeqDataSet(mat, sampleAnnot,
     groupID=gID
 #,featureRanges=exonsByGene
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
