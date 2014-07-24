@@ -8,7 +8,7 @@ folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "counts-CP4.rda"))
 load(file.path(folder, "sampleAnnot-CP4.rda"))
 
-outfolder = file.path(folder, "drug_effect")
+outfolder = file.path(folder, "drug_effect-CP4")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 ## first look at gene counts

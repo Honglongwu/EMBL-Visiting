@@ -11,9 +11,9 @@ library(RColorBrewer)
 library(pvclust)
 library(VennDiagram)
 
-folder = "/g/steinmetz/wmueller/NGLY1/"
-load(file.path(folder, "counts.rda"))
-load(file.path(folder, "sampleAnnot.rda"))
+folder = "/g/steinmetz/wmueller/NGLY1"
+load(file.path(folder, "counts-CP4.rda"))
+load(file.path(folder, "sampleAnnot-CP4.rda"))
 load(file.path(folder, "gtf.rda"))
 
 ## first look at gene counts
@@ -42,6 +42,8 @@ pairwise.comp.func <- function(indi.name){
 
 de.pw.indi.list <- foreach(indi.name=unique(sampleAnnot$individual)) %dopar% pairwise.comp.func(indi.name)
 
+outfolder="/g/steinmetz/wmueller/NGLY1/hcluster-CP4/" 
+
 ## find the shared up/down genes
 ## for up
 venn.cols <- brewer.pal(12, 'Set3')[3:7]
@@ -49,7 +51,7 @@ up.gene.list <- lapply(de.pw.indi.list,function(x){rownames(subset(x,padj < 0.01
 names(up.gene.list) <- unique(sampleAnnot$individual)
 
 up.tmp <- venn.diagram(up.gene.list,filename=NULL,fill=venn.cols)
-pdf('/g/steinmetz/wmueller/NGLY1/hcluster/venn.up.pdf')
+pdf(file.path(outdir,'venn.up.pdf'))
 grid.draw(up.tmp)
 dev.off()
 
@@ -57,7 +59,7 @@ down.gene.list <- lapply(de.pw.indi.list,function(x){rownames(subset(x,padj < 0.
 names(down.gene.list) <- unique(sampleAnnot$individual)
 
 down.tmp <- venn.diagram(down.gene.list,filename=NULL,fill=venn.cols)
-pdf('/g/steinmetz/wmueller/NGLY1/hcluster/venn.down.pdf')
+pdf(file.path(outfolder,'venn.down.pdf'))
 grid.draw(down.tmp)
 dev.off()
 
