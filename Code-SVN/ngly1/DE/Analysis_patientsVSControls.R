@@ -2,7 +2,7 @@
 library("DESeq2")
 
 #set directory where the files are
-directory <- "/Volumes/steinmetz/wmueller/NGLY1/DMSOvAzaC/DMSOcounts/"
+directory <- "/g/steinmetz/wmueller/NGLY1/DMSOvAzaC/DMSOcounts/"
 
 #get all files with the *.txt
 files <- system( paste("ls ", directory, "*.txt", sep=""), intern = T)
