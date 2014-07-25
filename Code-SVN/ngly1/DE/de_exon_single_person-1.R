@@ -2,8 +2,10 @@
 # Author: czhu
 ###############################################################################
 library(DEXSeq)
-ncpu=35
-gene = "NGLY1"
+ncpu=10
+#gene = "NGLY1"
+gene = commandArgs(trailingOnly=TRUE)[1]
+
 
 folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "exon-CP4/exonCounts-CP4.rda"))
