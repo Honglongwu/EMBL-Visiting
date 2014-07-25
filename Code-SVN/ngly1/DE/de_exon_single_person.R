@@ -6,8 +6,8 @@ ncpu=35
 
 folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "exon-CP4/exonCounts-CP4.rda"))
-load(file.path(folder, "sampleAnnot.rda"))
-outfolder = file.path(folder, "exon")
+load(file.path(folder, "sampleAnnot-CP4.rda"))
+outfolder = file.path(folder, "exon-CP4")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 ## first look at gene counts
