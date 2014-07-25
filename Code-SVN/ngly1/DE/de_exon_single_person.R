@@ -5,7 +5,7 @@ library(DEXSeq)
 ncpu=35
 
 folder = "/g/steinmetz/wmueller/NGLY1/"
-load(file.path(folder, "exon/exonCounts.rda"))
+load(file.path(folder, "exon-CP4/exonCounts-CP4.rda"))
 load(file.path(folder, "sampleAnnot.rda"))
 outfolder = file.path(folder, "exon")
 if (!file.exists(outfolder))  dir.create(outfolder)
