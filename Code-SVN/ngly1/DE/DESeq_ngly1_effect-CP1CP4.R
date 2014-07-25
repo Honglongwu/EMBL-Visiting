@@ -39,20 +39,20 @@ res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name"
 res = res[order(res$padj), ]
 
 #..#write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
-write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res, file=file.path(outfolder, "deCP1CP4.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
 save(dds, rld, res,sampleAnnot,file=file.path(outfolder, "resCP1vCP4.rda"))
 
-pdf(file.path(outfolder, "plot_PCA.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_PCA-deCP1CP4.pdf"), width=8, height=6)
 print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 dev.off()
 
-pdf(file.path(outfolder, "plot_MA.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_MA-deCP1CP4.pdf"), width=8, height=6)
 plotMA(res, alpha=0.01)
 dev.off()
 
-pdf(file.path(outfolder, "plot_dispEst.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_dispEst-deCP1CP4.pdf"), width=8, height=6)
 plotDispEsts(dds)
 dev.off()
 
