@@ -6,6 +6,7 @@ ncpu=10
 #gene = "NGLY1"
 gene = commandArgs(trailingOnly=TRUE)[1]
 
+gene
 
 folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "exon-CP4/exonCounts-CP4.rda"))
@@ -67,4 +68,3 @@ for(thisIndividual in levels(sampleAnnot$individual)){
     }
     dev.off()    
 }
-
