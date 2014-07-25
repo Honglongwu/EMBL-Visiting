@@ -20,6 +20,6 @@ write.table(partner,paste0(genename,'-partners'),quote=F,row.names=F,col.names=F
 }
 
 interaction('NGLY1')
-interaction('SRSF2')
+sapply(paste0('SRSF',1:12), interaction)
 interaction('MYC')
 interaction('TP53')
