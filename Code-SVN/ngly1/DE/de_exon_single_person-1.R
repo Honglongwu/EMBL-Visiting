@@ -3,6 +3,7 @@
 ###############################################################################
 library(DEXSeq)
 ncpu=35
+gene = "NGLY1"
 
 folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "exon-CP4/exonCounts-CP4.rda"))
@@ -22,10 +23,7 @@ if(file.exists(inFile))
 {
 gene = read.table(inFile)
 return(gene[,1])
-
 }
-
-
 }
 
 ## exclude sample 19 for the time being
@@ -59,9 +57,9 @@ for(thisIndividual in levels(sampleAnnot$individual)){
     
     plotFolder = file.path(outfolder, "plot")
     if (!file.exists(plotFolder))  dir.create(plotFolder)
-    
-    pdf(file.path(plotFolder, paste0(thisIndividual,"_ngly1_srsf2.pdf")), width=12, height=8)
-    for(thisExon in c("NGLY1", "SRSF2")){
+    genes = geneInteraction(gene)
+    pdf(file.path(plotFolder, paste0(thisIndividual,"_",gene,".pdf")), width=12, height=8)
+    for(thisExon in genes){
         plotDEXSeq( dxr1, thisExon, legend=TRUE, cex.axis=1.2, cex=1.3, lwd=2 ,displayTranscripts=TRUE, 
             fitExpToVar="treatment",norCounts=TRUE, splicing=TRUE)
     }

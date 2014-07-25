@@ -15,6 +15,7 @@ proteinid = paste0('9606.', proteinid)
 string = read.table(STRING, header=T)
 s = string[string$protein1 %in% proteinid & string$combined_score >= Score,]
 partner = unique(mcols(gtf)[paste0('9606.',mcols(gtf)$protein_id) %in% s$protein2,]$gene_name)
+partner = union(genename,partner)
 write.table(partner,paste0(genename,'-partners'),quote=F,row.names=F,col.names=F)
 }
 
