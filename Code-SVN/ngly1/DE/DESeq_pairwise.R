@@ -117,7 +117,8 @@ rv = mygo(rownames(dds.norm), up.genes, 'BP')
 ## how to get gene of interest
 require(biomaRt)
 ensembl = useMart("ensembl",dataset="hsapiens_gene_ensembl")
-geneOfInt = genesInTerm(rv$it, "GO:0042555")
+#geneOfInt = genesInTerm(rv$it, "GO:0042555")
+geneOfInt = genesInTerm(rv$it, "GO:0009070")
 
 ## how to annotate genes
 getBM(attributes=c('ensembl_gene_id',"wikigene_name",'description', "phenotype_description"), filters='ensembl_gene_id', values=unlist(geneOfInt), mart=ensembl)
@@ -129,6 +130,17 @@ enrichRes[rownames(enrichRes) %in% unlist(genesInTerm(rv$it, "GO:0042574")),]
 listAttributes(ensembl)
 
 listFilters(ensembl)
+
+#hanice#
+####
+genesGO=function(go)
+{
+    genesInTerm(rv$it, go)[[1]]
+}
+genes.GO.list=lapply(rv$ot$GO.ID, genesGO)
+genes.GO = lapply(genes.GO.list,"[",seq(max(sapply(genes.GO.list,length))))
+write.table(genes.GO, 'Up-Genes-GO.txt',quote=F,row.names=F)
+####
 
 
 
