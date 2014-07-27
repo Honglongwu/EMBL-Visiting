@@ -64,10 +64,12 @@ grid.draw(down.tmp)
 dev.off()
 
 #hanice#
+####
 up.genes = sapply(up.gene.list,"[",seq(max(sapply(up.gene.list,length))))
 write.table(up.genes, 'Treatment-up-Genes.txt',quote=F,row.names=F)
 down.genes = sapply(down.gene.list,"[",seq(max(sapply(down.gene.list,length))))
 write.table(down.genes, 'Treatment-down-Genes.txt',quote=F,row.names=F)
+####
 
 up.genes <- names(table(unlist(up.gene.list,use.name=FALSE)))[table(unlist(up.gene.list,use.name=FALSE)) == 6]
 down.genes <- names(table(unlist(down.gene.list,use.name=FALSE)))[table(unlist(down.gene.list,use.name=FALSE)) == 6]
