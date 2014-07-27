@@ -69,6 +69,22 @@ up.genes = sapply(up.gene.list,"[",seq(max(sapply(up.gene.list,length))))
 write.table(up.genes, 'Treatment-up-Genes.txt',quote=F,row.names=F)
 down.genes = sapply(down.gene.list,"[",seq(max(sapply(down.gene.list,length))))
 write.table(down.genes, 'Treatment-down-Genes.txt',quote=F,row.names=F)
+
+load(file.path(folder,'gtf.rda'))
+idmapping=function(EnsemblID)
+{
+ids[ids$gene_id %in% EnsemblID,]$gene_name
+}
+up.genes.symbl.list=sapply(up.gene.list,idmapping)
+down.genes.symbl.list=sapply(down.genes.list,idmapping)
+
+up.genes.symbl = sapply(up.gene.symbl.list,"[",seq(max(sapply(up.gene.symbl.list,length))))
+write.table(up.genes.symbl, 'Treatment-up-Genes-symbl.txt',quote=F,row.names=F)
+down.genes.symbl = sapply(down.gene.symbl.list,"[",seq(max(sapply(down.gene.symbl.list,length))))
+write.table(down.genes.symbl, 'Treatment-down-Genes-symbl.txt',quote=F,row.names=F)
+
+
+
 ####
 
 up.genes <- names(table(unlist(up.gene.list,use.name=FALSE)))[table(unlist(up.gene.list,use.name=FALSE)) == 6]
