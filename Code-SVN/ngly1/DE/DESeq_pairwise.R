@@ -138,11 +138,18 @@ genesGO=function(go)
     genesInTerm(rv$it, go)[[1]]
 }
 genes.GO.list=lapply(rv$ot$GO.ID, genesGO)
-genes.GO = lapply(genes.GO.list,"[",seq(max(sapply(genes.GO.list,length))))
-write.table(genes.GO, 'Up-Genes-GO.txt',quote=F,row.names=F)
+names(genes.GO.list)=rv$ot$GO.ID
+genes.GO = t(sapply(genes.GO.list,"[",seq(max(sapply(genes.GO.list,length)))))
+write.table(genes.GO, 'Up-Genes-GO.txt',quote=F,row.names=F,col.names=F)
+
+rv = mygo(rownames(dds.norm), down.genes, 'BP')
+genes.GO.list=lapply(rv$ot$GO.ID, genesGO)
+names(genes.GO.list)=rv$ot$GO.ID
+genes.GO = t(sapply(genes.GO.list,"[",seq(max(sapply(genes.GO.list,length)))))
+write.table(genes.GO, 'Down-Genes-GO.txt',quote=F,row.names=F,col.names=F)
+
+
 ####
-
-
 
 
 ## find overlapped de genes in five indis
