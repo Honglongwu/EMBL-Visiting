@@ -76,11 +76,11 @@ idmapping=function(EnsemblID)
 ids[ids$gene_id %in% EnsemblID,]$gene_name
 }
 up.genes.symbl.list=sapply(up.gene.list,idmapping)
-down.genes.symbl.list=sapply(down.genes.list,idmapping)
+down.genes.symbl.list=sapply(down.gene.list,idmapping)
 
-up.genes.symbl = sapply(up.gene.symbl.list,"[",seq(max(sapply(up.gene.symbl.list,length))))
+up.genes.symbl = sapply(up.genes.symbl.list,"[",seq(max(sapply(up.genes.symbl.list,length))))
 write.table(up.genes.symbl, 'Treatment-up-Genes-symbl.txt',quote=F,row.names=F)
-down.genes.symbl = sapply(down.gene.symbl.list,"[",seq(max(sapply(down.gene.symbl.list,length))))
+down.genes.symbl = sapply(down.genes.symbl.list,"[",seq(max(sapply(down.genes.symbl.list,length))))
 write.table(down.genes.symbl, 'Treatment-down-Genes-symbl.txt',quote=F,row.names=F)
 
 
