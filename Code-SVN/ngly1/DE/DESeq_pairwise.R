@@ -70,7 +70,6 @@ write.table(up.genes, 'Treatment-up-Genes.txt',quote=F,row.names=F)
 down.genes = sapply(down.gene.list,"[",seq(max(sapply(down.gene.list,length))))
 write.table(down.genes, 'Treatment-down-Genes.txt',quote=F,row.names=F)
 
-load(file.path(folder,'gtf.rda'))
 idmapping=function(EnsemblID)
 {
 ids[ids$gene_id %in% EnsemblID,]$gene_name
