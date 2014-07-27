@@ -38,8 +38,8 @@ cat("Genes show specific effect")
 pdf(file.path(outfolder, "affected_genes.pdf"), width=8, height=6)
 lattice::dotplot(assay(rld)["ENSG00000154277",]~sampleAnnot$individual, group=sampleAnnot$treatment, auto.key=TRUE,
     pch=19, ylab="Normalised gene expression",main="UCHL1")
-lattice::dotplot(assay(rld)["ENSG00000185437",]~sampleAnnot$individual, group=sampleAnnot$treatment, auto.key=TRUE,
-    pch=19, ylab="Normalised gene expression", main="SH3BGR")
+lattice::dotplot(assay(rld)["ENSG00000111371",]~sampleAnnot$individual, group=sampleAnnot$treatment, auto.key=TRUE,
+    pch=19, ylab="Normalised gene expression", main="SLC38A1")
 dev.off()
 
 
