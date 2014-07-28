@@ -29,7 +29,8 @@ res = results(dds)
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 
 res = res[order(res$padj), ]
-write.table( res, file=file.path(outfolder, "de.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
+#write.table( res, file=file.path(outfolder, "de.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
+write.table( res, file=file.path(outfolder, "de.txt"), quote = FALSE, sep = "\t")
 
 rld = rlog(dds, blind=FALSE)
 save(dds, rld, res, sampleAnnot, file=file.path(outfolder, "res.rda"))
@@ -41,6 +42,14 @@ lattice::dotplot(assay(rld)["ENSG00000154277",]~sampleAnnot$individual, group=sa
 lattice::dotplot(assay(rld)["ENSG00000111371",]~sampleAnnot$individual, group=sampleAnnot$treatment, auto.key=TRUE,
     pch=19, ylab="Normalised gene expression", main="SLC38A1")
 dev.off()
+
+pdf(file.path(outfolder, "affected_genes2.pdf"), width=8, height=6)
+lattice::dotplot(assay(rld)["ENSG00000154277",]~sampleAnnot$individual, group=sampleAnnot$treatment, auto.key=TRUE,
+    pch=19, ylab="Normalised gene expression",main="UCHL1")
+lattice::dotplot(assay(rld)["ENSG00000111371",]~sampleAnnot$individual, group=sampleAnnot$treatment, auto.key=TRUE,
+    pch=19, ylab="Normalised gene expression", main="SLC38A1")
+dev.off()
+
 
 
 pdf(file.path(outfolder, "plot_PCA.pdf"), width=8, height=6)
