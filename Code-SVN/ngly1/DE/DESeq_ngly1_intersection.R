@@ -16,3 +16,8 @@ write.table(genes[1],'DE_ngly1_threesets_genes_id.txt',quote=F,row.names=F, col.
 write.table(genes[2],'DE_ngly1_threesets_genes_symbol.txt',quote=F,row.names=F, col.names=F)
 
 
+load(file.path(folder,'resNGLY1-ALL.rda'))
+samplesALL=res
+samplesALLsiggene=rownames(samplesALL[samplesALL$padj<0.01 & !is.na(samplesALL$padj),])
+four_sets=intersect(three_sets, samplesALLsiggene)
+length(four_sets)
