@@ -41,20 +41,20 @@ res = res[order(res$padj), ]
 table(res$padj<0.01)
 
 #..#write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
-write.table( res, file=file.path(outfolder, "deCP2CP3FCP1.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res, file=file.path(outfolder, "deCP1MCP1FCP1.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
-save(dds, rld, res,sampleAnnot,file=file.path(outfolder, "resCP2CP3FCP1.rda"))
+save(dds, rld, res,sampleAnnot,file=file.path(outfolder, "resCP1MCP1FCP1.rda"))
 
-pdf(file.path(outfolder, "plot_PCA-deCP2CP3FCP1.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_PCA-deCP1MCP1FCP1.pdf"), width=8, height=6)
 print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 dev.off()
 
-pdf(file.path(outfolder, "plot_MA-deCP2CP3FCP1.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_MA-deCP1MCP1FCP1.pdf"), width=8, height=6)
 plotMA(res, alpha=0.01)
 dev.off()
 
-pdf(file.path(outfolder, "plot_dispEst-deCP2CP3FCP1.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_dispEst-deCP1MCP1FCP1.pdf"), width=8, height=6)
 plotDispEsts(dds)
 dev.off()
 
