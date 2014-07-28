@@ -22,10 +22,10 @@ mat = assay(geneCounts)
 ##interfamily differences
 #wh = which(sampleAnnot$family == "w" & sampleAnnot$treatment == "DMSO")
 #CP2 v CP3
-wh = which(grepl("FCP1|^CP[23].*", sampleAnnot$individual) & sampleAnnot$treatment == "DMSO" )
+wh = which(grepl("^[MF]?CP1$", sampleAnnot$individual) & sampleAnnot$treatment == "DMSO" )
 
 sampleAnnot = droplevels(sampleAnnot[wh,])
-sampleAnnot$individual=relevel(sampleAnnot$individual,'FCP1')
+sampleAnnot$individual=relevel(sampleAnnot$individual,'CP1')
 mat = mat[, wh]
 
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleOrigin+ sampleStatus + treatment)
