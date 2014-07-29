@@ -34,9 +34,8 @@ ncpu=10
 dxd = DEXSeq::estimateSizeFactors( dxd )
 dxd = DEXSeq::estimateDispersions( dxd , BPPARAM=MulticoreParam(workers=ncpu))
 dxd = testForDEU( dxd, reducedModel=~ individual + gender + exon,BPPARAM= MulticoreParam(workers=ncpu))
-dxd = estimateExonFoldChanges( dxd, BPPARAM=MulticoreParam(workers=ncpu))
+#dxd = estimateExonFoldChanges( dxd, BPPARAM=MulticoreParam(workers=ncpu))
 dxr1 = DEXSeqResults( dxd )
-
 save(dxd, dxr1, file=file.path(outfolder, "DE_all_NGLY1_DMSO.rda"))
 
 
