@@ -23,7 +23,7 @@ mygenes = exonicParts[sel]
 mat = mat[sel,]
 
 dxd = DEXSeqDataSet(mat, sampleAnnot,
-    design= ~ individual + exon,
+    design= ~ individual + gender+exon+gender:exon,
     featureID=as.character(mcols(mygenes)$exonic_part), 
     groupID=as.character(mcols(mygenes)$gene_id),
     featureRanges=mygenes
@@ -33,7 +33,7 @@ dxd = DEXSeqDataSet(mat, sampleAnnot,
 ncpu=10
 dxd = DEXSeq::estimateSizeFactors( dxd )
 dxd = DEXSeq::estimateDispersions( dxd , BPPARAM=MulticoreParam(workers=ncpu))
-dxd = testForDEU( dxd,BPPARAM=MulticoreParam(workers=ncpu))
+dxd = testForDEU( dxd, reducedModel=~ individual + gender + exon,BPPARAM= MulticoreParam(workers=ncpu))
 dxd = estimateExonFoldChanges( dxd, BPPARAM=MulticoreParam(workers=ncpu))
 dxr1 = DEXSeqResults( dxd )
 
