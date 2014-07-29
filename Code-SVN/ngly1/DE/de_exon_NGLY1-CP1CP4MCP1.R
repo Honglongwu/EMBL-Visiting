@@ -13,7 +13,7 @@ load(file.path(folder, "sampleAnnot-CP4.rda"))
 mat = assay(exonCounts)
 ## use all samples
 #wh = rep(TRUE, ncol(mat))
-wh = sampleAnnot$treatment=='DMSO' & sampleAnnot$individual!='19'
+wh = which(grepl("^M?CP[14].*", sampleAnnot$individual) & sampleAnnot$treatment == "DMSO" )
 #wh = sampleAnnot$individual == "19"
 mat = mat[, wh]
 sampleAnnot = droplevels(sampleAnnot[wh, ])
@@ -23,7 +23,7 @@ mygenes = exonicParts[sel]
 mat = mat[sel,]
 
 dxd = DEXSeqDataSet(mat, sampleAnnot,
-    design= ~ individual + exon+ individual:exon,
+    design= ~ individual + sampleStatus+exon+sampleStatus:exon,
     featureID=as.character(mcols(mygenes)$exonic_part), 
     groupID=as.character(mcols(mygenes)$gene_id),
     featureRanges=mygenes
@@ -33,10 +33,10 @@ dxd = DEXSeqDataSet(mat, sampleAnnot,
 ncpu=10
 dxd = DEXSeq::estimateSizeFactors( dxd )
 dxd = DEXSeq::estimateDispersions( dxd , BPPARAM=MulticoreParam(workers=ncpu))
-dxd = testForDEU( dxd, reducedModel=~ exon,BPPARAM= MulticoreParam(workers=ncpu))
+dxd = testForDEU( dxd, reducedModel=~ individual + sampleStatus + exon,BPPARAM= MulticoreParam(workers=ncpu))
 dxd = estimateExonFoldChanges( dxd,fitExpToVar="individual", BPPARAM=MulticoreParam(workers=ncpu))
 dxr1 = DEXSeqResults( dxd )
-save(dxd, dxr1, file=file.path(outfolder, "DE_all_NGLY1_DMSO_2.rda"))
+save(dxd, dxr1, file=file.path(outfolder, "DE_NGLY1_DMSO-CP1CP4MCP1.rda"))
 
 
 #plotFolder=file.path(outfolder, "plot")
