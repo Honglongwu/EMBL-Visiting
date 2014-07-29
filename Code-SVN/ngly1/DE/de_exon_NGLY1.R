@@ -30,10 +30,10 @@ dxd = DEXSeqDataSet(mat, sampleAnnot,
 #transcripts=as.character(mcols(mygenes)$tx_name)  
 )
 
-ncpu=20
+ncpu=10
 dxd = DEXSeq::estimateSizeFactors( dxd )
 dxd = DEXSeq::estimateDispersions( dxd , BPPARAM=MulticoreParam(workers=ncpu))
-dxd = testForDEU( dxd, reducedModel=~ individual + treatment+exon,   BPPARAM=MulticoreParam(workers=ncpu))
+dxd = testForDEU( dxd,BPPARAM=MulticoreParam(workers=ncpu))
 dxd = estimateExonFoldChanges( dxd, BPPARAM=MulticoreParam(workers=ncpu))
 dxr1 = DEXSeqResults( dxd )
 
