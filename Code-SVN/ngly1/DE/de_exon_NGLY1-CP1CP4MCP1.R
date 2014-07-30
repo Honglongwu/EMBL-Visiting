@@ -21,6 +21,7 @@ selGene = unique(as.character(exonicParts$gene_id))
 sel = as.logical(mcols(exonicParts)$gene_id %in% selGene)
 mygenes = exonicParts[sel]
 mat = mat[sel,]
+sampleAnnot$biorep = factor(sampleAnnot$biorep)
 #sampleAnnot$sample = factor(sampleAnnot$label)
 
 
