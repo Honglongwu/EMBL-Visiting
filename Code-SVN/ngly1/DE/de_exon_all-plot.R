@@ -20,5 +20,5 @@ for(thisExon in gene){
 dev.off()
 }
 
-sigplot(c('MYC','TP53','NGLY1'))
-sigplot(c('C5orf45','EIF3I','ENOSF1','LRRFIP1','RGS3','SQSTM1'))
+sigplot(c('PTGS2','SLC7A11'))
+#sigplot(c('C5orf45','EIF3I','ENOSF1','LRRFIP1','RGS3','SQSTM1'))
