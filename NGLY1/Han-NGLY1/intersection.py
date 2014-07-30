@@ -8,10 +8,15 @@ for line in inFile:
         D[x] = 1
 inFile.close()
 
-inFile = open('DE_ngly1_twosets_genes.txt')
+inFile = open('de.txt')
+line = inFile.readline()
 for line in inFile:
     line = line.strip()
     fields = line.split()
-    if fields[1] in D:
-        print(fields[1])
+    try:
+        if float(fields[6]) <0.01:
+            if fields[7] in D:
+                print(line)
+    except:
+        pass
 inFile.close()

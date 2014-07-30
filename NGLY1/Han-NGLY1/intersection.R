@@ -11,3 +11,7 @@ upf_gene=unique(unlist(lapply(as.character(upf$Gene.names[upf$Average.log2.fold.
 
 intersect(deseq_three_sets_gene, upf_gene)
 intersect(deseq_two_sets_gene, upf_gene)
+
+
+
+
