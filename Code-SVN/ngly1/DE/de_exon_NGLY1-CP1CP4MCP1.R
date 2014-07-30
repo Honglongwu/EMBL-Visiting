@@ -21,11 +21,11 @@ selGene = unique(as.character(exonicParts$gene_id))
 sel = as.logical(mcols(exonicParts)$gene_id %in% selGene)
 mygenes = exonicParts[sel]
 mat = mat[sel,]
-sampleAnnot$sample = factor(sampleAnnot$label)
+#sampleAnnot$sample = factor(sampleAnnot$label)
 
 
 dxd = DEXSeqDataSet(mat, sampleAnnot,
-    design= ~ sample +exon+ sampleStatus:exon,
+    design= ~individual +exon+ sampleStatus:exon + biorep:exon,
     featureID=as.character(mcols(mygenes)$exonic_part), 
     groupID=as.character(mcols(mygenes)$gene_id),
     featureRanges=mygenes
@@ -35,7 +35,7 @@ dxd = DEXSeqDataSet(mat, sampleAnnot,
 ncpu=10
 dxd = DEXSeq::estimateSizeFactors( dxd )
 dxd = DEXSeq::estimateDispersions( dxd , BPPARAM=MulticoreParam(workers=ncpu))
-dxd = testForDEU( dxd,BPPARAM= MulticoreParam(workers=ncpu))
+dxd = testForDEU( dxd,reducedModel=~individual +exon+ biorep:exon,BPPARAM= MulticoreParam(workers=ncpu))
 dxd = estimateExonFoldChanges( dxd,fitExpToVar="sampleStatus", BPPARAM=MulticoreParam(workers=ncpu))
 dxr1 = DEXSeqResults( dxd )
 save(dxd, dxr1, file=file.path(outfolder, "DE_NGLY1_DMSO-CP1CP4MCP1.rda"))
