@@ -13,7 +13,7 @@ load(file.path(folder, "sampleAnnot-CP4.rda"))
 mat = assay(exonCounts)
 ## use all samples
 #wh = rep(TRUE, ncol(mat))
-wh = which(grepl("^M?CP[14].*", sampleAnnot$individual) & sampleAnnot$treatment == "DMSO" )
+wh = which(grepl("CP[23]|FCP1", sampleAnnot$individual) & sampleAnnot$treatment == "DMSO" )
 #wh = sampleAnnot$individual == "19"
 mat = mat[, wh]
 sampleAnnot = droplevels(sampleAnnot[wh, ])
@@ -38,7 +38,7 @@ dxd = DEXSeq::estimateDispersions( dxd , BPPARAM=MulticoreParam(workers=ncpu))
 dxd = testForDEU( dxd,BPPARAM= MulticoreParam(workers=ncpu))
 dxd = estimateExonFoldChanges( dxd,fitExpToVar="sampleStatus", BPPARAM=MulticoreParam(workers=ncpu))
 dxr1 = DEXSeqResults( dxd )
-save(dxd, dxr1, file=file.path(outfolder, "DE_NGLY1_DMSO-CP1CP4MCP1.rda"))
+save(dxd, dxr1, file=file.path(outfolder, "DE_NGLY1_DMSO-CP2CP3FCP1.rda"))
 
 
 #plotFolder=file.path(outfolder, "plot")
