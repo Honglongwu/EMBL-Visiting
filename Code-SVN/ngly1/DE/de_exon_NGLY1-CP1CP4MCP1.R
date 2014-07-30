@@ -26,7 +26,7 @@ sampleAnnot$biorep = factor(sampleAnnot$biorep)
 
 
 dxd = DEXSeqDataSet(mat, sampleAnnot,
-    design= ~individual +exon+ sampleStatus:exon + biorep:exon,
+    design= ~individual + exon + sampleStatus:exon,
     featureID=as.character(mcols(mygenes)$exonic_part), 
     groupID=as.character(mcols(mygenes)$gene_id),
     featureRanges=mygenes
@@ -36,7 +36,7 @@ dxd = DEXSeqDataSet(mat, sampleAnnot,
 ncpu=10
 dxd = DEXSeq::estimateSizeFactors( dxd )
 dxd = DEXSeq::estimateDispersions( dxd , BPPARAM=MulticoreParam(workers=ncpu))
-dxd = testForDEU( dxd,reducedModel=~individual +exon+ biorep:exon,BPPARAM= MulticoreParam(workers=ncpu))
+dxd = testForDEU( dxd,reducedModel=~individual +exon,BPPARAM= MulticoreParam(workers=ncpu))
 dxd = estimateExonFoldChanges( dxd,fitExpToVar="sampleStatus", BPPARAM=MulticoreParam(workers=ncpu))
 dxr1 = DEXSeqResults( dxd )
 save(dxd, dxr1, file=file.path(outfolder, "DE_NGLY1_DMSO-CP1CP4MCP1.rda"))
