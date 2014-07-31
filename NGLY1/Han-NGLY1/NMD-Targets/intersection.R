@@ -29,6 +29,11 @@ write.table(upf_drug_four_two,'upf_drug_effect_four_patients_two_parents.txt',qu
 upf_drug_four_minus_six = setdiff(upf_drug_four,upf_drug_six)
 write.table(upf_drug_four_minus_six,'upf_drug_effect_four_patients_minus_six_samples.txt',quote=F,col.names=F, row.names=F)
 
+drug_effect_group= read.table('de.txt')
+drug_effect_group_genes = unique(drug_effect_group[drug_effect_group$padj<0.01 & !is.na(drug_effect_group$padj),]$gene_name)
+upf_drug_effect_group_genes = intersect(upf_gene,drug_effect_group_genes)
+write.table(upf_drug_effect_group_genes,'upf_drug_effect_group_genes.txt',quote=F,col.names=F, row.names=F)
+
 
 
 #intersect(deseq_three_sets_gene, upf_gene)
