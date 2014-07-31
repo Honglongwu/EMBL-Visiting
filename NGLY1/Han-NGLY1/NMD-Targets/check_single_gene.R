@@ -25,18 +25,14 @@ load('DESeq-ALL-rld.rda')
 plotFolder=file.path("/g/steinmetz/hsun/NGLY1/Han-NGLY1/NMD-Targets", "single-gene-plot-check")
 if (!file.exists(plotFolder))  dir.create(plotFolder)
 
-pdf(file.path(plotFolder, "ngly1-2.pdf"), width=8, height=6)
-lattice::dotplot(rld[symbol2id('NGLY1'),]~sampleAnnot$individual, group=sampleAnnot$treatment,pch=19, auto.key=TRUE, 
-    ylab="Normalised gene expression", main="NGLY1")
-dev.off()
-
 geneplot = function(gene,filename=paste0(gene,'.pdf')){
 pdf(file.path(plotFolder, filename), width=8, height=6)
 sampleAnnot$individual = factor(c('19','CP1','CP2','CP3','CP4','MCP1','FCP1'))
-lattice::dotplot(rld[smbol2id(gene)]~sampleAnnot$individual, group=sampleAnnot$treatment,pch=19, auto.key=TRUE, 
+lattice::dotplot(rld[symbol2id(gene),]~sampleAnnot$individual, group=sampleAnnot$treatment,pch=19, auto.key=TRUE, 
     ylab="Normalised gene expression", main=gene)
-dev.off
+dev.off()
 }
+geneplot('NGLY1')
 
 
 #pdf(file.path(plotFolder, "b2m.pdf"), width=8, height=6)
