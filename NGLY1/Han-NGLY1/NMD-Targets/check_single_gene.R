@@ -25,7 +25,9 @@ load('DESeq-ALL-rld.rda')
 plotFolder=file.path("/g/steinmetz/hsun/NGLY1/Han-NGLY1/NMD-Targets", "single-gene-plot-check")
 if (!file.exists(plotFolder))  dir.create(plotFolder)
 
-geneplot = function(gene,filename=paste0(gene,'.pdf')){
+geneplot = function(gene){
+#filename = paste0(gene,'.pdf')
+filename = 'haha.pdf'
 pdf(file.path(plotFolder, filename), width=8, height=6)
 sampleAnnot$individual = factor(c('19','CP1','CP2','CP3','CP4','MCP1','FCP1'))
 lattice::dotplot(rld[symbol2id(gene),]~sampleAnnot$individual, group=sampleAnnot$treatment,pch=19, auto.key=TRUE, 
