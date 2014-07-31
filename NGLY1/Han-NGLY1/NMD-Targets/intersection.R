@@ -26,6 +26,8 @@ drug_effect_four_patients_two_parents_genes = unique(drug_effect_four_patients_t
 upf_drug_four_two = intersect(upf_gene, drug_effect_four_patients_two_parents_genes)
 write.table(upf_drug_four_two,'upf_drug_effect_four_patients_two_parents.txt',quote=F,col.names=F, row.names=F)
 
+upf_drug_four_minus_six = setdiff(upf_drug_four,upf_drug_six)
+write.table(upf_drug_four_minus_six,'upf_drug_effect_four_patients_minus_six_samples.txt',quote=F,col.names=F, row.names=F)
 
 
 
