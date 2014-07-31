@@ -26,14 +26,46 @@ plotFolder=file.path("/g/steinmetz/hsun/NGLY1/Han-NGLY1/NMD-Targets", "single-ge
 if (!file.exists(plotFolder))  dir.create(plotFolder)
 sampleAnnot$individual = factor(c('19','CP1','CP2','CP3','CP4','MCP1','FCP1'))
 
-xxplot = function(genename){
-#filename = paste0(gene,'.pdf')
-#filename = 'haha.pdf'
-pdf(file.path(plotFolder, "haha.pdf"), width=8, height=6)
-p=lattice::dotplot(rld[symbol2id(genename),]~sampleAnnot$individual, group=sampleAnnot$treatment,pch=19, auto.key=TRUE,ylab="Normalised gene expression")
-dev.off()
+#geneplot = function(genename,filename=paste0(gene,'.pdf')){
+#pdf(file.path(plotFolder, filename), width=8, height=6)
+#print(lattice::dotplot(rld[symbol2id(genename),]~sampleAnnot$individual, group=sampleAnnot$treatment,pch=19, auto.key=TRUE,ylab="Normalised gene expression"))
+#dev.off()
+#}
+#geneplot('NGLY1')
+
+geneplot = function(genename){
+for(g in genename)
+{
+print(lattice::dotplot(rld[symbol2id(g),]~sampleAnnot$individual, 
+                       group=sampleAnnot$treatment,pch=19, auto.key=TRUE,
+                       ylab="Normalised gene expression",main=g))
 }
-xxplot('NGLY1')
+}
+
+genes=read.table('upf_drug_effect_six_samples.txt',header=F)
+pdf(file.path(plotFolder, 'upf_drug_effect_six_samples.pdf'), width=8, height=6)
+geneplot(genes[,1])
+dev.off()
+
+genes=read.table('upf_drug_effect_four_patients_minus_six_samples.txt',header=F)
+pdf(file.path(plotFolder, 'upf_drug_effect_four_patients_minus_six_samples.pdf'), width=8, height=6)
+geneplot(genes[,1])
+dev.off()
+
+genes=read.table('upf_drug_effect_four_patients_two_parents.txt',header=F)
+pdf(file.path(plotFolder, 'upf_drug_effect_four_patients_two_parents.pdf'), width=8, height=6)
+geneplot(genes[,1])
+dev.off()
+
+pdf(file.path(plotFolder, 'PTGS2.pdf'), width=8, height=6)
+geneplot('PTGS2')
+dev.off()
+
+
+
+
+
+
 
 
 #pdf(file.path(plotFolder, "b2m.pdf"), width=8, height=6)
