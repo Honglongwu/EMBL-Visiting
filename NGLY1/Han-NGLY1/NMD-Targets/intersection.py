@@ -11,6 +11,8 @@ for line in inFile:
 inFile.close()
 
 
+
+'''
 inFile = open('DE_treatment_six_samples.txt')
 line = inFile.readline()
 for line in inFile:
@@ -19,3 +21,4 @@ for line in inFile:
     if fields[1] in D:
         print(line)
 inFile.close()
+'''
