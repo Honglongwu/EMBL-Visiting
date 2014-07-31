@@ -7,8 +7,11 @@ for line in inFile:
     if float(fields[5]) > 0:
         fs =(fields[4]).strip().split(';')
         for x in fs:
-            D[x] = 1
+            if x.find(' ')==-1 and len(x) > 0:
+                D[x] = 1
 inFile.close()
+print(len(D))
+
 
 
 
