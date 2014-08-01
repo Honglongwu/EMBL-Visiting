@@ -22,8 +22,10 @@ load(inFile)
 #cn=setdiff(colnames(dxr1),'genomicData')
 #cn=c('groupID','featureID')
 #exon=as.matrix(dxr1[dxr1$exonBaseMean==0,cn])
-exon=rownames(dxr1)[dxr1$exonBaseMean<=COUNT]
+exon=dxr1[exon_unique,'exonBaseMean']
+return(exon)
 #write.table(exon,ouFile,quote=F,col.names=F,row.names=F)
 }
+exon_count=lapply(sample,get_exon_count,exon_unique)
 
 
