@@ -10,7 +10,7 @@ load(file.path(outfolder, "DE_all.rda"))
 
 sigplot=function(gene,filename){
     print(filename)
-plotFolder=file.path(outfolder, "plot")
+plotFolder=file.path("plot")
 if (!file.exists(plotFolder))  dir.create(plotFolder)
 
 pdf(file.path(plotFolder, filename), width=12, height=8)

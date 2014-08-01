@@ -19,8 +19,17 @@ inFiles = c('DE_CP1.sig_gene.txt','DE_CP2.sig_gene.txt','DE_CP3.sig_gene.txt','D
 sig_gene_four_patient=lapply(inFiles, sig_gene)
 sig_gene_four=Reduce(intersect,sig_gene_four_patient)
 write.table(sig_gene_four, 'de_exon_CP1_CP2_CP3_CP4_sig_genes.txt',col.names=F,row.names=F,quote=F)
-
 intersect(upf_gene, sig_gene_four)
+
+inFiles = c('DE_CP1.sig_gene.txt','DE_CP2.sig_gene.txt','DE_CP3.sig_gene.txt',
+            'DE_CP4.sig_gene.txt','DE_MCP1.sig_gene.txt',
+            'DE_19.sig_gene.txt')
+sig_gene_all_sample=lapply(inFiles, sig_gene)
+sig_all=as.matrix(table(unlist(sig_gene_all_sample)))
+sig_all_gene_mul=rownames(sig_all)[sig_all[,1]>0]
+upf_sig=intersect(upf_gene, sig_all_gene_mul)
+write.table(upf_sig,'de_exon_upf_sig_genes.txt',col.names=F,row.names=F, quote=F)
+
 
 
 
