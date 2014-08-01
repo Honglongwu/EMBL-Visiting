@@ -12,11 +12,15 @@ upf_gene = upf_gene[!grepl('\\s',upf_gene)]
 
 sig_gene = function(inFile)
 {
-read.table('DE_CP1.sig_gene.txt',header=F)[1]
+read.table(inFile,header=F)[,1]
 }
 
 inFiles = c('DE_CP1.sig_gene.txt','DE_CP2.sig_gene.txt','DE_CP3.sig_gene.txt','DE_CP4.sig_gene.txt')
 sig_gene_four_patient=lapply(inFiles, sig_gene)
+sig_gene_four=Reduce(intersect,sig_gene_four_patient)
+write.table(sig_gene_four, 'de_exon_CP1_CP2_CP3_CP4_sig_genes.txt',col.names=F,row.names=F,quote=F)
+
+intersect(upf_gene, sig_gene_four)
 
 
 
