@@ -25,12 +25,12 @@ load(file.path(folder,inFile))
 #exon=as.matrix(dxr1[dxr1$exonBaseMean==0,cn])
 exon_count=dxr1[exon_unique,]$countData
 n = strsplit(inFile,'[_|.]')[[1]][2]
-paste0(n,'_',)
-colnames(exon_count)=
+colnames(exon_count)=paste0(n,c('_AzaC_rep1','_AzaC_rep2','_DMSO_rep1','_DMSO_rep2'))
+return(exon_count)
 
 #write.table(exon,ouFile,quote=F,col.names=F,row.names=F)
 }
 exon_count=lapply(sample,get_exon_count,exon_unique=exon_unique)
 df=data.frame(exon_count)
-write.table(df,'exon_count.txt',)
+write.table(df,'sig_exon_count.txt',quote=F,col.names=NA)
 
