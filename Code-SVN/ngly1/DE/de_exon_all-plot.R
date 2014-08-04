@@ -29,5 +29,6 @@ genes=c('SKP2')
 genes=c('C10orf76','RCAN1','RAB3GAP1','RRN3','SLC3A2','LEMD2','SAMM50','DUSP3','UBAC2','TXNDC12')
 genes=c('SLC3A2')
 genes=c('SLC7A11')
+genes = read.table('DE_CP1.sig_gene.txt',header=F)[,1]
 sigplot(genes, filename = paste0("DE_all_",paste(genes[1:3],collapse='_'),'_etc.pdf'))
 #sigplot(c('C5orf45','EIF3I','ENOSF1','LRRFIP1','RGS3','SQSTM1'))
