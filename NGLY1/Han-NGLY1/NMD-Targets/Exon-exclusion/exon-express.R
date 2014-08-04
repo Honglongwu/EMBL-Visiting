@@ -2,7 +2,7 @@ folder='/g/steinmetz/wmueller/NGLY1/exon-CP4'
 COUNT=0
 get_exon=function(inFile)
 {
-load(inFile)
+load(file.path(folder,inFile))
 ouFile = paste0(strsplit(inFile,'[.]')[[1]][1],'.exon.txt')
 #cn=setdiff(colnames(dxr1),'genomicData')
 #cn=c('groupID','featureID')
@@ -17,7 +17,7 @@ exon_unique=unique(unlist(exon))
 
 get_exon_count=function(inFile,exon_unique)
 {
-load(inFile)
+load(file.path(folder,inFile))
 #ouFile = paste0(strsplit(inFile,'[.]')[[1]][1],'.exon.txt')
 #cn=setdiff(colnames(dxr1),'genomicData')
 #cn=c('groupID','featureID')
@@ -26,6 +26,6 @@ exon=dxr1[exon_unique,'exonBaseMean']
 return(exon)
 #write.table(exon,ouFile,quote=F,col.names=F,row.names=F)
 }
-exon_count=lapply(sample,get_exon_count,exon_unique)
+exon_count=lapply(sample,get_exon_count,exon_unique=exon_unique)
 
 
