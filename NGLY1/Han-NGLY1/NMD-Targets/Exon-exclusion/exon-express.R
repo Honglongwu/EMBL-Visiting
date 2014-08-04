@@ -27,10 +27,15 @@ return(exon)
 #write.table(exon,ouFile,quote=F,col.names=F,row.names=F)
 }
 exon_count=lapply(sample,get_exon_count,exon_unique=exon_unique)
-exon_count_merge = exon_count[[1]]
-for(i in 2:length(exon_count))
-{
-exon_count_merge = merge(exon_count_merge, exon_count[[i]])
-}
-write.table()
+exon_count_data_frame=data.frame(exon_count)
+write.table(exon_count_data_frame,'exonBaseMean-ALL-sample.txt',quote=F,col.names=F)
+
+
+
+#exon_count_merge = exon_count[[1]]
+#for(i in 2:length(exon_count))
+#{
+#exon_count_merge = merge(exon_count_merge, exon_count[[i]])
+#}
+#write.table()
 

@@ -3,12 +3,12 @@ import string
 
 trans = string.maketrans('ATCGatcg','TAGCtagc')
 inFile = open('NGLY1-unmapped-file-list')
-ouFile = open('NGLY1-unmapped.fasta', 'w')
-D = {}
+#ouFile = open('NGLY1-unmapped.fasta', 'w')
 for line in inFile:
     file = line.strip()
+    D = {}
     fd = file.split('/')[-2]
-    #ouFile = open(fd[-2]+'.fasta', 'w')
+    ouFile = open(fd+'.fasta', 'w')
     sp = subprocess.Popen(['samtools', 'view', file], stdout=subprocess.PIPE, bufsize=1)
     for  x in sp.stdout:
         fields = x.split('\t')
@@ -20,6 +20,6 @@ for line in inFile:
                 ouFile.write(fields[9][20:]+'\n')
                 D[fields[9]] = 1
 
-    #ouFile.close()
+    ouFile.close()
 inFile.close()
-ouFile.close()
+#ouFile.close()

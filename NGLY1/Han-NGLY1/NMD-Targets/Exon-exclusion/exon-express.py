@@ -1,0 +1,2 @@
+inFile = open()
+inFile.close()
