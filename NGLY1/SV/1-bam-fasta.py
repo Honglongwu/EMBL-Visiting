@@ -14,10 +14,12 @@ for line in inFile:
         fields = x.split('\t')
         if fields[9].find('N')==-1:
             if fields[9] not in D and string.translate(fields[9],trans) not in D:
-                ouFile.write('>'+fields[0]+':'+fd+':head'+'\n')
-                ouFile.write(fields[9][0:20]+'\n')
-                ouFile.write('>'+fields[0]+':'+fd+':tail'+'\n')
-                ouFile.write(fields[9][20:]+'\n')
+                #ouFile.write('>'+fields[0]+':'+fd+':head'+'\n')
+                #ouFile.write(fields[9][0:20]+'\n')
+                #ouFile.write('>'+fields[0]+':'+fd+':tail'+'\n')
+                #ouFile.write(fields[9][20:]+'\n')
+                ouFile.write('>'+fields[0]+':'+fd+'\n')
+                ouFile.write(fields[9]+'\n')
                 D[fields[9]] = 1
 
     ouFile.close()
