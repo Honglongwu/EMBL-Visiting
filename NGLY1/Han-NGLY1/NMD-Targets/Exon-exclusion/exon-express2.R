@@ -1,6 +1,7 @@
+library(DEXSeq)
 folder='/g/steinmetz/wmueller/NGLY1/exon-CP4'
 plotFolder = '/g/steinmetz/hsun/NGLY1/Han-NGLY1/NMD-Targets/Exon-exclusion/plot'
-get_exon_count=function(inFile, inclusionL, exclusionL)
+get_exon_count=function(inFile)
 {
 load(file.path(folder,inFile))
 #ouFile = paste0(strsplit(inFile,'[.]')[[1]][1],'.exon.txt')
@@ -15,8 +16,6 @@ sig_exclusion = sig[sig_count[,1] <=0 & sig_count[,2] <=0,]
 sig_inclusion = sig[sig_count[,3] <= 0 & sig_count[,4] <= 0,]
 sig_exclusion_gene = sig_exclusion$groupID
 sig_inclusion_gene = sig_inclusion$groupID
-inclusionL = union(inclusionL, sig_inclusion_gene)
-exclusionL = union(exclusionL, sig_exclusion_gene)
 for(gene in union(sig_exclusion_gene, sig_inclusion_gene))
 {
 filename = paste0(gene,'.',strsplit(inFile,'[.]')[[1]][1],'.pdf')
@@ -27,14 +26,23 @@ for(thisExon in gene){
 }
 dev.off()
 }
+return(list(sig_exclusion_gene, sig_inclusion_gene))
+}
 
 #return(sig_exclusion_gene)
 #write.table(exon,ouFile,quote=F,col.names=F,row.names=F)
 
-inclusionL = ''
-exclusionL = ''
-
 sample = c('DE_19.rda','DE_CP1.rda','DE_CP2.rda',
 'DE_CP3.rda','DE_CP4.rda','DE_MCP1.rda','DE_FCP1.rda')
 #exon_unique = unique(unlist(lapply(sample,get_exon_count)))
-exclusion_gene = lapply(sample,get_exon_count)
+gene=lapply(sample,get_exon_count)
+inclusion_gene = unique(unlist(lapply(gene, get_element,i=1)))
+exclusion_gene = unique(unlist(lapply(gene, get_element,i=2)))
+
+write.table(inclusion_gene,'de_exon_inclusion_gene.txt',row.names=F, col.names=F,quote=F)
+write.table(exclusion_gene,'de_exon_exclusion_gene.txt', row.names=F, col.names=F,quote=F)
+
+get_element=function(x, i)
+{
+    return(x[i])
+}
