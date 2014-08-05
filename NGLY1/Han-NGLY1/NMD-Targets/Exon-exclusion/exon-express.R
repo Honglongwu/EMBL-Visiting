@@ -1,6 +1,8 @@
 library(DEXSeq)
 folder='/g/steinmetz/wmueller/NGLY1/exon-CP4'
 plotFolder = '/g/steinmetz/hsun/NGLY1/Han-NGLY1/NMD-Targets/Exon-exclusion/plot'
+COUNT_MIN = 5
+COUNT_MAX = 20
 get_exon_count=function(inFile)
 {
 load(file.path(folder,inFile))
@@ -12,8 +14,8 @@ load(file.path(folder,inFile))
 ##rownames(dxr1[dxr1$padj<0.01 & !is.na(dxr1$padj),])
 sig=dxr1[dxr1$padj<0.01 & !is.na(dxr1$padj),]
 sig_count = sig$countData
-sig_exclusion = sig[(sig_count[,1] <=0 & sig_count[,2] <=0) & (sig_count[,3] >=20 & sig_count[,4] >=20),]
-sig_inclusion = sig[(sig_count[,3] <= 0 & sig_count[,4] <= 0) & (sig_count[,1] >=20 & sig_count[,2] >=20),]
+sig_exclusion = sig[(sig_count[,1] <=COUNT_MIN & sig_count[,2] <= COUNT_MIN) & (sig_count[,3] >= COUNT_MAX & sig_count[,4] >= COUNT_MAX),]
+sig_inclusion = sig[(sig_count[,3] <=COUNT_MIN  & sig_count[,4] <= COUNT_MIN ) & (sig_count[,1] >= COUNT_MAX & sig_count[,2] >=COUNT_MAX),]
 sig_exclusion_gene = sig_exclusion$groupID
 sig_inclusion_gene = sig_inclusion$groupID
 for(gene in union(sig_exclusion_gene, sig_inclusion_gene))

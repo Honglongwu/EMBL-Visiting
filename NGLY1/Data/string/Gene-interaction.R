@@ -1,6 +1,6 @@
 library(GenomicAlignments)
 
-Score = 700
+Score = 900
 homeFolder = '/g/steinmetz/wmueller/NGLY1'
 STRING = '/g/steinmetz/hsun/NGLY1/Data/string/9606.protein.links.v9.1.txt'
 
