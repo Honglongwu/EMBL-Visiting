@@ -1,6 +1,6 @@
 library(GenomicAlignments)
 
-Score = 900
+Score = 700
 homeFolder = '/g/steinmetz/wmueller/NGLY1'
 STRING = '/g/steinmetz/hsun/NGLY1/Data/string/9606.protein.links.v9.1.txt'
 
@@ -16,10 +16,10 @@ string = read.table(STRING, header=T)
 s = string[string$protein1 %in% proteinid & string$combined_score >= Score,]
 partner = unique(mcols(gtf)[paste0('9606.',mcols(gtf)$protein_id) %in% s$protein2,]$gene_name)
 partner = union(genename,partner)
-write.table(partner,paste0(genename,'-partners'),quote=F,row.names=F,col.names=F)
+write.table(partner,paste0(genename,'-partners-700'),quote=F,row.names=F,col.names=F)
 }
 
-interaction('NGLY1')
-sapply(paste0('SRSF',1:12), interaction)
+#interaction('NGLY1')
+#sapply(paste0('SRSF',1:12), interaction)
 interaction('MYC')
-interaction('TP53')
+#interaction('TP53')
