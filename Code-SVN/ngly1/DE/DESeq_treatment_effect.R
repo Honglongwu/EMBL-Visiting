@@ -8,7 +8,7 @@ folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "counts-CP4.rda"))
 load(file.path(folder, "sampleAnnot-CP4.rda"))
 
-outfolder = file.path(folder, "drug_effect-CP4")
+outfolder = file.path(folder, "drug-effect-groupwise-GeneLevel")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 ## first look at gene counts
@@ -52,6 +52,7 @@ sum(res$padj< 0.001, na.rm=TRUE)
 
 res = res[order(res$padj), ]
 write.table( res, file=file.path(outfolder, "de.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
+write.table( res, file=file.path(outfolder, "drug-effect-six-sample.txt"), quote = FALSE, sep = "\t")
 
 rld = rlog(dds, blind=FALSE)
 save(dds, rld, res, sampleAnnot, file=file.path(outfolder, "res.rda"))

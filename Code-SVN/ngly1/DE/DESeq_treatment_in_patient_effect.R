@@ -8,7 +8,7 @@ folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "counts-CP4.rda"))
 load(file.path(folder, "sampleAnnot-CP4.rda"))
 
-outfolder = file.path(folder, "drug_in_patient-CP4")
+outfolder = file.path(folder, "drug-effect-groupwise-in-patient-GeneLevel")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 ## first look at gene counts
@@ -29,8 +29,8 @@ res = results(dds)
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 
 res = res[order(res$padj), ]
-#write.table( res, file=file.path(outfolder, "de.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
-write.table( res, file=file.path(outfolder, "de.txt"), quote = FALSE, sep = "\t",col.names=NA)
+write.table( res, file=file.path(outfolder, "de.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
+write.table( res, file=file.path(outfolder, "drug-effect-six-sample-in-patient.txt"), quote = FALSE, sep = "\t",col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
 save(dds, rld, res, sampleAnnot, file=file.path(outfolder, "res.rda"))
