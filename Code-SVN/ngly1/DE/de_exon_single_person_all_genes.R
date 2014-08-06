@@ -30,4 +30,4 @@ four_patients = Reduce(intersect, siggenes[1:4])
 print(six_samples)
 print(four_patients)
 lapply(c('de_CP1.rda', 'de_CP2.rda', 'de_CP3.rda', 
-         'de_CP4.rda', 'de_MCP1.rda', 'de_FCP1.rda'), sigplot,gene=six_samples)
+         'de_CP4.rda', 'de_MCP1.rda', 'de_FCP1.rda'), sigplot,gene=four_patients)
