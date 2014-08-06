@@ -26,8 +26,9 @@ sample = c('de_19.rda','de_CP1.rda','de_CP2.rda',
 'de_CP3.rda','de_CP4.rda','de_MCP1.rda','de_FCP1.rda')
 #exon_unique = unique(unlist(lapply(sample,get_exon_count)))
 gene=lapply(sample,get_exon_count)
-exclusion_exon = unique(unlist(lapply(gene, get_element,i=1)))
-inclusion_exon = unique(unlist(lapply(gene, get_element,i=2)))
+#names(gene) = c('19','CP1','CP2','CP3','CP4','MCP1','FCP1')
+exclusion_exon = lapply(gene, get_element,i=1)
+inclusion_exon = lapply(gene, get_element,i=2)
 #load('/g/steinmetz/wmueller/NGLY1/gtf.rda')
 #exclusion_gene_id = ids[ids$gene_name %in% exclusion_gene,c('gene_id','gene_name')]
 #inclusion_gene_id = ids[ids$gene_name %in% inclusion_gene,c('gene_id','gene_name')]
@@ -36,7 +37,7 @@ file.create(ouFile)
 
 for(i in 1:length(exclusion_exon))
 {
-    x=data.frame(start(exclusion_exon[[i]]),end(exclusion_exon[[i]]),width(exclusion_exon[[i]]),names(exclusion_exon[[i]]))
+    x=data.frame(start(exclusion_exon[[i]]),end(exclusion_exon[[i]]),width(exclusion_exon[[i]]))
     if(dim(x)[1] > 0)
     {
         write.table(x, ouFile,append=T,quote=F,col.names=F,row.names=F)
@@ -47,7 +48,7 @@ ouFile = 'de_exon_inclusion_exon.txt'
 file.create(ouFile)
 for(i in 1:length(inclusion_exon))
 {
-    x=data.frame(start(inclusion_exon[[i]]),end(inclusion_exon[[i]]),width(inclusion_exon[[i]]),names(inclusion_exon[[i]]))
+    x=data.frame(start(inclusion_exon[[i]]),end(inclusion_exon[[i]]),width(inclusion_exon[[i]]))
     if(dim(x)[1] > 0)
     {
         write.table(x, ouFile,append=T,quote=F,col.names=F,row.names=F)
