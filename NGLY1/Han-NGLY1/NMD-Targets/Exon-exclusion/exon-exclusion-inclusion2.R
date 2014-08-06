@@ -12,8 +12,8 @@ sig_exclusion = sig[(sig_count[,1] <=COUNT_MIN & sig_count[,2] <= COUNT_MIN) & (
 sig_inclusion = sig[(sig_count[,3] <=COUNT_MIN  & sig_count[,4] <= COUNT_MIN ) & (sig_count[,1] >= COUNT_MAX & sig_count[,2] >=COUNT_MAX),]
 sig_exclusion_gene = sig_exclusion$groupID
 sig_inclusion_gene = sig_inclusion$groupID
-sig_exclusion_exon = ranges(sig_exclusion$genomicData)
-sig_inclusion_exon = ranges(sig_inclusion$genomicData)
+sig_exclusion_exon = sig_exclusion
+sig_inclusion_exon = sig_inclusion
 return(list(sig_exclusion_exon, sig_inclusion_exon))
 }
 
@@ -27,8 +27,10 @@ sample = c('de_19.rda','de_CP1.rda','de_CP2.rda',
 #exon_unique = unique(unlist(lapply(sample,get_exon_count)))
 gene=lapply(sample,get_exon_count)
 #names(gene) = c('19','CP1','CP2','CP3','CP4','MCP1','FCP1')
-exclusion_exon = lapply(gene, get_element,i=1)
-inclusion_exon = lapply(gene, get_element,i=2)
+exclusion_exon = unlist(lapply(gene, get_element,i=1))
+inclusion_exon = unlist(lapply(gene, get_element,i=2))
+names(exclusion_exon)=c('19','CP1','CP2','CP3','CP4','MCP1','FCP1')
+names(inclusion_exon)=c('19','CP1','CP2','CP3','CP4','MCP1','FCP1')
 #load('/g/steinmetz/wmueller/NGLY1/gtf.rda')
 #exclusion_gene_id = ids[ids$gene_name %in% exclusion_gene,c('gene_id','gene_name')]
 #inclusion_gene_id = ids[ids$gene_name %in% inclusion_gene,c('gene_id','gene_name')]
@@ -37,10 +39,11 @@ file.create(ouFile)
 
 for(i in 1:length(exclusion_exon))
 {
-    x=data.frame(start(exclusion_exon[[i]]),end(exclusion_exon[[i]]),width(exclusion_exon[[i]]))
-    if(dim(x)[1] > 0)
-    {
-        write.table(x, ouFile,append=T,quote=F,col.names=F,row.names=F)
+    x = start(exclusion_exon[[i]])
+    if(length(x) > 0)
+    { 
+    y=data.frame(start(exclusion_exon[[i]]),end(exclusion_exon[[i]]),width(exclusion_exon[[i]]),names(exclusion_exon[i]))
+    write.table(y, ouFile,append=T,quote=F,col.names=F,row.names=F)
     }
 }
 
@@ -48,10 +51,11 @@ ouFile = 'de_exon_inclusion_exon.txt'
 file.create(ouFile)
 for(i in 1:length(inclusion_exon))
 {
-    x=data.frame(start(inclusion_exon[[i]]),end(inclusion_exon[[i]]),width(inclusion_exon[[i]]))
-    if(dim(x)[1] > 0)
+    x = start(inclusion_exon[[i]])
+    if(length(x) > 0)
     {
-        write.table(x, ouFile,append=T,quote=F,col.names=F,row.names=F)
+    y=data.frame(start(inclusion_exon[[i]]),end(inclusion_exon[[i]]),width(inclusion_exon[[i]]),names(inclusion_exon[i]))
+    write.table(y, ouFile,append=T,quote=F,col.names=F,row.names=F)
     }
 }
 
