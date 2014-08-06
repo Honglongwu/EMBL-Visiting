@@ -1,5 +1,5 @@
 folder = "/g/steinmetz/wmueller/NGLY1/"
-load(file.path(folder,'drug_effect-CP4','DESeq-treatment-control-pairwise.rda'))
+load(file.path(folder,'drug-effect-pairwise-GeneLevel','DESeq-treatment-control-pairwise.rda'))
 pwlist=de.pw.indi.list
 sigfunc=function(x)
 {
@@ -31,6 +31,6 @@ sigfunc2=function(x)
 pwsig=lapply(pwlist,sigfunc2)
 six_samples=Reduce(intersect, pwsig)
 genes3 = ids[ids$gene_id %in% six_samples,]
-write.table(genes3,'DE_treatment_four_patients_two_parents.txt',quote=F,row.names=F, col.names=F)
-write.table(genes3[1],'DE_treatment_four_patients_two_parents_id.txt',quote=F,row.names=F, col.names=F)
-write.table(genes3[2],'DE_treatment_four_patients_two_parents_symbol.txt',quote=F,row.names=F, col.names=F)
+write.table(genes3,'DE_treatment_sig_in_four_patients_not_in_two_parents.txt',quote=F,row.names=F, col.names=F)
+write.table(genes3[1],'DE_treatment_sig_in_four_patients_not_in_two_parents_id.txt',quote=F,row.names=F, col.names=F)
+write.table(genes3[2],'DE_treatment_sig_in_four_patients_not_in_two_parents_symbol.txt',quote=F,row.names=F, col.names=F)

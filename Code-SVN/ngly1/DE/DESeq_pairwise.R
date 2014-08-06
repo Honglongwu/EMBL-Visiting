@@ -42,6 +42,10 @@ pairwise.comp.func <- function(indi.name){
 
 de.pw.indi.list <- foreach(indi.name=unique(sampleAnnot$individual)) %dopar% pairwise.comp.func(indi.name)
 
+save(de.pw.indi.list,'DESeq-treatment-control-pairwise.rda')
+
+################################################################
+
 outfolder="/g/steinmetz/wmueller/NGLY1/hcluster-CP4/" 
 
 ## find the shared up/down genes
