@@ -56,7 +56,8 @@ for(i in 1:length(inclusion_exon))
     { 
     x=inclusion_exon[[i]]
     y=data.frame(rownames(x),x$groupID,seqnames(x$genomicData),strand(x$genomicData),start(x$genomicData),end(x$genomicData),width(x$genomicData),names(inclusion_exon[i]),x$countData)
-    write.table(y, ouFile,append=T,quote=F,col.names=F,row.names=F)
+    #names(y)=c('Exon-ID','Gene','chr','strand','start','end','width','sample','DMSO-rep1','DMSO-rep2','AzaC-rep1','AzaC-rep2')
+    write.table(y, ouFile,append=T,quote=F,col.names=F,row.names=F,sep='\t')
     }
 }
 
