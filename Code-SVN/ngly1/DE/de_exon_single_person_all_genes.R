@@ -1,7 +1,7 @@
 # test difference at exon level
 # Author: czhu
 ###############################################################################
-folder='/g/steinmetz/hsun/NGLY1/NGLY1-wmueller/exon-CP4'
+folder='/g/steinmetz/hsun/NGLY1/NGLY1-wmueller/drug-effect-pairwise-ExonLevel'
 
 sigget =function(sample){
     load(file.path(folder, sample))
@@ -21,13 +21,13 @@ sigplot = function(sample,gene){
     }
     dev.off()   
 }
-siggenes = lapply(c('DE_CP1.rda', 'DE_CP2.rda', 'DE_CP3.rda', 
-               'DE_CP4.rda', 'DE_MCP1.rda', 'DE_FCP1.rda'), sigget)
+siggenes = lapply(c('de_CP1.rda', 'de_CP2.rda', 'de_CP3.rda', 
+               'de_CP4.rda', 'de_MCP1.rda', 'de_FCP1.rda'), sigget)
 names(siggenes) = c('CP1', 'CP2', 'CP3', 'CP4', 'MCP1', 'FCP1')
 lapply(siggenes,length)
 six_samples = Reduce(intersect, siggenes[1:6])
-four_patients = Reduce(intersect, siggenes[1:7])
+four_patients = Reduce(intersect, siggenes[1:4])
 print(six_samples)
 print(four_patients)
-lapply(c('DE_CP1.rda', 'DE_CP2.rda', 'DE_CP3.rda', 
-         'DE_CP4.rda', 'DE_MCP1.rda', 'DE_FCP1.rda'), sigplot,gene=four_patients)
+lapply(c('de_CP1.rda', 'de_CP2.rda', 'de_CP3.rda', 
+         'de_CP4.rda', 'de_MCP1.rda', 'de_FCP1.rda'), sigplot,gene=six_samples)

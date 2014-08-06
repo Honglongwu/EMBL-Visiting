@@ -38,7 +38,7 @@ for(thisIndividual in levels(sampleAnnot$individual)){
     dxd = testForDEU( dxd, reducedModel=~ treatment + exon,   BPPARAM=MulticoreParam(workers=ncpu))
     dxd = estimateExonFoldChanges( dxd, fitExpToVar="treatment", BPPARAM=MulticoreParam(workers=ncpu))
     dxr1 = DEXSeqResults( dxd )
-    save(dxd, dxr1, file=file.path(outfolder, paste0("DE_", thisIndividual, ".rda")))
+    save(dxd, dxr1, file=file.path(outfolder, paste0("de_", thisIndividual, ".rda")))
     
 #plotDispEsts( dxd )
     
