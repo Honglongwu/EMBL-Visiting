@@ -1,7 +1,7 @@
 library(DEXSeq)
 folder='/g/steinmetz/wmueller/NGLY1/exon-CP4'
 plotFolder = '/g/steinmetz/hsun/NGLY1/Han-NGLY1/NMD-Targets/Exon-exclusion/plot'
-COUNT_MIN = 5
+COUNT_MIN = 0
 COUNT_MAX = 20
 get_exon_count=function(inFile)
 {
