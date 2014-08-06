@@ -14,6 +14,7 @@ sig_exclusion_gene = sig_exclusion$groupID
 sig_inclusion_gene = sig_inclusion$groupID
 sig_exclusion_exon = ranges(sig_exclusion$genomicData)
 sig_inclusion_exon = ranges(sig_inclusion$genomicData)
+return(list(sig_exclusion_exon, sig_inclusion_exon))
 }
 
 get_element=function(x, i)
@@ -25,13 +26,34 @@ sample = c('de_19.rda','de_CP1.rda','de_CP2.rda',
 'de_CP3.rda','de_CP4.rda','de_MCP1.rda','de_FCP1.rda')
 #exon_unique = unique(unlist(lapply(sample,get_exon_count)))
 gene=lapply(sample,get_exon_count)
-exclusion_gene = unique(unlist(lapply(gene, get_element,i=1)))
-inclusion_gene = unique(unlist(lapply(gene, get_element,i=2)))
-load('/g/steinmetz/wmueller/NGLY1/gtf.rda')
-exclusion_gene_id = ids[ids$gene_name %in% exclusion_gene,c('gene_id','gene_name')]
-inclusion_gene_id = ids[ids$gene_name %in% inclusion_gene,c('gene_id','gene_name')]
+exclusion_exon = unique(unlist(lapply(gene, get_element,i=1)))
+inclusion_exon = unique(unlist(lapply(gene, get_element,i=2)))
+#load('/g/steinmetz/wmueller/NGLY1/gtf.rda')
+#exclusion_gene_id = ids[ids$gene_name %in% exclusion_gene,c('gene_id','gene_name')]
+#inclusion_gene_id = ids[ids$gene_name %in% inclusion_gene,c('gene_id','gene_name')]
+ouFile = 'de_exon_exclusion_exon.txt'
+file.create(ouFile)
 
-write.table(exclusion_gene_id,'de_exon_exclusion_gene.txt', row.names=F, col.names=F,quote=F)
-write.table(inclusion_gene_id,'de_exon_inclusion_gene.txt',row.names=F, col.names=F,quote=F)
+for(i in 1:length(exclusion_exon))
+{
+    x=data.frame(start(exclusion_exon[[i]]),end(exclusion_exon[[i]]),width(exclusion_exon[[i]]),names(exclusion_exon[[i]]))
+    if(dim(x)[1] > 0)
+    {
+        write.table(x, ouFile,append=T,quote=F,col.names=F,row.names=F)
+    }
+}
+
+ouFile = 'de_exon_inclusion_exon.txt'
+file.create(ouFile)
+for(i in 1:length(inclusion_exon))
+{
+    x=data.frame(start(inclusion_exon[[i]]),end(inclusion_exon[[i]]),width(inclusion_exon[[i]]),names(inclusion_exon[[i]]))
+    if(dim(x)[1] > 0)
+    {
+        write.table(x, ouFile,append=T,quote=F,col.names=F,row.names=F)
+    }
+}
+
+
 
 
