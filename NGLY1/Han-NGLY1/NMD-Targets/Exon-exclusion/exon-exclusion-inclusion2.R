@@ -39,26 +39,26 @@ file.create(ouFile)
 
 for(i in 1:length(exclusion_exon))
 {
-    x = start(exclusion_exon[[i]])
-    if(length(x) > 0)
+    if(dim(exclusion_exon[[i]])[1]>0)
     { 
-    y=data.frame(start(exclusion_exon[[i]]),end(exclusion_exon[[i]]),width(exclusion_exon[[i]]),names(exclusion_exon[i]))
+    x=exclusion_exon[[i]]
+    y=data.frame(rownames(x),x$groupID,seqnames(x$genomicData),strand(x$genomicData),start(x$genomicData),end(x$genomicData),width(x$genomicData),names(exclusion_exon[i]))
     write.table(y, ouFile,append=T,quote=F,col.names=F,row.names=F)
     }
 }
 
 ouFile = 'de_exon_inclusion_exon.txt'
 file.create(ouFile)
+
 for(i in 1:length(inclusion_exon))
 {
-    x = start(inclusion_exon[[i]])
-    if(length(x) > 0)
-    {
-    y=data.frame(start(inclusion_exon[[i]]),end(inclusion_exon[[i]]),width(inclusion_exon[[i]]),names(inclusion_exon[i]))
+    if(dim(inclusion_exon[[i]])[1]>0)
+    { 
+    x=inclusion_exon[[i]]
+    y=data.frame(rownames(x),x$groupID,seqnames(x$genomicData),strand(x$genomicData),start(x$genomicData),end(x$genomicData),width(x$genomicData),names(inclusion_exon[i]),x$countData)
     write.table(y, ouFile,append=T,quote=F,col.names=F,row.names=F)
     }
 }
-
 
 
 
