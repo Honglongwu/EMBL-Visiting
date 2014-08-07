@@ -42,24 +42,29 @@ print(lattice::dotplot(rld[symbol2id(g),]~sampleAnnot$individual,
 }
 }
 
-genes=read.table('upf_drug_effect_six_samples.txt',header=F)
-pdf(file.path(plotFolder, 'upf_drug_effect_six_samples.pdf'), width=8, height=6)
-geneplot(genes[,1])
+#genes=read.table('upf_drug_effect_six_samples.txt',header=F)
+#pdf(file.path(plotFolder, 'upf_drug_effect_six_samples.pdf'), width=8, height=6)
+#geneplot(genes[,1])
+#dev.off()
+#
+#genes=read.table('upf_drug_effect_four_patients_minus_six_samples.txt',header=F)
+#pdf(file.path(plotFolder, 'upf_drug_effect_four_patients_minus_six_samples.pdf'), width=8, height=6)
+#geneplot(genes[,1])
+#dev.off()
+#
+#genes=read.table('upf_drug_effect_four_patients_two_parents.txt',header=F)
+#pdf(file.path(plotFolder, 'upf_drug_effect_four_patients_two_parents.pdf'), width=8, height=6)
+#geneplot(genes[,1])
+#dev.off()
+#
+#pdf(file.path(plotFolder, 'PTGS2.pdf'), width=8, height=6)
+#geneplot('PTGS2')
+#dev.off()
+
+pdf(file.path(plotFolder, 'NGLY1.pdf'), width=8, height=6)
+geneplot('NGLY1')
 dev.off()
 
-genes=read.table('upf_drug_effect_four_patients_minus_six_samples.txt',header=F)
-pdf(file.path(plotFolder, 'upf_drug_effect_four_patients_minus_six_samples.pdf'), width=8, height=6)
-geneplot(genes[,1])
-dev.off()
-
-genes=read.table('upf_drug_effect_four_patients_two_parents.txt',header=F)
-pdf(file.path(plotFolder, 'upf_drug_effect_four_patients_two_parents.pdf'), width=8, height=6)
-geneplot(genes[,1])
-dev.off()
-
-pdf(file.path(plotFolder, 'PTGS2.pdf'), width=8, height=6)
-geneplot('PTGS2')
-dev.off()
 
 
 
