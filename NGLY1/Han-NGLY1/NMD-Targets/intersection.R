@@ -4,6 +4,7 @@
 #deseq_two_sets=read.table('DE_ngly1_twosets_genes.txt',header=F)
 #deseq_two_sets_gene=unique(deseq_two_sets[,2])
 
+load('/g/steinmetz/wmueller/NGLY1/gtf.rda')
 
 
 upf=read.table('UPF1-regulated.txt',sep='\t',header=T)
@@ -14,7 +15,9 @@ upf_gene = upf_gene[!grepl('\\s',upf_gene)]
 drug_effect_six_samples = read.table('DE_treatment_six_samples.txt', header=F)
 drug_effect_six_samples_genes = unique(drug_effect_six_samples[,2])
 upf_drug_six = intersect(upf_gene, drug_effect_six_samples_genes)
-write.table(upf_drug_six,'upf_drug_effect_six_samples.txt',quote=F,col.names=F, row.names=F)
+upf_drug_six_id = ids[ids$gene_name %in% upf_drug_six,c('gene_id','gene_name')]
+write.table(upf_drug_six,'upf_drug_effect_six_samples.txt',quote=F,col.names=F, row.names=F,sep='\t')
+write.table(upf_drug_six_id,'upf_drug_effect_six_samples_id.txt',quote=F,col.names=F, row.names=F,sep='\t')
 
 drug_effect_four_patients = read.table('DE_treatment_four_patients.txt', header=F)
 drug_effect_four_patients_genes = unique(drug_effect_four_patients[,2])
