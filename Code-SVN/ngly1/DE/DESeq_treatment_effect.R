@@ -58,6 +58,7 @@ rld = rlog(dds, blind=FALSE)
 save(dds, rld, res, sampleAnnot, file=file.path(outfolder, "res.rda"))
 
 pdf(file.path(outfolder, "plot_PCA.pdf"), width=8, height=6)
+#print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 dev.off()
 
