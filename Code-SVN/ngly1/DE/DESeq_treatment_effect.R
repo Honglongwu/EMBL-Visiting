@@ -63,7 +63,7 @@ print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 dev.off()
 
 pdf(file.path(outfolder, "plot_MA.pdf"), width=8, height=6)
-plotMA(res, alpha=0.01)
+plotMA(results(dds), alpha=0.01)
 dev.off()
 
 pdf(file.path(outfolder, "plot_dispEst.pdf"), width=8, height=6)
