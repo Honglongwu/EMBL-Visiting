@@ -51,7 +51,9 @@ static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, cons
 {
         //hanice
         //char t[1024]="";
+
         int ti = 0;
+        ti+=strlen(t);
 	int j;
 	if (p->is_head) {
 		//putchar('^');
@@ -406,6 +408,7 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 			printf("%s\t%d\t%c", h->target_name[tid], pos + 1, (ref && pos < ref_len)? ref[pos] : 'N');
 			for (i = 0; i < n; ++i) {
 				int j, cnt;
+                                char pileup[100][1024]={0};
 				for (j = cnt = 0; j < n_plp[i]; ++j) {
 					const bam_pileup1_t *p = plp[i] + j;
 					if (bam1_qual(p->b)[p->qpos] >= conf->min_baseQ) ++cnt;
@@ -416,15 +419,14 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					if (conf->flag & MPLP_PRINT_POS) printf("\t*");
 				} else {
 					for (j = 0; j < n_plp[i]; ++j) {
-                                                printf("**%d**",j);
 						const bam_pileup1_t *p = plp[i] + j;
 						if (bam1_qual(p->b)[p->qpos] >= conf->min_baseQ)
                                                 {
-                                                        char pileup[1024]="";
-							pileup_seq(plp[i] + j, pos, ref_len, ref, pileup);
-                                                        printf("%s",pileup);
+							pileup_seq(plp[i] + j, pos, ref_len, ref, pileup[i]);
+                                                        //printf("%s",pileup);
                                                 }
 					}
+                                        printf("%s",pileup[i]);
 					putchar('\t');
 					for (j = 0; j < n_plp[i]; ++j) {
 						const bam_pileup1_t *p = plp[i] + j;
