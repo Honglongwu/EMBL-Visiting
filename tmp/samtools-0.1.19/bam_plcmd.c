@@ -47,10 +47,10 @@ static inline int printw2(int c, FILE *fp, char *buf)
 
 
 
-static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, const char *ref)
+static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, const char *ref, char *t)
 {
         //hanice
-        char t[1024]="";
+        //char t[1024]="";
         int ti = 0;
 	int j;
 	if (p->is_head) {
@@ -108,7 +108,7 @@ static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, cons
             //putchar('$');
             t[ti++]='$';
         }
-        printf("%s",t);
+        //printf("%s",t);
 }
 
 #include <assert.h>
@@ -416,9 +416,14 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					if (conf->flag & MPLP_PRINT_POS) printf("\t*");
 				} else {
 					for (j = 0; j < n_plp[i]; ++j) {
+                                                printf("**%d**",j);
 						const bam_pileup1_t *p = plp[i] + j;
 						if (bam1_qual(p->b)[p->qpos] >= conf->min_baseQ)
-							pileup_seq(plp[i] + j, pos, ref_len, ref);
+                                                {
+                                                        char pileup[1024]="";
+							pileup_seq(plp[i] + j, pos, ref_len, ref, pileup);
+                                                        printf("%s",pileup);
+                                                }
 					}
 					putchar('\t');
 					for (j = 0; j < n_plp[i]; ++j) {
