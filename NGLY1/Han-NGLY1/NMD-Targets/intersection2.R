@@ -5,3 +5,4 @@ table(y)[table(y)>1]
 
 x = read.table('upf_drug_effect_six_samples.txt')[,1]
 y = read.table('upf_drug_effect_four_patients.txt')[,1]
+y[!y %in% x]
