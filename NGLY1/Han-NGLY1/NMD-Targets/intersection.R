@@ -22,7 +22,9 @@ write.table(upf_drug_six_id,'upf_drug_effect_six_samples_id.txt',quote=F,col.nam
 drug_effect_four_patients = read.table('DE_treatment_four_patients.txt', header=F)
 drug_effect_four_patients_genes = unique(drug_effect_four_patients[,2])
 upf_drug_four = intersect(upf_gene, drug_effect_four_patients_genes)
+upf_drug_four_id = ids[ids$gene_name %in% upf_drug_four,c('gene_id','gene_name')]
 write.table(upf_drug_four,'upf_drug_effect_four_patients.txt',quote=F,col.names=F, row.names=F)
+write.table(upf_drug_four_id,'upf_drug_effect_four_patients_id.txt',quote=F,col.names=F, row.names=F)
 
 drug_effect_four_patients_two_parents = read.table('DE_treatment_four_patients_two_parents.txt', header=F)
 drug_effect_four_patients_two_parents_genes = unique(drug_effect_four_patients_two_parents[,2])
