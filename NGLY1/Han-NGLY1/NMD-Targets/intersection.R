@@ -26,6 +26,16 @@ upf_drug_four_id = ids[ids$gene_name %in% upf_drug_four,c('gene_id','gene_name')
 write.table(upf_drug_four,'upf_drug_effect_four_patients.txt',quote=F,col.names=F, row.names=F)
 write.table(upf_drug_four_id,'upf_drug_effect_four_patients_id.txt',quote=F,col.names=F, row.names=F)
 
+drug_effect_atleasttwo = read.table('Significant-Gene-At-Least-Two-Individual.txt', header=F)
+drug_effect_atleasttwo_genes = unique(drug_effect_atleasttwo[,1])
+drug_effect_atleasttwo_genes_name = ids[ids$gene_id %in% drug_effect_atleasttwo_genes,'gene_name']
+upf_drug_atleasttwo = intersect(upf_gene, drug_effect_atleasttwo_genes_name)
+upf_drug_atleasttwo_id = ids[ids$gene_name %in% upf_drug_atleasttwo,c('gene_id','gene_name')]
+write.table(upf_drug_atleasttwo,'upf_drug_effect_atleastwo.txt',quote=F,col.names=F, row.names=F)
+write.table(upf_drug_atleasttwo_id,'upf_drug_effect_atleasttwo_id.txt',quote=F,col.names=F, row.names=F)
+
+
+
 drug_effect_four_patients_two_parents = read.table('DE_treatment_four_patients_two_parents.txt', header=F)
 drug_effect_four_patients_two_parents_genes = unique(drug_effect_four_patients_two_parents[,2])
 upf_drug_four_two = intersect(upf_gene, drug_effect_four_patients_two_parents_genes)
