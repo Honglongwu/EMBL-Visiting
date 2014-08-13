@@ -67,7 +67,7 @@ void split_string(char *p, char ps[][DEPTH])
         {
             for(j=i;j<strlen(p);j++)
             {
-                if(p[j]=='.' || p[j]==',')
+                if(p[j]=='.' || p[j]==',' ||j==strlen(p)-1)
                 {
                     strncpy(ps[n++],p+i,j-i+1);
                     i = j;
@@ -81,8 +81,8 @@ void split_string(char *p, char ps[][DEPTH])
 
 void split_cmp(char *p1, char *p2, struct string_count SN[])
 {
-    char ps1[DEPTH][DEPTH]={0};
-    char ps2[DEPTH][DEPTH]={0};
+    char ps1[DEPTH][DEPTH]={{0}};
+    char ps2[DEPTH][DEPTH]={{0}};
     split_string(p1,ps1);
     split_string(p2,ps2);
 
@@ -142,9 +142,6 @@ static inline int printw2(int c, FILE *fp, char *buf)
 
 static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, const char *ref, char *t)
 {
-        //hanice
-        //char t[1024]="";
-
         int ti = 0;
         ti+=strlen(t);
 	int j;
@@ -499,11 +496,11 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 			}
 		} else {
 			printf("%s\t%d\t%c", h->target_name[tid], pos + 1, (ref && pos < ref_len)? ref[pos] : 'N');
+                        ////added by hanice
+                        char pileup[SAMPLE_NUM][DEPTH]={{0}};
+                        ////
 			for (i = 0; i < n; ++i) {
 				int j, cnt;
-                                ///// added by hanice
-                                char pileup[SAMPLE_NUM][DEPTH]={0};
-                                /////
 				for (j = cnt = 0; j < n_plp[i]; ++j) {
 					const bam_pileup1_t *p = plp[i] + j;
 					if (bam1_qual(p->b)[p->qpos] >= conf->min_baseQ) ++cnt;
@@ -548,30 +545,31 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					}
 				}
 			}
-			putchar('\n');
+                        //// need to change back
+			////putchar('\n');
+			putchar('\t');
+                        ///// added by hanice        
+                        struct string_count SN[DEPTH];
+                        //int i = 0;
+                        for(i=0;i<DEPTH;i++)
+                        {
+                            SN[i].s="";
+                            SN[i].sn[0]=0;
+                            SN[i].sn[1]=0;
+                        }
+                        split_cmp(pileup[0],pileup[1],SN);
+                    
+                        for(i=0;i<DEPTH;i++)
+                        {
+                            if(SN[i].sn[0]+SN[i].sn[1]!=0)
+                            {
+                            printf("%s\t%d\t%d\t%d\t",SN[i].s,SN[i].sn[0]+SN[i].sn[1],SN[i].sn[0],SN[i].sn[1]);
+                            }
+                        }        
+                        printf("\n");
+                        //////       
 		}
 	}
-
-        ///// added by hanice        
-        struct string_count SN[DEPTH];
-        int i = 0;
-        for(i=0;i<DEPTH;i++)
-        {
-            SN[i].s="";
-            SN[i].sn[0]=0;
-            SN[i].sn[1]=0;
-        }
-        split_cmp(pileup[0],pileup[1],SN);
-    
-        for(i=0;i<DEPTH;i++)
-        {
-            if(SN[i].sn[0]+SN[i].sn[1]!=0)
-            {
-            printf("%s\t%d\t%d\t%d\n",SN[i].s,SN[i].sn[0]+SN[i].sn[1],SN[i].sn[0],SN[i].sn[1]);
-            }
-        }        
-        //////       
-
 	bcf_close(bp);
 	bam_smpl_destroy(sm); free(buf.s);
 	for (i = 0; i < gplp.n; ++i) free(gplp.plp[i]);
