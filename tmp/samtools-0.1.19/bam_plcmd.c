@@ -11,99 +11,6 @@
 #include "kstring.h"
 #include "sam_header.h"
 
-//// added by hanice
-#define SAMPLE_NUM 2
-#define DEPTH 1024
-
-struct string_count
-{
-        char *s;
-        int sn[SAMPLE_NUM];
-};
-
-void count_string(char *s, int n, struct string_count * SN)
-{
-    int i = 0;
-    for(i=0;i<DEPTH;i++)
-    {
-        if(strcmp(SN[i].s,s)==0)
-        {
-            SN[i].sn[n] += 1;
-            break;
-        }
-        else
-        {
-            if(strcmp(SN[i].s,"")==0)
-            {
-                SN[i].s=s;
-                SN[i].sn[n] += 1;
-                break;
-            }
-        }
-    }
-}
-
-int count_cmp(const void *s1, const void *s2)
-    {
-      struct string_count *e1 = (struct string_count *)s1;
-      struct string_count *e2 = (struct string_count *)s2;
-      return (e2->sn[0]+e2->sn[1]) - (e1->sn[0]+e1->sn[1]);
-    }
-
-
-void split_string(char *p, char ps[][DEPTH])
-{
-    int i =0;
-    int j =0;
-    int n =0;
-    for(i=0;i<strlen(p);i++)
-    {
-        if(p[i] == '.'||p[i]==','||p[i]=='A'||p[i]=='T'||p[i]=='C'||p[i]=='G')
-        {
-            strncpy(ps[n++],&p[i],1);
-
-        }
-        else if(p[i] == '+' || p[i] == '-')
-        {
-            for(j=i;j<strlen(p);j++)
-            {
-                if(p[j]=='.' || p[j]==',' ||j==strlen(p)-1)
-                {
-                    strncpy(ps[n++],p+i,j-i+1);
-                    i = j;
-                    break;
-                }
-            }
-        }
-
-    }
-}
-
-void split_cmp(char *p1, char *p2, struct string_count SN[])
-{
-    char ps1[DEPTH][DEPTH]={{0}};
-    char ps2[DEPTH][DEPTH]={{0}};
-    split_string(p1,ps1);
-    split_string(p2,ps2);
-
-    int i=0;
-    for (i=0;i<DEPTH;i++)
-    {
-        if(strlen(ps1[i]) || strlen(ps2[i]))
-        {
-        count_string(ps1[i],0,SN);
-        count_string(ps2[i],1,SN);
-        }
-        else
-        {
-        break;
-        }
-    }
-    qsort(SN, DEPTH, sizeof(struct string_count), count_cmp);
-
-}
-/////////
-
 static inline int printw(int c, FILE *fp)
 {
 	char buf[16];
@@ -119,37 +26,12 @@ static inline int printw(int c, FILE *fp)
 	return 0;
 }
 
-static inline int printw2(int c, FILE *fp, char *buf)
+static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, const char *ref)
 {
-        int l, x;
-        if (c == 0)
-        {
-            //return fputc('0', fp);
-            buf[0]='0';
-            return 0;
-        }
-        for (l = 0, x = c < 0? -c : c; x > 0; x /= 10) buf[l++] = x%10 + '0';
-        if (c < 0) buf[l++] = '-';
-        buf[l] = 0;
-        for (x = 0; x < l/2; ++x) {
-                int y = buf[x]; buf[x] = buf[l-1-x]; buf[l-1-x] = y;
-        }
-        //fputs(buf, fp);
-        return 0;
-}
-
-
-
-static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, const char *ref, char *t)
-{
-        int ti = 0;
-        ti+=strlen(t);
 	int j;
 	if (p->is_head) {
-		//putchar('^');
-		//putchar(p->b->core.qual > 93? 126 : p->b->core.qual + 33);
-		t[ti++]='^';
-		t[ti++]=p->b->core.qual > 93? 126 : p->b->core.qual + 33;
+		putchar('^');
+		putchar(p->b->core.qual > 93? 126 : p->b->core.qual + 33);
 	}
 	if (!p->is_del) {
 		int c = bam_nt16_rev_table[bam1_seqi(bam1_seq(p->b), p->qpos)];
@@ -161,46 +43,22 @@ static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, cons
 			if (c == '=') c = bam1_strand(p->b)? ',' : '.';
 			else c = bam1_strand(p->b)? tolower(c) : toupper(c);
 		}
-		//putchar(c);
-                t[ti++]=c;
-	} 
-        else 
-        {
-            //putchar(p->is_refskip? (bam1_strand(p->b)? '<' : '>') : '*');
-            t[ti++]=p->is_refskip? (bam1_strand(p->b)? '<' : '>') : '*';
-        }
+		putchar(c);
+	} else putchar(p->is_refskip? (bam1_strand(p->b)? '<' : '>') : '*');
 	if (p->indel > 0) {
-		//putchar('+'); printw(p->indel, stdout);
-		t[ti++]='+'; 
-                char pw[16]="";
-                printw2(p->indel, stdout,pw);
-                //printf("%s", pw);
-                strcat(t,pw);
-                ti+=strlen(pw);
-
+		putchar('+'); printw(p->indel, stdout);
 		for (j = 1; j <= p->indel; ++j) {
 			int c = bam_nt16_rev_table[bam1_seqi(bam1_seq(p->b), p->qpos + j)];
-			//putchar(bam1_strand(p->b)? tolower(c) : toupper(c));
-			t[ti++]=bam1_strand(p->b)? tolower(c) : toupper(c);
+			putchar(bam1_strand(p->b)? tolower(c) : toupper(c));
 		}
 	} else if (p->indel < 0) {
-                char pw[16]="";
-		printw2(p->indel, stdout, pw);
-                strcat(t,pw);
-                ti+=strlen(pw);
-                //printf("%s", pw);
+		printw(p->indel, stdout);
 		for (j = 1; j <= -p->indel; ++j) {
 			int c = (ref && (int)pos+j < ref_len)? ref[pos+j] : 'N';
-			//putchar(bam1_strand(p->b)? tolower(c) : toupper(c));
-			t[ti++]=bam1_strand(p->b)? tolower(c) : toupper(c);
+			putchar(bam1_strand(p->b)? tolower(c) : toupper(c));
 		}
 	}
-	if (p->is_tail) 
-        {
-            //putchar('$');
-            t[ti++]='$';
-        }
-        //printf("%s",t);
+	if (p->is_tail) putchar('$');
 }
 
 #include <assert.h>
@@ -496,9 +354,6 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 			}
 		} else {
 			printf("%s\t%d\t%c", h->target_name[tid], pos + 1, (ref && pos < ref_len)? ref[pos] : 'N');
-                        ////added by hanice
-                        char pileup[SAMPLE_NUM][DEPTH]={{0}};
-                        ////
 			for (i = 0; i < n; ++i) {
 				int j, cnt;
 				for (j = cnt = 0; j < n_plp[i]; ++j) {
@@ -513,12 +368,8 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					for (j = 0; j < n_plp[i]; ++j) {
 						const bam_pileup1_t *p = plp[i] + j;
 						if (bam1_qual(p->b)[p->qpos] >= conf->min_baseQ)
-                                                {
-							pileup_seq(plp[i] + j, pos, ref_len, ref, pileup[i]);
-                                                }
+							pileup_seq(plp[i] + j, pos, ref_len, ref);
 					}
-                                        printf("%s",pileup[i]);
-                                                
 					putchar('\t');
 					for (j = 0; j < n_plp[i]; ++j) {
 						const bam_pileup1_t *p = plp[i] + j;
@@ -545,31 +396,10 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					}
 				}
 			}
-                        //// need to change back
-			////putchar('\n');
-			putchar('\t');
-                        ///// added by hanice        
-                        struct string_count SN[DEPTH];
-                        //int i = 0;
-                        for(i=0;i<DEPTH;i++)
-                        {
-                            SN[i].s="";
-                            SN[i].sn[0]=0;
-                            SN[i].sn[1]=0;
-                        }
-                        split_cmp(pileup[0],pileup[1],SN);
-                    
-                        for(i=0;i<DEPTH;i++)
-                        {
-                            if(SN[i].sn[0]+SN[i].sn[1]!=0)
-                            {
-                            printf("%s\t%d\t%d\t%d\t",SN[i].s,SN[i].sn[0]+SN[i].sn[1],SN[i].sn[0],SN[i].sn[1]);
-                            }
-                        }        
-                        printf("\n");
-                        //////       
+			putchar('\n');
 		}
 	}
+
 	bcf_close(bp);
 	bam_smpl_destroy(sm); free(buf.s);
 	for (i = 0; i < gplp.n; ++i) free(gplp.plp[i]);

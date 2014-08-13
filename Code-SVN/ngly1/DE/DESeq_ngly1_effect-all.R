@@ -6,7 +6,7 @@ library(DESeq2)
 
 folder = "/g/steinmetz/wmueller/NGLY1"
 
-outfolder = file.path(folder, "DE_ngly1-CP4")
+outfolder = file.path(folder, "NGLY1-groupwise-GeneLevel")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 load(file.path(folder, "counts-CP4.rda"))
@@ -52,7 +52,7 @@ print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 dev.off()
 
 pdf(file.path(outfolder, "plot_MA-DMSO-ALL.pdf"), width=8, height=6)
-plotMA(res, alpha=0.01)
+plotMA(results(dds), alpha=0.01)
 dev.off()
 
 pdf(file.path(outfolder, "plot_dispEst-DMSO-ALL.pdf"), width=8, height=6)
