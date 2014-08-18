@@ -61,11 +61,25 @@ for line in inFile:
     RAW[fields[0]]=fields[1:]
 inFile.close()
 
+GENE = {}
+inFile = open('DE_treatment_six_samples.txt')
+for line in inFile:
+    line = line.strip()
+    fields = line.split()
+    GENE[fields[0]]=fields[1]
+inFile.close()
 
 ouFile = open('NGLY1-significant-gene-six-individul.txt','w')
+cp1='CP1_AzaC_biorep1\tCP1_AzaC_biorep2\tCP1_DMSO_biorep1\tCP1_DMSO_biorep2\tCP1_AzaC_DMSO_log2_fold_change\tCP1_AzaC_DMSO_padj'
+cp2='CP2_AzaC_biorep1\tCP2_AzaC_biorep2\tCP2_DMSO_biorep1\tCP2_DMSO_biorep2\tCP2_AzaC_DMSO_log2_fold_change\tCP2_AzaC_DMSO_padj'
+cp3='CP3_AzaC_biorep1\tCP3_AzaC_biorep2\tCP3_DMSO_biorep1\tCP3_DMSO_biorep2\tCP3_AzaC_DMSO_log2_fold_change\tCP3_AzaC_DMSO_padj'
+cp4='CP4_AzaC_biorep1\tCP4_AzaC_biorep2\tCP4_DMSO_biorep1\tCP4_DMSO_biorep2\tCP4_AzaC_DMSO_log2_fold_change\tCP4_AzaC_DMSO_padj'
+fcp1='FCP1_AzaC_biorep1\tFCP1_AzaC_biorep2\tFCP1_DMSO_biorep1\tFCP1_DMSO_biorep2\tFCP1_AzaC_DMSO_log2_fold_change\tFCP1_AzaC_DMSO_padj'
+mcp1='MCP1_AzaC_biorep1\tMCP1_AzaC_biorep2\tMCP1_DMSO_biorep1\tMCP1_DMSO_biorep2\tMCP1_AzaC_DMSO_log2_fold_change\tMCP1_AzaC_DMSO_padj'
+ouFile.write('Gene\tGene_Ensembl_ID\t'+'\t'.join([cp1,cp2,cp3,cp4,fcp1,mcp1])+'\n')
 for k in RAW:
-    ouFile.write(k+'\t'+'\t'.join(RAW[0:4])+'\t'+'\t'.join(CP1[k])+'\t'.join(RAW[4:8])+'\t'.join(CP2[k])+'\t'.join(RAW[8:12])+'\t'.join(CP3[k])+'\t'.join(RAW[12:16])+'\t'.join(CP4[k])
-            +'\t'.join(RAW[16:20])+'\t'.join(FCP1[k])+'\t'.join(RAW[20:24])+'\t'.join(MCP1[k]))
+    ouFile.write(GENE[k]+'\t'+k+'\t'+'\t'.join(RAW[k][0:4])+'\t'+'\t'.join(CP1[k])+'\t'+'\t'.join(RAW[k][4:8])+'\t'+'\t'.join(CP2[k])+'\t'+'\t'.join(RAW[k][8:12])+'\t'+'\t'.join(CP3[k])+'\t'+'\t'.join(RAW[k][12:16])+'\t'+'\t'.join(CP4[k]) +'\t'+'\t'.join(RAW[k][16:20])+'\t'+'\t'.join(FCP1[k])+'\t'+'\t'.join(RAW[k][20:24])+'\t'+'\t'.join(MCP1[k])+'\n')
+
 ouFile.close()
 
 
