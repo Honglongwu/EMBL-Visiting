@@ -1,3 +1,4 @@
+import sys
 D = {}
 inFile = open('homologene.data')
 for line in inFile:
@@ -18,7 +19,7 @@ inFile.close()
 
 for x in D:
     for y in D[x]:
-        if y[3] == 'NGLY1' and y[1] == '9606':
+        if y[3] == sys.argv[1] and y[1] == '9606':
             for m in D[x]:
                 print(m[3]+'\t'+D2[m[1]])
 
