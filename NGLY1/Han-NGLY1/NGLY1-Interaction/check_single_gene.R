@@ -8,21 +8,24 @@ folder = "/g/steinmetz/wmueller/NGLY1/"
 load(file.path(folder, "counts-CP4.rda"))
 load(file.path(folder, "sampleAnnot-CP4.rda"))
 load(file.path(folder, "gtf.rda"))
-##..##
-##..#### first look at gene counts
-##..##mat = assay(geneCounts)
-##..##
-##..##dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~ individual + treatment)
-##..##dds = DESeq(dds)
-##..##
-##..##rld = assay(rlog(dds, blind=FALSE))
-##..##save(rld, file='DESeq-ALL-rld.rda')
+
+mat = assay(geneCounts)
+
+wh = sampleAnnot$treatment == "DMSO"
+sampleAnnot = droplevels(sampleAnnot[wh,])
+mat = mat[, wh]
+
+dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~ individual)
+dds = DESeq(dds)
+rld = assay(rlog(dds, blind=FALSE))
+save(rld, file='DESeq-ALL-DMSO-rld.rda')
+
 symbol2id = function(symbo){
     ids$gene_id[ids$gene_name==symbo]
 }
 
-load('DESeq-ALL-rld.rda')
-plotFolder=file.path("/g/steinmetz/hsun/NGLY1/Han-NGLY1/NMD-Targets", "single-gene-plot-check")
+load('DESeq-ALL-DMSO-rld.rda')
+plotFolder=file.path("/g/steinmetz/hsun/NGLY1/Han-NGLY1/NGLY1-Interaction", "single-gene-plot-check")
 if (!file.exists(plotFolder))  dir.create(plotFolder)
 sampleAnnot$individual = factor(c('19','CP1','CP2','CP3','CP4','MCP1','FCP1'))
 
@@ -37,7 +40,7 @@ geneplot = function(genename){
 for(g in genename)
 {
 print(lattice::dotplot(rld[symbol2id(g),]~sampleAnnot$individual, 
-                       group=sampleAnnot$treatment,pch=19, auto.key=TRUE,
+                       group=sampleAnnot$individual,pch=19, auto.key=TRUE,
                        ylab="Normalised gene expression",main=g))
 }
 }
@@ -64,6 +67,11 @@ print(lattice::dotplot(rld[symbol2id(g),]~sampleAnnot$individual,
 pdf(file.path(plotFolder, 'NGLY1.pdf'), width=8, height=6)
 geneplot('NGLY1')
 dev.off()
+
+pdf(file.path(plotFolder, 'VCP.pdf'), width=8, height=6)
+geneplot('VCP')
+dev.off()
+
 
 
 
