@@ -7,3 +7,12 @@ get.sig = function(x)
 }
 
 lapply(de.pw.indi.list,get.sig)
+
+library(DESeq2)
+load('counts-CP4.rda')
+gc = assay(geneCounts)
+count=gc[rownames(gc) %in% sig.gene.six,5:dim(gc)[2]]
+write.table(count,'NGLY1-raw-count.txt',quote=F,col.names=NA)
+
+
+
