@@ -14,20 +14,21 @@ load(file.path(folder, "sampleAnnot-CP4.rda"))
 load('resNGLY1-ALL.rda')
 #load('resCP1CP4MCP1.rda')
 
-#gc = assay(geneCounts)[,c('CP1_DMSO_biorep1.bam','CP1_DMSO_biorep2.bam','CP4_DMSO_biorep1.bam','CP4_DMSO_biorep2.bam','MCP1_DMSO_biorep1.bam','MCP1_DMSO_biorep2.bam')]
-#gc.annot=factor(c('CP1','CP1','CP4','CP4','MCP1','MCP1'))
+gc.name = colnames(assay(geneCounts))
+gc.name = gc.name[grepl('CP.*DMSO', gc.name)]
+gc = assay(geneCounts)[,gc.name]
+gc.annot=factor(c('CP1','CP1','CP2','CP2','CP3','CP3','CP4','CP4','FCP1','FCP1','MCP1','MCP1'))
 
 
 plotFolder=file.path("/g/steinmetz/hsun/NGLY1/Han-NGLY1/NGLY1-Interaction", "single-gene-plot-check")
 if (!file.exists(plotFolder))  dir.create(plotFolder)
 
 #sampleAnnot$individual = factor(c('CP1','CP4','MCP1'))
-rld= assay(rld)
 geneplot = function(genename){
 for(g in genename)
 {
-print(lattice::dotplot(rld[symbol2id(g),]~sampleAnnot$individual, 
-                       group=sampleAnnot$individual,pch=19, auto.key=TRUE,
+print(lattice::dotplot(gc[symbol2id(g),]~gc.annot, 
+                       group=gc.annot,pch=19, auto.key=TRUE,
                        ylab="gene raw counts",main=g))
 }
 }
