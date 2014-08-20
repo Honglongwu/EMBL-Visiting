@@ -399,6 +399,10 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 			putchar('\n');
 		}
 	}
+        putchar('a');
+        putchar('a');
+        putchar('a');
+        putchar('a');
 
 	bcf_close(bp);
 	bam_smpl_destroy(sm); free(buf.s);
