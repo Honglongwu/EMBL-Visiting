@@ -340,7 +340,11 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 			bcf_call_combine(gplp.n, bcr, bca, ref16, &bc);
 			bcf_call2bcf(tid, pos, &bc, b, bcr, conf->fmt_flag, 0, 0);
 			bcf_write(bp, bh, b);
+                        //hanice
+                        fprintf(stderr,"%s\n",b->ref);
+                        fprintf(stderr,"%s\n",b->alt);
 			bcf_destroy(b);
+				
 			// call indels
 			if (!(conf->flag&MPLP_NO_INDEL) && total_depth < max_indel_depth && bcf_call_gap_prep(gplp.n, gplp.n_plp, gplp.plp, pos, bca, ref, rghash) >= 0) {
 				for (i = 0; i < gplp.n; ++i)
@@ -348,10 +352,12 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 				if (bcf_call_combine(gplp.n, bcr, bca, -1, &bc) >= 0) {
 					b = calloc(1, sizeof(bcf1_t));
 					bcf_call2bcf(tid, pos, &bc, b, bcr, conf->fmt_flag, bca, ref);
+                                        //hanice
+                                        fprintf(stderr,"%s\n",b->ref);
+                                        fprintf(stderr,"%s\n",b->alt);
 					bcf_write(bp, bh, b);
 					bcf_destroy(b);
 				}
-                                fprintf(stderr,"bbbbb");
 			}
 		} else {
 			printf("%s\t%d\t%c", h->target_name[tid], pos + 1, (ref && pos < ref_len)? ref[pos] : 'N');
