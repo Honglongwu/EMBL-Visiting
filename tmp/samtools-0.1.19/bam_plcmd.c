@@ -351,6 +351,7 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					bcf_write(bp, bh, b);
 					bcf_destroy(b);
 				}
+                                fprintf(stderr,"bbbbb");
 			}
 		} else {
 			printf("%s\t%d\t%c", h->target_name[tid], pos + 1, (ref && pos < ref_len)? ref[pos] : 'N');
