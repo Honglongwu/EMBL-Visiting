@@ -1,5 +1,5 @@
 D = {}
-inFile = open('NGLY1-seq.fa')
+inFile = open('NGLY1-seq2.fa')
 while True:
     line1 = inFile.readline().strip()
     line2 = inFile.readline().strip()
@@ -19,4 +19,5 @@ for line in inFile:
 inFile.close()
 for k in D:
     if len(D[k]) > 1:
-        print(D[k])
+        for x in D[k][1:]:
+            print(x[0] + '\t' + x[1])
