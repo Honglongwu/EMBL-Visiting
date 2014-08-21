@@ -341,8 +341,8 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 			bcf_call2bcf(tid, pos, &bc, b, bcr, conf->fmt_flag, 0, 0);
 			bcf_write(bp, bh, b);
                         //hanice
-                        fprintf(stderr,"%s\n",b->ref);
-                        fprintf(stderr,"%s\n",b->alt);
+                        //fprintf(stderr,"%s\n",b->ref);
+                        //fprintf(stderr,"%s\n",b->alt);
 			bcf_destroy(b);
 				
 			// call indels
@@ -353,8 +353,8 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					b = calloc(1, sizeof(bcf1_t));
 					bcf_call2bcf(tid, pos, &bc, b, bcr, conf->fmt_flag, bca, ref);
                                         //hanice
-                                        fprintf(stderr,"%s\n",b->ref);
-                                        fprintf(stderr,"%s\n",b->alt);
+                                        //fprintf(stderr,"%s\n",b->ref);
+                                        //fprintf(stderr,"%s\n",b->alt);
 					bcf_write(bp, bh, b);
 					bcf_destroy(b);
 				}
