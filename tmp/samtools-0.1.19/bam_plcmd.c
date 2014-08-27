@@ -346,7 +346,7 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 			bcf_destroy(b);
 				
 			// call indels
-			if (!(conf->flag&MPLP_NO_INDEL) && total_depth < max_indel_depth && bcf_call_gap_prep(gplp.n, gplp.n_plp, gplp.plp, pos, bca, ref,rghash) >= 0) {
+			if (!(conf->flag&MPLP_NO_INDEL) && total_depth < max_indel_depth && bcf_call_gap_prep(gplp.n, gplp.n_plp, gplp.plp, pos, bca, ref_len, ref, rghash) >= 0) {
 				for (i = 0; i < gplp.n; ++i)
 					bcf_call_glfgen(gplp.n_plp[i], gplp.plp[i], -1, bca, bcr + i);
 				if (bcf_call_combine(gplp.n, bcr, bca, -1, &bc) >= 0) {
