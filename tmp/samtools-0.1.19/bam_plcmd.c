@@ -28,6 +28,8 @@ static inline int printw(int c, FILE *fp)
 
 static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, const char *ref)
 {
+            fprintf(stderr, "@@@%d\t%d\t%c\n", pos, ref_len, *ref);
+                    fprintf(stderr,"#####\n");
 	int j;
 	if (p->is_head) {
 		putchar('^');
