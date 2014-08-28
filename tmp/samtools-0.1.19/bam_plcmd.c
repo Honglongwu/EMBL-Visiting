@@ -375,6 +375,7 @@ static int mpileup(mplp_conf_t *conf, int n, char **fn)
 					for (j = 0; j < n_plp[i]; ++j) {
 						const bam_pileup1_t *p = plp[i] + j;
 						if (bam1_qual(p->b)[p->qpos] >= conf->min_baseQ)
+                                                        //fprintf(stderr,"@@@%d\t%d\t%c\n", pos, ref_len, *ref);
 							pileup_seq(plp[i] + j, pos, ref_len, ref);
 					}
 					putchar('\t');
