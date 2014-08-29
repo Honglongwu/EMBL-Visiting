@@ -2,7 +2,7 @@ import subprocess
 import string
 trans = string.maketrans('ATCGatcg','TAGCtagc')
 
-inFile = open('NGLY1-unmapped-file-list2')
+inFile = open('NGLY1-unmapped-file-list')
 ouFile = open('NGLY1-unmapped.fasta', 'w')
 D = {}
 for line in inFile:
@@ -20,7 +20,7 @@ for line in inFile:
             elif seq_rev in D:
                 D[seq_rev].append(fd+':'+fields[0])
             else:
-                D.setdefault(seq, [])
+                D.setdefault(seq, [fd+':'+fields[0]])
     #ouFile.close()
 inFile.close()
 for k in D:
