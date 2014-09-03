@@ -2,7 +2,7 @@ import subprocess
 import string
 trans = string.maketrans('ATCGatcg','TAGCtagc')
 
-inFile = open('NGLY1-unmapped-file-list2')
+inFile = open('NGLY1-unmapped-file-list')
 ouFile = open('NGLY1-unmapped.fq', 'w')
 D = {}
 for line in inFile:
@@ -25,10 +25,11 @@ for line in inFile:
 inFile.close()
 for k in D:
     ouFile.write('@' + '|'.join(D[k]) +'|'+k+'|'+'1'+ '\n')
-    ouFile.write(k[0:24] + '\n')
+    ouFile.write(k[0:20] + '\n')
     ouFile.write('+\n')
-    ouFile.write('H'*len(k[0:24])+'\n')
+    ouFile.write('H'*len(k[0:20])+'\n')
     ouFile.write('@' + '|'.join(D[k]) +'|'+k+'|'+'2'+ '\n')
-    ouFile.write(k[24:] + '\n')
-    ouFile.write('H'*len(k[24:])+'\n')
+    ouFile.write(k[len(k)-20:] + '\n')
+    ouFile.write('+\n')
+    ouFile.write('H'*len(k[len(k)-20:])+'\n')
 ouFile.close()
