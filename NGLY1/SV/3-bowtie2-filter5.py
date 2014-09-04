@@ -29,7 +29,7 @@ while True:
         break
 inFile.close()
 d = D.items()
-d.sort(cmp=lambda x,y:cmp(len(x[1]),len(y[1])))
+d.sort(cmp=lambda x,y:cmp(len(x[1]),len(y[1])),reverse= True)
 for x in d:
     if len(x[1]) > 1:
         ouFile.write('>' + str(len(x[1]))+ '\t' + x[0]+'\n')
