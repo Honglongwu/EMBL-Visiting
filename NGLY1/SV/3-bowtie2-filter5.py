@@ -3,8 +3,8 @@ D = {}
 def similar(k, D):
     for y in D:
         x = y.split('\t')
-        if (x[0] == k[0] and 10<=int(x[1]) - int(k[1]) <=10 and x[2] == k[2] and 10 <= int(x[3]) - int(k[3]) <= 10) \
-                or (x[0] == k[2] and 10<=int(x[1]) - int(k[3]) <=10 and x[2] == k[0] and 10 <= int(x[3]) - int(k[1]) <= 10):
+        if (x[0] == k[0] and -10<=int(x[1]) - int(k[1]) <=10 and x[2] == k[2] and -10 <= int(x[3]) - int(k[3]) <= 10) \
+                or (x[0] == k[2] and -10<=int(x[1]) - int(k[3]) <=10 and x[2] == k[0] and -10 <= int(x[3]) - int(k[1]) <= 10):
                     return y
     return 0
 inFile = open('NGLY1-unmapped.aligned.paired3')
@@ -28,9 +28,11 @@ while True:
     else:
         break
 inFile.close()
-for k in D:
-    if len(D[k]) > 1:
-        ouFile.write(k+'\n')
-        for x in D[k]:
-            ouFile.write('\n'.join(x)+'\n')
+d = D.items()
+d.sort(cmp=lambda x,y:cmp(len(x[1]),len(y[1])))
+for x in d:
+    if len(x[1]) > 1:
+        ouFile.write('>' + str(len(x[1]))+ '\t' + x[0]+'\n')
+        for y in x[1]:
+            ouFile.write('\n'.join(y)+'\n')
 ouFile.close()
