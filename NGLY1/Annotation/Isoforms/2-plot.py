@@ -94,11 +94,5 @@ inFile.close()
 ax.set_yticks(ytick)
 ax.set_yticklabels(yticklabel, fontsize=8)
 
-red_patch = patches.Patch(color='red', label='The red data')
-green_patch = patches.Patch(color='green', label='The green data')
-blue_patch = patches.Patch(color='blue', label='The blue data')
-magenta_patch = patches.Patch(color='magenta', label='The magenta data')
-
-plt.legend(handles=[red_patch, green_patch, blue_patch, magenta_patch])
 
 plt.savefig('NGLY1-Isoforms.pdf')
