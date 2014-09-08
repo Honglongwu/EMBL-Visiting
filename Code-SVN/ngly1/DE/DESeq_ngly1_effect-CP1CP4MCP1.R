@@ -6,7 +6,7 @@ library(DESeq2)
 
 folder = "/g/steinmetz/wmueller/NGLY1"
 
-outfolder = file.path(folder, "DE_ngly1-CP4")
+outfolder = file.path(folder, "NGLY1-groupwise-GeneLevel")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 load(file.path(folder, "counts-CP4.rda"))
@@ -37,12 +37,14 @@ load(file.path(folder, "gtf.rda"))
 res = results(dds)
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 res = res[order(res$padj), ]
+res.sig = res[which(res$padj<0.01),]
 
 #..#write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
 write.table( res, file=file.path(outfolder, "deCP1CP4MCP1.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig, file=file.path(outfolder, "deCP1CP4MCP1_sig.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
-save(dds, rld, res,sampleAnnot,file=file.path(outfolder, "resCP1CP4MCP1.rda"))
+save(dds, rld, res,res.sig,sampleAnnot,file=file.path(outfolder, "resCP1CP4MCP1.rda"))
 
 pdf(file.path(outfolder, "plot_PCA-deCP1CP4MCP1.pdf"), width=8, height=6)
 print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
