@@ -5,11 +5,6 @@ import matplotlib.pyplot as plt
 from matplotlib.path import Path
 import matplotlib.patches as patches
 
-L1 = []
-L2 = []
-L3 = []
-L4 = []
-
 '''
 inFile = open('POGK-A01-coverage')
 for line in inFile:
@@ -40,10 +35,11 @@ for line in inFile:
     for x in exon_end:
         Pos.append(x)
 
-MIN = min(Pos)
-MAX = max(Pos)
+MIN = min(Pos) - 1000
+MAX = max(Pos) + 1000
 
 fig = plt.figure()
+'''
 ax = fig.add_axes([0.1,0.6,0.8,0.38])
 ax.set_xlim(MIN,MAX)
 #ax.set_ylim(min(L2),int(max(L2)*1.1))
@@ -57,11 +53,12 @@ ax.set_xlim(MIN,MAX)
 ax.set_xticklabels([])
 ax.set_ylabel('B01')
 #ax.plot(L3, L4, 'b.')
+'''
 
-ax = fig.add_axes([0.1,0.02,0.8,0.16])
+ax = fig.add_axes([0.1,0.1,0.8,0.8])
 ax.set_ylim(0,1)
 ax.set_xlim(MIN,MAX)
-ax.set_ylabel('POGK')
+ax.set_ylabel('NGLY1 Isoforms')
 ax.set_xticklabels([])
 ax.set_xticks([])
 ax.set_yticklabels([])
@@ -87,9 +84,9 @@ for line in inFile:
     exon_end = [int(x) for x in fields[3:len(fields):3]]
 
     for i in range(len(exon_start)):
-        exon = [(exon_start[i],0.05+0.06*(n-1)),(exon_start[i],0.1+0.06*(n-1)),(exon_end[i],0.1+0.06*(n-1)),(exon_end[i],0.05+0.06*(n-1)),(0,0)]
+        exon = [(exon_start[i],0.05+0.06*(n-1)),(exon_start[i],0.08+0.06*(n-1)),(exon_end[i],0.08+0.06*(n-1)),(exon_end[i],0.05+0.06*(n-1)),(0,0)]
         path = Path(exon, codes)
-        patch = patches.PathPatch(path, facecolor='green', lw=1)
+        patch = patches.PathPatch(path, facecolor='red', edgecolor='red', lw=1)
         ax.add_patch(patch)
 
 inFile.close()
