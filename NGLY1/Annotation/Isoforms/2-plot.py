@@ -89,6 +89,10 @@ for line in inFile:
         patch = patches.PathPatch(path, facecolor='red', edgecolor='red', lw=1)
         ax.add_patch(patch)
 
+    for i in range(len(exon_end)-1):
+        ax.plot([exon_start[i],exon_end[i+1]],[0.065+0.06*(n-1), 0.065+0.06*(n-1)],color='green')
+
+     
 inFile.close()
 
 
