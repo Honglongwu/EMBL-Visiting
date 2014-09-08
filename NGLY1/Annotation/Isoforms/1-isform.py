@@ -3,20 +3,18 @@ inFile = open('ENSG00000151092')
 for line in inFile:
     line = line.strip()
     fields = line.split('\t')
-    transcript_id = fields[-1].split(';')[1]
-    exon_number = fields[-1].split(';')[2]
+    transcript_id = fields[-1].split(';')[1].strip()
+    exon_number = fields[-1].split(';')[2].strip()
 
     if fields[2] == 'exon':
         D.setdefault(transcript_id, [])
-        D[transcript_id].append([exon_number, int(fields[3]), int(fields[4])])
+        D[transcript_id].append([exon_number, fields[3], fields[4]])
 inFile.close()
 
-'''
 for k in D:
-    print(k)
-    print(D[k])
-'''
+    print(k+'\t'+'\t'.join(['\t'.join(x) for x in D[k]]))
 
+'''
 def get_min_max(D):
     L = []
     for k in D:
@@ -46,3 +44,4 @@ for i in range(len(GLx)):
                 L.append(j+get_min_max(D)[0])
     print(GLx[i][0])
     print(L)
+'''

@@ -28,9 +28,21 @@ for line in inFile:
 inFile.close()
 '''
 
+inFile = open('ENSG00000151092-trasncripts')
+Pos = []
+for line in inFile:
+    line = line.strip()
+    fields = line.split('\t')
+    exon_start = [int(x) for x in fields[2:len(fields):3]]
+    exon_end = [int(x) for x in fields[3:len(fields):3]]
+    for x in exon_start:
+        Pos.append(x)
+    for x in exon_end:
+        Pos.append(x)
 
-MIN = 25760434
-MAX = 25824989
+MIN = min(Pos)
+MAX = max(Pos)
+
 fig = plt.figure()
 ax = fig.add_axes([0.1,0.6,0.8,0.38])
 ax.set_xlim(MIN,MAX)
@@ -64,22 +76,23 @@ codes = [Path.MOVETO,
          Path.CLOSEPOLY,
          ]   
 #exon1
-exon_start = '25760434,25761504,25770623,25773809,25775362,25777494,25778824,25781067,25792588,25805556,25820064,25824750,'.split(',')
-exon_end = '25761126,25761682,25770809,25773974,25775473,25777640,25778946,25781290,25792754,25805802,25820179,25824989,'.split(',')
-for i in range(len(exon_start)-1):
-    exon = [(exon_start[i],0.1),(exon_start[i],0.2),(exon_end[i],0.2),(exon_end[i],0.1),(0,0)]
-    path = Path(exon, codes)
-    patch = patches.PathPatch(path, facecolor='green', lw=1)
-    ax.add_patch(patch)
-#exon2
-exon_start = '25760434,25761504,25770623,25773809,25775362,25777494,25778824,25781067,25792588,25805556,25820064,25831351,'.split(',')
-exon_end = '25761126,25761682,25770809,25773974,25775473,25777640,25778946,25781290,25792754,25805802,25820179,25831530,'.split(',')
-for i in range(len(exon_start)-1):
-    exon = [(exon_start[i],0.3),(exon_start[i],0.4),(exon_end[i],0.4),(exon_end[i],0.3),(0,0)]
-    path = Path(exon, codes)
-    patch = patches.PathPatch(path, facecolor='green', lw=1)
-    ax.add_patch(patch)
 
+inFile = open('ENSG00000151092-trasncripts')
+n = 0
+for line in inFile:
+    n += 1
+    line = line.strip()
+    fields = line.split('\t')
+    exon_start = [int(x) for x in fields[2:len(fields):3]]
+    exon_end = [int(x) for x in fields[3:len(fields):3]]
+
+    for i in range(len(exon_start)):
+        exon = [(exon_start[i],0.05+0.06*(n-1)),(exon_start[i],0.1+0.06*(n-1)),(exon_end[i],0.1+0.06*(n-1)),(exon_end[i],0.05+0.06*(n-1)),(0,0)]
+        path = Path(exon, codes)
+        patch = patches.PathPatch(path, facecolor='green', lw=1)
+        ax.add_patch(patch)
+
+inFile.close()
 
 
 #cds = [25760950,25824881]
