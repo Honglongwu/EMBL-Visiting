@@ -23,7 +23,7 @@ for line in inFile:
 inFile.close()
 '''
 
-inFile = open('ENSG00000151092-trasncripts')
+inFile = open('ENSG00000151092-trasncripts-sorted')
 Pos = []
 for line in inFile:
     line = line.strip()
@@ -35,8 +35,8 @@ for line in inFile:
     for x in exon_end:
         Pos.append(x)
 
-MIN = min(Pos) - 1000
-MAX = max(Pos) + 1000
+MIN = min(Pos)
+MAX = max(Pos)
 
 fig = plt.figure()
 '''
@@ -55,12 +55,12 @@ ax.set_ylabel('B01')
 #ax.plot(L3, L4, 'b.')
 '''
 
-ax = fig.add_axes([0.1,0.1,0.8,0.8])
+ax = fig.add_axes([0.15,0.1,0.8,0.8])
 ax.set_ylim(0,1)
-ax.set_xlim(MIN,MAX)
-ax.set_ylabel('NGLY1 Isoforms')
-ax.set_xticklabels([])
-ax.set_xticks([])
+ax.set_xlabel('NGLY1')
+ax.set_xlim(MIN - 1000,MAX + 1000)
+ax.set_xticklabels(['chr3:'+str(MIN),'chr3:'+str(MAX)], fontsize=8)
+ax.set_xticks([MIN, MAX])
 ax.set_yticklabels([])
 ax.set_yticks([])
 #ax.axes.get_yaxis().set_visible(False)
@@ -74,8 +74,10 @@ codes = [Path.MOVETO,
          ]   
 #exon1
 
-inFile = open('ENSG00000151092-trasncripts')
+inFile = open('ENSG00000151092-trasncripts-sorted')
 n = 0
+ytick = []
+yticklabel = []
 for line in inFile:
     n += 1
     line = line.strip()
@@ -91,7 +93,11 @@ for line in inFile:
 
     for i in range(len(exon_end)-1):
         ax.plot([exon_start[i],exon_end[i+1]],[0.065+0.06*(n-1), 0.065+0.06*(n-1)],color='green')
+    ytick.append(0.065+0.06*(n-1))
+    yticklabel.append(fields[0].split('"')[1])
 
+ax.set_yticks(ytick)
+ax.set_yticklabels(yticklabel, fontsize=8)
      
 inFile.close()
 
