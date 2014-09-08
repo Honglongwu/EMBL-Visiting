@@ -18,16 +18,16 @@ for line in inFile:
 inFile.close()
 
 def get_color(transcript_id):
-    if TranscriptColor[transcript_id] == '': 
-        return 0
-    elif TranscriptColor[transcript_id] == '': 
-        return 0
-    elif TranscriptColor[transcript_id] == '': 
-        return 0
-    elif TranscriptColor[transcript_id] == '': 
-        return 0
+    if TranscriptColor[transcript_id] == 'protein_coding': 
+        return 'red'
+    elif TranscriptColor[transcript_id] == 'retained_intron': 
+        return 'blue'
+    elif TranscriptColor[transcript_id] == 'processed_transcript': 
+        return 'magenta'
+    elif TranscriptColor[transcript_id] == 'nonsense_mediated_decay': 
+        return 'green'
     else:
-        return 'black'
+        return 'yellow'
 
 
 inFile = open('ENSG00000151092-trasncripts-sorted')
@@ -48,7 +48,7 @@ MAX = max(Pos)
 fig = plt.figure()
 ax = fig.add_axes([0.15,0.1,0.8,0.8])
 ax.set_ylim(0,1)
-ax.set_xlabel('NGLY1')
+ax.set_xlabel('ENSG00000151092(NGLY1)')
 ax.set_xlim(MIN - 1000,MAX + 1000)
 ax.set_xticklabels(['chr3:'+str(MIN),'chr3:'+str(MAX)], fontsize=8)
 ax.set_xticks([MIN, MAX])
@@ -80,12 +80,11 @@ for line in inFile:
     for i in range(len(exon_start)):
         exon = [(exon_start[i],0.05+0.06*(n-1)),(exon_start[i],0.08+0.06*(n-1)),(exon_end[i],0.08+0.06*(n-1)),(exon_end[i],0.05+0.06*(n-1)),(0,0)]
         path = Path(exon, codes)
-        #patch = patches.PathPatch(path, facecolor=get_color(transcript_id), edgecolor=get_color(transcript_id), lw=1)
-        patch = patches.PathPatch(path, facecolor=get_color(transcript_id))
+        patch = patches.PathPatch(path, facecolor=get_color(transcript_id), edgecolor=get_color(transcript_id), lw=1)
         ax.add_patch(patch)
 
     for i in range(len(exon_end)-1):
-        ax.plot([exon_start[i],exon_end[i+1]],[0.065+0.06*(n-1), 0.065+0.06*(n-1)],color='green')
+        ax.plot([exon_start[i],exon_end[i+1]],[0.065+0.06*(n-1), 0.065+0.06*(n-1)],color='black')
     ytick.append(0.065+0.06*(n-1))
     yticklabel.append(transcript_id)
 
