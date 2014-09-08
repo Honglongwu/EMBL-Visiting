@@ -6,6 +6,8 @@ from matplotlib.path import Path
 import matplotlib.patches as patches
 import re
 
+
+
 TranscriptColor = {}
 inFile = open('ENSG00000151092')
 for line in inFile:
@@ -87,10 +89,16 @@ for line in inFile:
         ax.plot([exon_start[i],exon_end[i+1]],[0.065+0.06*(n-1), 0.065+0.06*(n-1)],color='black')
     ytick.append(0.065+0.06*(n-1))
     yticklabel.append(transcript_id)
+inFile.close()
 
 ax.set_yticks(ytick)
 ax.set_yticklabels(yticklabel, fontsize=8)
-     
-inFile.close()
+
+red_patch = patches.Patch(color='red', label='The red data')
+green_patch = patches.Patch(color='green', label='The green data')
+blue_patch = patches.Patch(color='blue', label='The blue data')
+magenta_patch = patches.Patch(color='magenta', label='The magenta data')
+
+plt.legend(handles=[red_patch, green_patch, blue_patch, magenta_patch])
 
 plt.savefig('NGLY1-Isoforms.pdf')
