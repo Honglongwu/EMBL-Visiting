@@ -9,7 +9,7 @@ import re
 
 
 TranscriptColor = {}
-inFile = open('ENSG00000151092')
+inFile = open('ENSG00000151092-GRCh37')
 for line in inFile:
     line = line.strip()
     fields = line.split('\t')
@@ -32,7 +32,7 @@ def get_color(transcript_id):
         return 'yellow'
 
 
-inFile = open('ENSG00000151092-trasncripts-sorted')
+inFile = open('ENSG00000151092-GRCh37-transcripts-sorted')
 Pos = []
 for line in inFile:
     line = line.strip()
@@ -67,7 +67,7 @@ codes = [Path.MOVETO,
          ]   
 #exon1
 
-inFile = open('ENSG00000151092-trasncripts-sorted')
+inFile = open('ENSG00000151092-GRCh37-transcripts-sorted')
 n = 0
 ytick = []
 yticklabel = []

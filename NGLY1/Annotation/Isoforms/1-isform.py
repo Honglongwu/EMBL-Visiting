@@ -1,5 +1,5 @@
 D = {}
-inFile = open('ENSG00000151092')
+inFile = open('ENSG00000151092-GRCh37')
 for line in inFile:
     line = line.strip()
     fields = line.split('\t')
