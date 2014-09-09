@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.path import Path
 import matplotlib.patches as patches
 import re
+import unique_region
 
 Region = {}
 inFile = open('ENSG00000151092-GRCh37-transcripts-unique-region')
@@ -92,6 +93,8 @@ for line in inFile:
     transcript_id = fields[0].split('"')[1]
     if transcript_id in Region:
         ax.scatter(Region[transcript_id],[0.09+0.06*(n-1)]*len(Region[transcript_id]),color='black',marker='.')
+        for x in unique_region.Region[transcript_id]:
+            ax.text(x[0]+100, 0.09+0.06*(n-1), str(x[1]-x[0])+'bp', fontsize=6)
 
 
     for i in range(len(exon_start)):

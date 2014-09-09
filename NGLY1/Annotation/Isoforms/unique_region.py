@@ -34,3 +34,7 @@ while True:
     else:
         break
 inFile.close()
+if __name__=='__main__':
+    for k in Region:
+        print(k)
+        print(Region[k])
