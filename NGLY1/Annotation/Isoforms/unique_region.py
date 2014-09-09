@@ -1,3 +1,4 @@
+Region = {}
 inFile = open('ENSG00000151092-GRCh37-transcripts-unique-region')
 while True:
     line1 = inFile.readline().strip()
@@ -15,18 +16,20 @@ while True:
                 while j <= max:
                     if j == max:
                         end = j 
-                        print(start)
-                        print(end)
+                        Region.setdefault(gene, [])
+                        Region[gene].append([start, end])
                         i = j + 1
                         break
                     elif str(j) not in fields:
                         end = j - 1
-                        print(start)
-                        print(end)
+                        Region.setdefault(gene, [])
+                        Region[gene].append([start, end])
                         i = j + 1
                         break
                     else:
                         j += 1
+            else:
+                i += 1
                         
     else:
         break

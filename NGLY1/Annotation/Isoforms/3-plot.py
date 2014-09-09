@@ -6,6 +6,9 @@ from matplotlib.path import Path
 import matplotlib.patches as patches
 import re
 
+import unique_region
+Region = unique_region.Region
+
 
 
 TranscriptColor = {}
@@ -78,6 +81,10 @@ for line in inFile:
     exon_start = [int(x) for x in fields[2:len(fields):3]]
     exon_end = [int(x) for x in fields[3:len(fields):3]]
     transcript_id = fields[0].split('"')[1]
+    if transcript_id in Region:
+        for x in Region[transcript_id]:
+            ax.plot([x[0],x[1]],[0.085+0.06*(n-1), 0.085+0.06*(n-1)],color='black')
+
 
     for i in range(len(exon_start)):
         exon = [(exon_start[i],0.05+0.06*(n-1)),(exon_start[i],0.08+0.06*(n-1)),(exon_end[i],0.08+0.06*(n-1)),(exon_end[i],0.05+0.06*(n-1)),(0,0)]
@@ -102,4 +109,4 @@ legend.append(ax.plot([0,0],[0,0], color='magenta')[0])
 
 ax.legend(legend, ['protein_coding','retained_intron','nonsense_mediated_decay','processed_transcript'], loc='lower right', ncol=2, bbox_to_anchor=[1,1.01], prop={'size':8})
 
-plt.savefig('NGLY1-Isoforms.pdf')
+plt.savefig('NGLY1-Isoforms-unique-region.pdf')
