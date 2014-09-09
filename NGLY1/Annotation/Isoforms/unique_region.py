@@ -38,5 +38,8 @@ ouFile = open('ENSG00000151092-GRCh37-transcripts-unique-region2', 'w')
 if __name__=='__main__':
     for k in Region:
         ouFile.write(k+'\n')
-        #ouFile.write([for x in Region[k]]+'\n')
+        for x in Region[k]:
+            for y in x:
+                ouFile.write(str(y) + '\t')
+        ouFile.write('\n')
 ouFile.close()
