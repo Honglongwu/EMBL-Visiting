@@ -6,9 +6,18 @@ from matplotlib.path import Path
 import matplotlib.patches as patches
 import re
 
-import unique_region
-Region = unique_region.Region
-
+Region = {}
+inFile = open('ENSG00000151092-GRCh37-transcripts-unique-region')
+while True:
+    line1 = inFile.readline().strip()
+    line2 = inFile.readline().strip()
+    if line1:
+        gene = line1.split('"')[1]
+        fields = line2.split('\t')
+        Region[gene] = fields
+    else:
+        break
+inFile.close()
 
 
 TranscriptColor = {}
@@ -82,8 +91,7 @@ for line in inFile:
     exon_end = [int(x) for x in fields[3:len(fields):3]]
     transcript_id = fields[0].split('"')[1]
     if transcript_id in Region:
-        for x in Region[transcript_id]:
-            ax.plot([x[0],x[1]],[0.085+0.06*(n-1), 0.085+0.06*(n-1)],color='black')
+        ax.scatter(Region[transcript_id],[0.09+0.06*(n-1)]*len(Region[transcript_id]),color='black',marker='.')
 
 
     for i in range(len(exon_start)):
