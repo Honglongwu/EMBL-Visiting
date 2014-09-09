@@ -94,5 +94,13 @@ inFile.close()
 ax.set_yticks(ytick)
 ax.set_yticklabels(yticklabel, fontsize=8)
 
+legend = []
+legend.append(ax.plot([0,0],[0,0], color='red')[0])
+legend.append(ax.plot([0,0],[0,0], color='blue')[0])
+legend.append(ax.plot([0,0],[0,0], color='magenta')[0])
+legend.append(ax.plot([0,0],[0,0], color='green')[0])
+
+xx=ax.legend(legend, ['red','blue','magenta','green'], loc='upper center', ncol=4)
+print(xx.get_bbox_to_anchor())
 
 plt.savefig('NGLY1-Isoforms.pdf')
