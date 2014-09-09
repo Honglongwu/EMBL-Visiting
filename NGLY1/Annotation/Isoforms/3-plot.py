@@ -93,9 +93,18 @@ for line in inFile:
     transcript_id = fields[0].split('"')[1]
     if transcript_id in Region:
         ax.scatter(Region[transcript_id],[0.09+0.06*(n-1)]*len(Region[transcript_id]),color='black',marker='.')
-        for x in unique_region.Region[transcript_id]:
-            ax.text(x[0]+100, 0.09+0.06*(n-1), str(x[1]-x[0])+'bp', fontsize=6)
 
+        if transcript_id == 'ENST00000417874':
+            for x in unique_region.Region[transcript_id]:
+                ax.text(x[0]-3500, 0.085+0.06*(n-1), str(x[1]-x[0]+1)+'bp', fontsize=6)
+        elif transcript_id == 'ENST00000496726':
+            x = unique_region.Region[transcript_id][0]
+            ax.text(x[0]-4500, 0.085+0.06*(n-1), str(x[1]-x[0]+1)+'bp', fontsize=6)
+            x = unique_region.Region[transcript_id][1]
+            ax.text(x[1]+500, 0.085+0.06*(n-1), str(x[1]-x[0]+1)+'bp', fontsize=6)
+        else:
+            for x in unique_region.Region[transcript_id]:
+                ax.text(x[1]+500, 0.085+0.06*(n-1), str(x[1]-x[0]+1)+'bp', fontsize=6)
 
     for i in range(len(exon_start)):
         exon = [(exon_start[i],0.05+0.06*(n-1)),(exon_start[i],0.08+0.06*(n-1)),(exon_end[i],0.08+0.06*(n-1)),(exon_end[i],0.05+0.06*(n-1)),(0,0)]

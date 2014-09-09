@@ -34,7 +34,9 @@ while True:
     else:
         break
 inFile.close()
+ouFile = open('ENSG00000151092-GRCh37-transcripts-unique-region2', 'w')
 if __name__=='__main__':
     for k in Region:
-        print(k)
-        print(Region[k])
+        ouFile.write(k+'\n')
+        #ouFile.write([for x in Region[k]]+'\n')
+ouFile.close()
