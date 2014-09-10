@@ -1,7 +1,7 @@
-sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.adipose.1.filtered.sorted.bam
+#sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.adipose.1.filtered.sorted.bam
 #sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.adrenal.1.filtered.sorted.bam
 #sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.blood.1.filtered.sorted.bam
-#sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.brain.1.filtered.sorted.bam
+sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.brain.1.filtered.sorted.bam
 #sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.breast.1.filtered.sorted.bam
 #sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.colon.1.filtered.sorted.bam
 #sh tview.sh /g/tier2/steinmetz/project/mTEC_Seq/externalData/IlluminaBodyMap/preAligned/GRCh37.HumanBodyMap.heart.1.filtered.sorted.bam
