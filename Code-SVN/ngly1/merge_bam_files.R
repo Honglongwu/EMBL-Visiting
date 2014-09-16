@@ -2,9 +2,9 @@
 # Author: czhu
 ###############################################################################
 folder = "/g/steinmetz/wmueller/NGLY1"
-sampleAnnot = read.delim(file=file.path(folder, "samples-CP4.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+sampleAnnot = read.delim(file=file.path(folder, "samples-BCells.txt"), stringsAsFactors=FALSE, check.names=FALSE)
 
-jobsHasFinished = file.exists(file.path(folder, "alignments/CP4", sampleAnnot$name, "accepted_hits.bam"))
+jobsHasFinished = file.exists(file.path(folder, "alignments/B-Cells", sampleAnnot$name, "accepted_hits.bam"))
 
 outfolder = file.path(folder, "alignment_filtered")
 if (!file.exists(outfolder))  dir.create(outfolder)
@@ -19,7 +19,8 @@ run_samtools_filter_by_mapping_quality = function(x, mq,o,ncpu){
     system(cmd)
 }
 
-f = factor(with(sampleAnnot[jobsHasFinished,], paste(individual,treatment,  biorep, sep="_")))
+#f = factor(with(sampleAnnot[jobsHasFinished,], paste(individual,treatment,  biorep, sep="_")))
+f = factor(with(sampleAnnot[jobsHasFinished,], paste(individual, biorep, sep="_")))
 tmplst = split(sampleAnnot[jobsHasFinished,],f)
 
 ## careful here if one samples doesn't have multiple technical replicates, since samtools merge needs multiple inputs 
@@ -32,9 +33,10 @@ for(i in 1:length(tmplst)){
     thisChunk = tmplst[[i]]
     for(j in 1:nrow(thisChunk)) {
         run_samtools_filter_by_mapping_quality(
-            file.path(folder,"alignments/CP4", thisChunk$name[j], "accepted_hits.bam"), 
+            file.path(folder,"alignments/B-Cells", thisChunk$name[j], "accepted_hits.bam"), 
             30, 
-            file.path(tmpfolder,paste0(with(thisChunk[j,], paste(individual, treatment, biorep, techrep,sep="_")), ".bam")),
+            #file.path(tmpfolder,paste0(with(thisChunk[j,], paste(individual, treatment, biorep, techrep,sep="_")), ".bam")),
+            file.path(tmpfolder,paste0(with(thisChunk[j,], paste(individual, biorep, techrep,sep="_")), ".bam")),
             10
             )
     }
