@@ -41,10 +41,10 @@ for(i in 1:length(tmplst)){
             )
     }
     
-    #..#cmd = paste(
-    #..#   "samtools merge -r -@ 10 -1", file.path(outfolder, paste0(names(tmplst)[i], ".bam")),
-    #..#    paste(dir(tmpfolder, full.names=TRUE), collapse=" "))
-    #..#cat(cmd, "\n")    
-    #..#system(cmd)
-    #..#unlink(tmpfolder,recursive = TRUE)    
+    cmd = paste(
+       "samtools merge -r -@ 10 -1", file.path(outfolder, paste0(names(tmplst)[i], ".bam")),
+        paste(dir(tmpfolder, full.names=TRUE), collapse=" "))
+    cat(cmd, "\n")    
+    system(cmd)
+    unlink(tmpfolder,recursive = TRUE)    
 }
