@@ -22,7 +22,10 @@ if(!file.exists(annotFile)) {
 
 exonsByGene <- exonsBy( hsa, by="gene") 
 
-bamLst = BamFileList( dir(file.path(folder, "/alignment_filtered"),pattern="*bam$", full.names=TRUE), yieldSize=100000)
+#bamLst = BamFileList( dir(file.path(folder, "/alignment_filtered"),pattern="*bam$", full.names=TRUE), yieldSize=100000)
+#bamLst = BamFileList( dir(file.path(folder, "/alignment_filtered"),pattern=".*B_.*bam$", full.names=TRUE), yieldSize=100000)
+bamLst = BamFileList( file.path(folder, "alignment_filtered", c("CP1-B_biorep1.bam", "CP1-B_biorep2.bam", "CP3-B_biorep1.bam", "CP3-B_biorep2.bam", "MCP1-B_biorep1.bam", "MCP1-B_biorep2.bam", "Ctrl-B_biorep1.bam", "Ctrl-B_biorep2.bam") ), yieldSize=100000)
+
 
 geneCounts <- summarizeOverlaps( exonsByGene, bamLst,
     mode="Union",
