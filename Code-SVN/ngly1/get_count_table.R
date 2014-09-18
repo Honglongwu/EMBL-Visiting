@@ -23,8 +23,7 @@ if(!file.exists(annotFile)) {
 exonsByGene <- exonsBy( hsa, by="gene") 
 
 #bamLst = BamFileList( dir(file.path(folder, "/alignment_filtered"),pattern="*bam$", full.names=TRUE), yieldSize=100000)
-#bamLst = BamFileList( dir(file.path(folder, "/alignment_filtered"),pattern=".*B_.*bam$", full.names=TRUE), yieldSize=100000)
-bamLst = BamFileList( file.path(folder, "alignment_filtered", c("CP1-B_biorep1.bam", "CP1-B_biorep2.bam", "CP3-B_biorep1.bam", "CP3-B_biorep2.bam", "MCP1-B_biorep1.bam", "MCP1-B_biorep2.bam", "Ctrl-B_biorep1.bam", "Ctrl-B_biorep2.bam") ), yieldSize=100000)
+bamLst = BamFileList( dir(file.path(folder, "/alignment_filtered"),pattern=".*B_.*bam$", full.names=TRUE), yieldSize=100000)
 
 
 geneCounts <- summarizeOverlaps( exonsByGene, bamLst,
@@ -40,8 +39,9 @@ exonCounts <- summarizeOverlaps( unlist(exonsByGene), bamLst,
     inter.feature=FALSE)
 
 ## pheno data
-pd = read.delim(file=file.path(folder, "samples-CP4.txt"), stringsAsFactors=FALSE, check.names=FALSE)
-pd = pd[,c("individual", "treatment", "biorep", "techrep", "label")]
+pd = read.delim(file=file.path(folder, "samples-BCells.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+#pd = pd[,c("individual", "treatment", "biorep", "techrep", "label")]
+pd = pd[,c("individual", "biorep", "techrep", "label")]
 
 ## introns 
 gs = genes(hsa)
@@ -58,4 +58,4 @@ intronCounts <- summarizeOverlaps( intronsByGene, bamLst,
     singleEnd=TRUE,
     ignore.strand=TRUE)
 
-save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts,  pd, file=file.path(folder, "counts-CP4.rda"))
+save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts,  pd, file=file.path(folder, "counts-BCells.rda"))
