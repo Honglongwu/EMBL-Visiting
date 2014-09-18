@@ -1,7 +1,7 @@
-rt = read.table('READ-NGLY1-ga.txt', sep='\t')
-rt[grepl('TCGA-AG-A002-01', unname(unlist(rt[1,])))]
-rt = read.table('READ-NGLY1-hiseq.txt', sep='\t')
-rt[grepl('TCGA-EI-6917-01', unname(unlist(rt[1,])))]
+rt = read.table('COAD-NGLY1-ga.txt', sep='\t')
+rt[grepl('TCGA-CM-4746-01', unname(unlist(rt[1,])))]
+rt = read.table('COAD-NGLY1-hiseq.txt', sep='\t')
+rt[grepl('TCGA-A6-6141-01', unname(unlist(rt[1,])))]
 
 #select=seq(3,dim(rt)[2],2)
 #count=unname(unlist(rt[2,select]))
