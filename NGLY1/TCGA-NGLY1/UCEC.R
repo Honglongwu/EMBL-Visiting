@@ -18,4 +18,5 @@ sample = c(colnames(rt.select),colnames(rt2.select))
 platform = rep(c("ga", "hiseq"), times=c(length(colnames(rt.select)),length(colnames(rt2.select))))
 tumor = rep("UCEC", each=length(sample))
 annotation = data.frame(sample=sample,platform=platform,tumor=tumor)
+merge(rt.select, rt2.select, by.x=0,by.y=0,)
 
