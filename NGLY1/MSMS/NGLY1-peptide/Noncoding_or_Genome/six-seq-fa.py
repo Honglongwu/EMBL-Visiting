@@ -28,12 +28,11 @@ def translate(seq):
 
 
 D = {}
-inFile = open("Homo_sapiens_NGLY1_001_sequence.fa.fa")
+inFile = open('Homo_sapiens_NGLY1_GRCh38_3_25699113_25803551_sequence_and_some_ENST.fa')
 while True:
     line1 = inFile.readline().strip()
-    line2 = inFile.readline().strip()
     if line1:
-        six = translate(line2)
+        six = translate(line1)
         for i in range(len(six)):
             seq=six[i].split('*')
             for x in seq:
@@ -42,7 +41,10 @@ while True:
     else:
         break
 inFile.close()
+n = 0
 for x in D:
-    if len(x) >= 30:
+    if len(x) >= 20:
+        n += 1
+        print('>GENOME|Q96IV0-18-%d(ENST00000280700)|NGLY1_HUMAN'%n)
         print(x)
 
