@@ -1,5 +1,5 @@
 D = {}
-inFile = open('NGLY1-seq2.fa')
+inFile = open('/g/steinmetz/hsun/NGLY1/MSMS/NGLY1-peptide/NGLY1-protein-Uniprot.fa')
 while True:
     line1 = inFile.readline().strip()
     line2 = inFile.readline().strip()
@@ -9,7 +9,7 @@ while True:
         break
 inFile.close()
 
-inFile = open('../rep12/evidence.txt')
+inFile = open('evidence.txt')
 for line in inFile:
     fields = line.split('\t')
     pep=fields[0]
