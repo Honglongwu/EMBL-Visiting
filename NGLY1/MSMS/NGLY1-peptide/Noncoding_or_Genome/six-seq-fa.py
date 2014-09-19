@@ -41,10 +41,12 @@ while True:
     else:
         break
 inFile.close()
+ouFile = open('Homo_sapiens_NGLY1_GRCh38_3_25699113_25803551_sequence_and_some_ENST_peptide.fa', 'w')
 n = 0
 for x in D:
     if len(x) >= 20:
         n += 1
-        print('>GENOME|Q96IV0-18-%d(ENST00000280700)|NGLY1_HUMAN'%n)
-        print(x)
+        ouFile.write('>GENOME|Q96IV0-18-%d(ENST00000280700)|NGLY1_HUMAN\n'%n)
+        ouFile.write(x + '\n')
+ouFile.close()
 
