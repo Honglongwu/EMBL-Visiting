@@ -5,6 +5,8 @@ select.x=seq(3,dim(rt)[1],1)
 rt.select = rt[select.x,select.y]
 rownames(rt.select) = rt[select.x,1]
 colnames(rt.select) = unlist(rt[1,select.y])
+colnames(rt.select)[colnames(rt.select)=="TCGA-AX-A1C7-01A-11R-A137-07"]="TCGA-AX-A1C7-01A-11R-A137-07"
+## TCGA-AX-A1C7-01A-11R-A137-07
 
 rt2 = read.table("UCEC__unc.edu__illuminahiseq_rnaseqv2__rsem.genes.results__Jul-08-2014.txt", sep = "\t")
 #rt2 = read.table("test2", sep = "\t")
@@ -17,7 +19,8 @@ colnames(rt2.select) = unlist(rt2[1,select.y])
 sample = c(colnames(rt.select),colnames(rt2.select))
 platform = rep(c("ga", "hiseq"), times=c(length(colnames(rt.select)),length(colnames(rt2.select))))
 tumor = rep("UCEC", each=length(sample))
-annotation = data.frame(sample=sample,platform=platform,tumor=tumor)
+sex = rep("female", each=length(sample))
+annotation = data.frame(sample=sample,platform=platform,tumor=tumor,sex=sex)
 count = merge(rt.select, rt2.select, by.x=0,by.y=0)
 
 ###
@@ -27,3 +30,7 @@ count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.x']='TCGA-AX-A1C7-01A-11R-A
 count.test[2:length(count.test)]==sample
 ###
 
+###phenotype
+###rt=read.table("nationwidechildrens.org_clinical_patient_ucec.txt",sep="\t")
+###rt[4:dim(rt)[1],c(1,7)]
+###
