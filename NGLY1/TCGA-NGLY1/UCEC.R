@@ -63,4 +63,14 @@ ngly1.control=ngly1.control[2:dim(ngly1.control)[2]]
 ngly1.control.annotation = cbind(rbind(ngly1.annotation, control.annotation),comparison)
 ngly1.control = merge(ngly1, control, by.x=1, by.y=1)
 
+### DESeq2
+gly1.control.tmp = sapply(ngly1.control, as.integer)
+rownames(ngly1.control.tmp)=rownames(ngly1.control)
+ngly1.control=ngly1.control.tmp
+dds=DESeqDataSetFromMatrix(countData=ngly1.control, colData=ngly1.control.annotation,design=~comparison)
+dds <- DESeq(dds)
+dds.results=results(dds)
+dds.results=dds.results[order(dds.results$padj),]
+dds.results.significant=[which(dds.results$padj<0.05),]
+
 save.image(file="UCEC.rda")
