@@ -28,7 +28,6 @@ count=count[,2:dim(count)[2]]
 count.numeric = as.data.frame(sapply(count,as.numeric))
 rownames(count.numeric) = rownames(count)
 count = count.numeric
-save.image(file="UCEC.rda")
 write.table(annotation$sample,file="UCEC-samples",quote=F,row.names=F,col.names=F)
 
 ###phenotype
@@ -46,23 +45,25 @@ NGLY1.count.t=as.data.frame(t(NGLY1.count))
 colnames(NGLY1.count.t) = "reads.number"
 NGLY1.count.t.ga = subset(NGLY1.count.t,annotation$platform=="ga")
 
-library(ggplot2)
-#pdf('UCEC-NGLY1-ga-count-distribution-bin50.pdf')
-#color = rep(c("white", "red", "white", "red", "white"), times=c(5,3,12,1,53))
-#ggplot(df, aes(x=count)) + geom_histogram(binwidth=50,colour="black", fill=color) + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq raw reads count)')
-#ggplot(df, aes(x=count)) + geom_histogram(colour="black", fill="white") + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq raw reads count)')
-#dev.off()
-ggplot(NGLY1.count.t.ga, aes(x=reads.number)) + geom_histogram(binwidth=50,colour="black", fill="white") + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq raw reads count)')
-
-###
-#count.test = colnames(count)
-#count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.y']='TCGA-AX-A1C7-01A-11R-A137-07'
-#count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.x']='TCGA-AX-A1C7-01A-11R-A137-07'
-#count.test[2:length(count.test)]==sample
 ###
 selection = NGLY1.count.t<=600 & NGLY1.count.t >= 500 & annotation$platform=='ga' & annotation$tumor_status=='TUMOR FREE' & annotation$race=='WHITE' & annotation$age <= 70 & annotation$age >= 50
 control=count[,selection]
 control.annotation = annotation[selection,]
 
-ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(count))]
+###ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(count))]
+ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-B5-A11N-01",colnames(count))]
 ngly1.annotation = annotation[annotation$sample %in% colnames(ngly1),]
+ngly1[grepl("NGLY1",rownames(ngly1)),]
+
+### merge ngly1 and control
+comparison = rep(c('ngly1','control'), times=c(dim(ngly1.annotation)[1], dim(control.annotation)[1]))
+ngly1.control = merge(ngly1, control, by.x=0, by.y=0)
+rownames(ngly1.control) = ngly1.control[,1]
+ngly1.control=ngly1.control[2:dim(ngly1.control)[2]]
+ngly1.control.annotation = cbind(rbind(ngly1.annotation, control.annotation),comparison)
+ngly1.control = merge(ngly1, control, by.x=1, by.y=1)
+
+
+save.image(file="UCEC.rda")
+
+library(DESeq2)
