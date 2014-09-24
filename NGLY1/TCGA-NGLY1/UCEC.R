@@ -34,17 +34,17 @@ write.table(annotation$sample,file="UCEC-samples",quote=F,row.names=F,col.names=
 ###phenotype
 ###using python to prepare input file
 phenotype=read.table("UCEC-samples-phenotype",sep="\t")
+colnames(phenotype)= c("sample", "gender", "race", "tumor_status","age")
 annotation.phenotype=merge(annotation,phenotype,by.x=1,by.y=1)
-
-
-
+annotation.phenotype.sorted=annotation.phenotype[match(annotation$sample,annotation.phenotype[,1]),]
+annotation = annotation.phenotype.sorted
 
 
 NGLY1.count=count[grepl('NGLY1',rownames(count)),]
 NGLY1.count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(NGLY1.count))]
 NGLY1.count.t=as.data.frame(t(NGLY1.count))
 colnames(NGLY1.count.t) = "reads.number"
-#NGLY1.count.t.ga = subset(NGLY1.count.t,annotation$platform=="ga")
+NGLY1.count.t.ga = subset(NGLY1.count.t,annotation$platform=="ga")
 
 library(ggplot2)
 #pdf('UCEC-NGLY1-ga-count-distribution-bin50.pdf')
@@ -60,6 +60,12 @@ ggplot(NGLY1.count.t.ga, aes(x=reads.number)) + geom_histogram(binwidth=50,colou
 #count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.x']='TCGA-AX-A1C7-01A-11R-A137-07'
 #count.test[2:length(count.test)]==sample
 ###
+
+NGLY1.count[,NGLY1.count.t<=600 & NGLY1.count.t >= 500 & annotation$platform=='ga' & annotation$tumor_status=='TUMOR FREE'
+            & annotation$race=='WHITE']
+annotation[NGLY1.count.t<=600 & NGLY1.count.t >= 500 & annotation$platform=='ga' & annotation$tumor_status=='TUMOR FREE'
+            & annotation$race=='WHITE' & annotation$age <= 70 & annotation$age >= 50,]
+
 
 
 
