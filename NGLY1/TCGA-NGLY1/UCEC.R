@@ -60,12 +60,9 @@ ggplot(NGLY1.count.t.ga, aes(x=reads.number)) + geom_histogram(binwidth=50,colou
 #count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.x']='TCGA-AX-A1C7-01A-11R-A137-07'
 #count.test[2:length(count.test)]==sample
 ###
+selection = NGLY1.count.t<=600 & NGLY1.count.t >= 500 & annotation$platform=='ga' & annotation$tumor_status=='TUMOR FREE' & annotation$race=='WHITE' & annotation$age <= 70 & annotation$age >= 50
+control=count[,selection]
+control.annotation = annotation[selection,]
 
-NGLY1.count[,NGLY1.count.t<=600 & NGLY1.count.t >= 500 & annotation$platform=='ga' & annotation$tumor_status=='TUMOR FREE'
-            & annotation$race=='WHITE']
-annotation[NGLY1.count.t<=600 & NGLY1.count.t >= 500 & annotation$platform=='ga' & annotation$tumor_status=='TUMOR FREE'
-            & annotation$race=='WHITE' & annotation$age <= 70 & annotation$age >= 50,]
-
-
-
-
+ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(count))]
+ngly1.annotation = annotation[annotation$sample %in% colnames(ngly1),]
