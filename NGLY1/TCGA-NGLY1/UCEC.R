@@ -20,8 +20,8 @@ colnames(rt2.select)[colnames(rt2.select)=="TCGA-AX-A1C7-01A-11R-A137-07"]="TCGA
 sample = c(colnames(rt.select),colnames(rt2.select))
 platform = rep(c("ga", "hiseq"), times=c(length(colnames(rt.select)),length(colnames(rt2.select))))
 tumor = rep("UCEC", each=length(sample))
-sex = rep("female", each=length(sample))
-annotation = data.frame(sample=sample,platform=platform,tumor=tumor,sex=sex)
+#sex = rep("female", each=length(sample))
+annotation = data.frame(sample=sample,platform=platform,tumor=tumor)
 count = merge(rt.select, rt2.select, by.x=0,by.y=0)
 rownames(count)=count[,1]
 count=count[,2:dim(count)[2]]
@@ -31,11 +31,20 @@ count = count.numeric
 save.image(file="UCEC.rda")
 write.table(annotation$sample,file="UCEC-samples",quote=F,row.names=F,col.names=F)
 
+###phenotype
+###using python to prepare input file
+phenotype=read.table("UCEC-samples-phenotype",sep="\t")
+annotation.phenotype=merge(annotation,phenotype,by.x=1,by.y=1)
+
+
+
+
+
 NGLY1.count=count[grepl('NGLY1',rownames(count)),]
 NGLY1.count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(NGLY1.count))]
 NGLY1.count.t=as.data.frame(t(NGLY1.count))
 colnames(NGLY1.count.t) = "reads.number"
-NGLY1.count.t.ga = subset(NGLY1.count.t,annotation$platform=="ga")
+#NGLY1.count.t.ga = subset(NGLY1.count.t,annotation$platform=="ga")
 
 library(ggplot2)
 #pdf('UCEC-NGLY1-ga-count-distribution-bin50.pdf')
@@ -52,9 +61,5 @@ ggplot(NGLY1.count.t.ga, aes(x=reads.number)) + geom_histogram(binwidth=50,colou
 #count.test[2:length(count.test)]==sample
 ###
 
-###phenotype
-###rt=read.table("nationwidechildrens.org_clinical_patient_ucec.txt",sep="\t", stringsAsFactors=F)
-###rt[4:dim(rt)[1],c(1,7)]
-###
 
 
