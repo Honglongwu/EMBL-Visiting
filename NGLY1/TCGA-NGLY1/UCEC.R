@@ -29,6 +29,7 @@ count.numeric = as.data.frame(sapply(count,as.numeric))
 rownames(count.numeric) = rownames(count)
 count = count.numeric
 save.image(file="UCEC.rda")
+write.table(annotation$sample,file="UCEC-samples",quote=F,row.names=F,col.names=F)
 
 NGLY1.count=count[grepl('NGLY1',rownames(count)),]
 NGLY1.count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(NGLY1.count))]
