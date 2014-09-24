@@ -25,7 +25,7 @@ annotation = data.frame(sample=sample,platform=platform,tumor=tumor)
 count = merge(rt.select, rt2.select, by.x=0,by.y=0)
 rownames(count)=count[,1]
 count=count[,2:dim(count)[2]]
-count.numeric = as.data.frame(sapply(count,as.numeric))
+count.numeric = as.data.frame(sapply(count,as.integer))
 rownames(count.numeric) = rownames(count)
 count = count.numeric
 write.table(annotation$sample,file="UCEC-samples",quote=F,row.names=F,col.names=F)
@@ -63,7 +63,4 @@ ngly1.control=ngly1.control[2:dim(ngly1.control)[2]]
 ngly1.control.annotation = cbind(rbind(ngly1.annotation, control.annotation),comparison)
 ngly1.control = merge(ngly1, control, by.x=1, by.y=1)
 
-
 save.image(file="UCEC.rda")
-
-library(DESeq2)
