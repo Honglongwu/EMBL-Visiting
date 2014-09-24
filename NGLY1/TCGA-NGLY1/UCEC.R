@@ -32,6 +32,17 @@ save.image(file="UCEC.rda")
 
 NGLY1.count=count[grepl('NGLY1',rownames(count)),]
 NGLY1.count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(NGLY1.count))]
+NGLY1.count.t=as.data.frame(t(NGLY1.count))
+colnames(NGLY1.count.t) = "reads.number"
+NGLY1.count.t.ga = NGLY1.count.t[,annotation$platform=="ga"]
+
+library(ggplot2)
+#pdf('UCEC-NGLY1-ga-count-distribution-bin50.pdf')
+#color = rep(c("white", "red", "white", "red", "white"), times=c(5,3,12,1,53))
+#ggplot(df, aes(x=count)) + geom_histogram(binwidth=50,colour="black", fill=color) + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq raw reads count)')
+#ggplot(df, aes(x=count)) + geom_histogram(colour="black", fill="white") + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq raw reads count)')
+#dev.off()
+ggplot(NGLY1.count.t.ga, aes(x=reads.number)) + geom_histogram(binwidth=50,colour="black", fill="white") + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq raw reads count)')
 
 ###
 #count.test = colnames(count)
