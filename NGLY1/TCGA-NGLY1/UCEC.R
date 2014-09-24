@@ -23,12 +23,13 @@ tumor = rep("UCEC", each=length(sample))
 sex = rep("female", each=length(sample))
 annotation = data.frame(sample=sample,platform=platform,tumor=tumor,sex=sex)
 count = merge(rt.select, rt2.select, by.x=0,by.y=0)
+save.image(file="UCEC.rda")
 
 ###
-count.test = colnames(count)
-count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.y']='TCGA-AX-A1C7-01A-11R-A137-07'
-count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.x']='TCGA-AX-A1C7-01A-11R-A137-07'
-count.test[2:length(count.test)]==sample
+#count.test = colnames(count)
+#count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.y']='TCGA-AX-A1C7-01A-11R-A137-07'
+#count.test[count.test=='TCGA-AX-A1C7-01A-11R-A137-07.x']='TCGA-AX-A1C7-01A-11R-A137-07'
+#count.test[2:length(count.test)]==sample
 ###
 
 ###phenotype
