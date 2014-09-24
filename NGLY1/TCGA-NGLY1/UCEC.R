@@ -23,7 +23,13 @@ tumor = rep("UCEC", each=length(sample))
 sex = rep("female", each=length(sample))
 annotation = data.frame(sample=sample,platform=platform,tumor=tumor,sex=sex)
 count = merge(rt.select, rt2.select, by.x=0,by.y=0)
+rownames(count)=count[,1]
+count=count[,2:dim(count)[2]]
+count= as.numeric(as.character(count))
 save.image(file="UCEC.rda")
+
+NGLY1.count=count[grepl('NGLY1',rownames(count)),]
+NGLY1.count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(NGLY1.count))]
 
 ###
 #count.test = colnames(count)
