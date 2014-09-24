@@ -35,7 +35,7 @@ NGLY1.count=count[grepl('NGLY1',rownames(count)),]
 NGLY1.count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(NGLY1.count))]
 NGLY1.count.t=as.data.frame(t(NGLY1.count))
 colnames(NGLY1.count.t) = "reads.number"
-NGLY1.count.t.ga = NGLY1.count.t[,annotation$platform=="ga"]
+NGLY1.count.t.ga = NGLY1.count.t[annotation$platform=="ga",]
 
 library(ggplot2)
 #pdf('UCEC-NGLY1-ga-count-distribution-bin50.pdf')
