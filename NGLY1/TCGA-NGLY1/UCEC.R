@@ -72,5 +72,4 @@ dds <- DESeq(dds)
 dds.results=results(dds)
 dds.results=dds.results[order(dds.results$padj),]
 dds.results.significant=[which(dds.results$padj<0.05),]
-
 save.image(file="UCEC.rda")
