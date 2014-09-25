@@ -28,7 +28,16 @@ def translate(seq):
 
 
 
-six = translate(sys.argv[1])
-for i in range(len(six)):
-    print(six[i])
-
+inFile = open(sys.argv[1])
+ouFile = open(sys.argv[1] + '-mutated', 'w')
+while True:
+    line1 = inFile.readline().strip()
+    line2 = inFile.readline().strip()
+    if line1:
+        ouFile.write(line1+'\n')
+        ouFile.write(translate(line2)[0]+'\n')
+        
+    else:
+        break
+inFile.close()
+ouFile.close()
