@@ -10,7 +10,9 @@ D['Tissue'] = line
 line = inFile.readline().strip().split('\t')
 D['Expression'] = [int(x) for x in line]
 line = inFile.readline().strip().split('\t')
-D['Others'] = [int(x)-3 for x in line]
+D['Others'] = line
+for i in range(len(D['Tissue'])):
+    D['Tissue'][i] = D['Tissue'][i] + '.' + D['Others'][i]
 
 for line in inFile:
     line = line.strip()
