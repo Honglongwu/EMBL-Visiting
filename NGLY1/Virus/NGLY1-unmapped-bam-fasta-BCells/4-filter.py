@@ -24,7 +24,7 @@ for F in Fs:
             seqname = fields[0]
             seq = D[seqname]
             if float(fields[2]) >= Identity and float(fields[3]) >= Length:
-                ouFile.write('>' + line + '\n')
+                ouFile.write('>' + line +'\t'+F[6:-13]+ '\n')
                 ouFile.write(seq + '\n')
                 
                 seqL = float(len(seq))
@@ -36,7 +36,7 @@ for F in Fs:
                 if A >0.9 or T >0.9 or C>0.9 or G>0.9 or N>0.9:
                     pass
                 else:
-                    ouFile2.write('>' + line + '\n')
+                    ouFile2.write('>' + line + '\t' + F[6:-13]+ '\n')
                     ouFile2.write(seq + '\n')
         inFile.close()
 ouFile.close()
