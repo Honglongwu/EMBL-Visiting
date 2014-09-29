@@ -1,7 +1,15 @@
 library(ggplot2)
-rt =read.table('NGLY1-Viruses-samples2')
+library(reshape2)
+rt =read.table('NGLY1-Viruses-samples.curated')
 colnames(rt) = c('Sample','Count')
+rt2 =read.table('NGLY1-Viruses-samples.curated')
+colnames(rt2) = c('Sample','Count')
+data = merge(rt,rt2,by.x=1,by.y=1)
+melted <- melt(data, id.vars=c("Sample"))
 #qplot(x=ordered(as.factor(Sample),c('CP1-B','CP3-B','MCP1-B','Ctrl-B')), y='Reads Count', data=rt, geom="bar", stat="identity",position="dodge", fill="white",colour="darkgreen")
 #qplot(x=Sample, y=Count, data=rt, geom="bar", stat="identity",position="dodge")
-c <- ggplot(rt, aes(x=factor(Sample, levels=c('CP1-B','CP3-B','MCP1-B','Ctrl-B')),y=Count))
-c + geom_bar(stat="identity", width=0.7, fill="white", colour="black") + ylab("The number of reads from human herpesvirus 4 (EBV)") + xlab("Sample of B cells")
+#c <- ggplot(melted, aes(x=factor(Sample, levels=c('CP1','CP2','CP3','CP4','FCP1','MCP1')),y=value))
+#c + geom_bar(stat="identity", width=0.7, fill=variable) + ylab("The number of reads from human herpesvirus 4 (EBV)") + xlab("Sample of B cells")
+qplot(x=factor(Sample, levels=c('CP1','CP2','CP3','CP4','FCP1','MCP1')), y=value, fill=variable,data=melted, geom="bar", stat="identity",position="dodge")
+
+                                                    
