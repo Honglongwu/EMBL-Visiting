@@ -23,9 +23,9 @@ for F in Fs:
             fields = line.split('\t')
             seqname = fields[0]
             seq = D[seqname]
-            if float(fields[2]) >= Identity and float(fields[3]) >= Length:
-                ouFile.write('>' + line +'\t'+F[6:-13]+ '\n')
-                ouFile.write(seq + '\n')
+            if fields[1][0:2]=='gi' and float(fields[2]) >= Identity and float(fields[3]) >= Length:
+                #ouFile.write('>' + line +'\t'+F[6:-13]+ '\n')
+                #ouFile.write(seq + '\n')
                 
                 seqL = float(len(seq))
                 A = seq.count('A')/seqL
