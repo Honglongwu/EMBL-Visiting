@@ -10,3 +10,6 @@ group_id=c('ENST00000489271','ENST00000489271','ENST00000463611','ENST0000047899
 )
 count <- assay(summarizeOverlaps(features, bfl, ignore.strand=TRUE, singleEnd = TRUE))
 save(count, file='ENSG00000151092-GRCh37-transcripts-unique-region2-counts-Bcells.rda')
+
+count2 <- summarizeOverlaps(features, bfl, ignore.strand=TRUE, singleEnd = TRUE)
+save(count2, file='ENSG00000151092-GRCh37-transcripts-unique-region2-counts-Bcells2.rda')
