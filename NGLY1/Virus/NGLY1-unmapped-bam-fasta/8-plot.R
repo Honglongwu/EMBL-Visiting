@@ -1,0 +1,7 @@
+library(ggplot2)
+rt =read.table('NGLY1-Viruses-samples2')
+colnames(rt) = c('Sample','Count')
+#qplot(x=ordered(as.factor(Sample),c('CP1-B','CP3-B','MCP1-B','Ctrl-B')), y='Reads Count', data=rt, geom="bar", stat="identity",position="dodge", fill="white",colour="darkgreen")
+#qplot(x=Sample, y=Count, data=rt, geom="bar", stat="identity",position="dodge")
+c <- ggplot(rt, aes(x=factor(Sample, levels=c('CP1-B','CP3-B','MCP1-B','Ctrl-B')),y=Count))
+c + geom_bar(stat="identity", width=0.7, fill="white", colour="black") + ylab("The number of reads from human herpesvirus 4 (EBV)") + xlab("Sample of B cells")
