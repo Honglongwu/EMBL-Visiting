@@ -27,7 +27,7 @@ for F in Fs:
             if float(fields[2]) >= Identity and float(fields[3]) >= Length:
                 #ouFile.write('>' + line +'\t'+F[6:-13]+ '\n')
                 #ouFile.write(seq + '\n')
-                if fields[1][0:2] == 'gi':
+                if fields[1][0:2] != 'gi':
                     UN[fields[0]] = 1
                 elif fields[0] not in UN:
                     seqL = float(len(seq))
@@ -42,6 +42,7 @@ for F in Fs:
                         ouFile2.write('>' + line + '\t' + F[6:-13]+ '\n')
                         ouFile2.write(seq + '\n')
         inFile.close()
+        os.remove(F)
 ouFile.close()
 ouFile2.close()
 

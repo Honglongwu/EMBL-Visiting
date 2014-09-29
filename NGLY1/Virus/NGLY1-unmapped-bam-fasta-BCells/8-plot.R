@@ -1,2 +1,5 @@
+library(ggplot2)
 rt =read.table('NGLY1-Viruses-samples2')
-ggplot(mtcars, aes(factor(cyl)))
+colnames(rt) = c('sample','count')
+ggplot(rt$count, aes(factor(count)))
+c + geom_bar()
