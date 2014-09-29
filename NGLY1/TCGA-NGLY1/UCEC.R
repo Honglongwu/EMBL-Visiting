@@ -29,6 +29,7 @@ count.numeric = as.data.frame(sapply(count,as.integer))
 rownames(count.numeric) = rownames(count)
 count = count.numeric
 write.table(annotation$sample,file="UCEC-samples",quote=F,row.names=F,col.names=F)
+write.table(count,file="UCEC-count",quote=F,col.names=NA)
 
 ###phenotype
 ###using python to prepare input file
