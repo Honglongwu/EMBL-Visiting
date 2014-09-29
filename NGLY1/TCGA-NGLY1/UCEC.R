@@ -62,6 +62,7 @@ rownames(ngly1.control) = ngly1.control[,1]
 ngly1.control=ngly1.control[2:dim(ngly1.control)[2]]
 ngly1.control.annotation = cbind(rbind(ngly1.annotation, control.annotation),comparison)
 ngly1.control = merge(ngly1, control, by.x=1, by.y=1)
+save.image(file="UCEC.rda")
 
 ### DESeq2
 gly1.control.tmp = sapply(ngly1.control, as.integer)
@@ -72,4 +73,3 @@ dds <- DESeq(dds)
 dds.results=results(dds)
 dds.results=dds.results[order(dds.results$padj),]
 dds.results.significant=[which(dds.results$padj<0.05),]
-save.image(file="UCEC.rda")
