@@ -84,7 +84,3 @@ dev.off()
 pdf("plot_MA-NGLY1-Control.pdf")
 plotMA(dds.results, alpha=0.01)
 dev.off()
-
-pdf("plot_dispEst-NGLY1-Control.pdf")
-plotDispEsts(dds)
-dev.off()
