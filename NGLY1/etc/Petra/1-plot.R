@@ -1,0 +1,18 @@
+library(ggplot2)
+library(reshape2)
+rt =read.table('CDx-reads-count')
+colnames(rt) = c('Sample','Count')
+
+colnames(data) = c('Sample','Enterobacteria phage','Human adenovirus')
+melted <- melt(data, id.vars=c("Sample"))
+colnames(melted)=c("Sample","Virus or Bacterium","value")
+#qplot(x=ordered(as.factor(Sample),c('CP1-B','CP3-B','MCP1-B','Ctrl-B')), y='Reads Count', data=rt, geom="bar", stat="identity",position="dodge", fill="white",colour="darkgreen")
+#qplot(x=Sample, y=Count, data=rt, geom="bar", stat="identity",position="dodge")
+pdf('NGLY1-Virus-Bacterium-Fibroblast.pdf')
+#c <- ggplot(melted, aes(x=factor(Sample, levels=c('CP1','CP2','CP3','CP4','FCP1','MCP1')),y=value),fill=variable)
+#c + geom_bar(stat="identity", width=0.7) + ylab("The number of reads from human herpesvirus 4 (EBV)") + xlab("Sample of B cells")
+#dev.off()
+qplot(x=factor(Sample, levels=c('CP1','CP2','CP3','CP4','FCP1','MCP1')), y=value, fill=`Virus or Bacterium`,data=melted, geom="bar", stat="identity",position="dodge",xlab="Sample of fibroblast cells", ylab="Number of reads")
+dev.off()
+
+                                                    
