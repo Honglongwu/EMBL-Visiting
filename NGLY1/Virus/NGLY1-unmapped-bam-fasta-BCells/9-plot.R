@@ -5,10 +5,10 @@ gg_color_hue <- function(n) {
 }
 rt =read.table('NGLY1-Viruses-samples2')
 colnames(rt) = c('Sample','Count')
-virus = rep('human herpesvirus 4 (EBV)',times=dim(rt)[1])
-data=cbind(rt,virus)
+Virus = rep('human herpesvirus 4 (EBV)',times=dim(rt)[1])
+data=cbind(rt,Virus)
 #qplot(x=ordered(as.factor(Sample),c('CP1-B','CP3-B','MCP1-B','Ctrl-B')), y='Reads Count', data=rt, geom="bar", stat="identity",position="dodge", fill="white",colour="darkgreen")
 #qplot(x=Sample, y=Count, data=rt, geom="bar", stat="identity",position="dodge")
 pdf("NGLY1-Virus-B-Cells.pdf")
-qplot(x=factor(Sample, levels=c('CP1-B','CP3-B','MCP1-B','Ctrl-B')), y=Count, fill=virus,data=data, geom="bar", stat="identity",position="dodge",xlab="Sample of B cells", ylab="Number of reads", width=0.7) 
+qplot(x=factor(Sample, levels=c('CP1-B','CP3-B','MCP1-B','Ctrl-B')), y=Count, fill=Virus,data=data,geom="bar",stat="identity",position="dodge",xlab="Sample of B cells", ylab="Number of reads", width=0.7) 
 dev.off()
