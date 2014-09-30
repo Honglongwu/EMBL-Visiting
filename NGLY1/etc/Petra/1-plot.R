@@ -10,7 +10,7 @@ pdf('CDx-in-Bcells.pdf')
 #c <- ggplot(melted, aes(x=factor(Sample, levels=c('CP1','CP2','CP3','CP4','FCP1','MCP1')),y=value),fill=variable)
 #c + geom_bar(stat="identity", width=0.7) + ylab("The number of reads from human herpesvirus 4 (EBV)") + xlab("Sample of B cells")
 #dev.off()
-qplot(x=factor(Sample, levels=c('CP1_rep1','CP1_rep2','CP3_rep1','CP3_rep2','MCP1_rep1','MCP1_rep2','Ctrl_rep1','Ctrl_rep2')), y=value, fill=`CD Protein`,data=melted, geom="bar", stat="identity",position="dodge",xlab="Sample of B cells", ylab="Number of reads") + theme(axis.text=element_text(size=6)
+qplot(x=factor(Sample, levels=c('CP1_rep1','CP1_rep2','CP3_rep1','CP3_rep2','MCP1_rep1','MCP1_rep2','Ctrl_rep1','Ctrl_rep2')), y=value, fill=`CD Protein`,data=melted, geom="bar", stat="identity",position="dodge",xlab="Sample of B cells", ylab="Number of reads")
 dev.off()
 
                                                     
