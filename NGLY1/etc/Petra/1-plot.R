@@ -1,7 +1,7 @@
 library(ggplot2)
 library(reshape2)
 rt =read.table('CDx-reads-count.curated')
-data=cbind(CD=c("CD40","CD21"),rt)
+data=cbind(CD=c("CD40","CD21","CD19"),rt)
 melted <- melt(data, id.vars=c("CD"))
 colnames(melted)=c("CD Protein","Sample","value")
 pdf('CDx-in-Bcells.pdf')
