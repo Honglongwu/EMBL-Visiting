@@ -75,12 +75,12 @@ dds.results=dds.results[order(dds.results$padj),]
 dds.results.significant=dds.results[which(dds.results$padj<0.05),]
 save.image(file="UCEC.rda")
 
-rld = rlog(dds, blind=FALSE)
-
-pdf("plot_PCA-NGLY1-Control.pdf")
-print(plotPCA(rld))
-dev.off()
-
-pdf("plot_MA-NGLY1-Control.pdf")
-plotMA(dds.results, alpha=0.01)
-dev.off()
+#rld = rlog(dds, blind=FALSE)
+#
+#pdf("plot_PCA-NGLY1-Control.pdf")
+#print(plotPCA(rld))
+#dev.off()
+#
+#pdf("plot_MA-NGLY1-Control.pdf")
+#plotMA(dds.results, alpha=0.01)
+#dev.off()
