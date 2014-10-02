@@ -8,7 +8,6 @@ D = {}
 for line in inFile:
     file = line.strip()
     fd = file.split('/')[-2]
-    #ouFile = open(fd+'.fasta', 'w')
     sp = subprocess.Popen(['samtools', 'view', file], stdout=subprocess.PIPE, bufsize=1)
     for  x in sp.stdout:
         fields = x.split('\t')
@@ -21,7 +20,6 @@ for line in inFile:
                 D[seq_rev].append(fd+':'+fields[0])
             else:
                 D.setdefault(seq, [fd+':'+fields[0]])
-    #ouFile.close()
 inFile.close()
 for k in D:
     ouFile.write('@' + '|'.join(D[k]) +'|'+k+'|'+'1'+ '\n')
