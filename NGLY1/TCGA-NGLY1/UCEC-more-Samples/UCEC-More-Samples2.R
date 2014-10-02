@@ -2,7 +2,7 @@
 load('UCEC.rda')
 selection = NGLY1.count.t >=700 & annotation$platform=='ga' & annotation$race=='WHITE' & annotation$age <= 70 & annotation$age >= 50
 control=count[,which(selection)]
-control.annotation = annotation[selection,]
+control.annotation = annotation[which(selection),]
 write.table(control,file="UCEC-36control",quote=F,col.names=NA)
 ###ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(count))]
 ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-B5-A11N-01",colnames(count))]
