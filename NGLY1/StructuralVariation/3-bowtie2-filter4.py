@@ -1,12 +1,12 @@
 inFile = open('NGLY1-unmapped.aligned.paired2')
-ouFile = open('NGLY1-unmapped.aligned.paired3', 'w')
+ouFile = open('NGLY1-unmapped.aligned.paired3-1', 'w')
 while True:
     line1 = inFile.readline().strip()
     line2 = inFile.readline().strip()
     if line1:
         fields1 = line1.split('\t')
         fields2 = line2.split('\t')
-        if fields1[2] == fields2[2] and -50<= int(fields1[3]) - int(fields2[3]) <= 50: 
+        if fields1[2] == fields2[2] and -30<= int(fields1[3]) - int(fields2[3]) <= 30: 
             pass
         else:
             ouFile.write(line1 + '\n')
