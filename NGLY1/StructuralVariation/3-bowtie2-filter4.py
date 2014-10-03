@@ -1,5 +1,5 @@
 inFile = open('NGLY1-unmapped.aligned.paired2')
-ouFile = open('NGLY1-unmapped.aligned.paired3-1', 'w')
+ouFile = open('NGLY1-unmapped.aligned.paired3', 'w')
 while True:
     line1 = inFile.readline().strip()
     line2 = inFile.readline().strip()
