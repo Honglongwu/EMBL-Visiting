@@ -1,6 +1,6 @@
 library(igraph)
-rt = read.table("NGLY1-BioGrid",stringsAsFactors=F)
-#rt = read.table("BIOGRID-ALL-Interaction",stringsAsFactors=F,sep='\t')
+#rt = read.table("NGLY1-BioGrid",stringsAsFactors=F)
+rt = read.table("BIOGRID-ALL-Interaction",stringsAsFactors=F,sep='\t')
 #rt = read.table("BIOGRID-ALL-Interaction-No-UBC",stringsAsFactors=F,sep='\t')
 name = unique(c(rt[,1],rt[,2]))
 g = graph.data.frame(rt,directed=F,vertices=data.frame(name=name))

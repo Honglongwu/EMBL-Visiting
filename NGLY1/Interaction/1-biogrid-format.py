@@ -1,4 +1,4 @@
-inFile = open('BIOGRID-ALL-3.2.115.tab2.txt')
+inFile = open('BIOGRID-ALL-3.2.117.tab2.txt')
 ouFile = open('BIOGRID-ALL-Interaction', 'w')
 D = {}
 head = inFile.readline()

@@ -1,5 +1,5 @@
 inFile = open('BIOGRID-ALL-3.2.117.tab2.txt')
-ouFile = open('BIOGRID-ALL-Interaction-No-UBC', 'w')
+ouFile = open('BIOGRID-ALL-Interaction-No-UBC-FBXO6', 'w')
 D = {}
 head = inFile.readline()
 for line in inFile:
@@ -8,7 +8,7 @@ for line in inFile:
     gene1 = fields[7].strip()
     gene2 = fields[8].strip()
     if fields[15] == '9606' and fields[16] == '9606' and gene1 != 'NA' and gene2 != 'NA':
-        if gene1 != 'UBC' and gene2 != 'UBC':
+        if gene1 != 'UBC' and gene2 != 'UBC' and gene1 != 'FBXO6' and gene2 != 'FBXO6':
             k1 = gene1 + '\t' + gene2
             k2 = gene2 + '\t' + gene1
             if k1 not in D and k2 not in D:
