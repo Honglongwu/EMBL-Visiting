@@ -7,6 +7,6 @@ for line in inFile:
     D.setdefault(fields[1], [])
     D[fields[1]].append(line)
 inFile.close()
-for k in ['EXON','UTR','INTRON']:
+for k in ['Type','EXON','UTR','INTRON']:
     ouFile.write('\n'.join(D[k])+'\n')
 ouFile.close()
