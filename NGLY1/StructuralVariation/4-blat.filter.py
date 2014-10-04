@@ -1,5 +1,5 @@
-inFile = open('NGLY1-unmapped.aligned.paired6.fa.blated')
-ouFile = open('NGLY1-unmapped.aligned.paired6.fa.blated.filtered', 'w')
+inFile = open('NGLY1-unmapped.aligned.paired6.blated')
+ouFile = open('NGLY1-unmapped.aligned.paired6.blated.filtered', 'w')
 D = {}
 for line in inFile:
     line = line.strip()
