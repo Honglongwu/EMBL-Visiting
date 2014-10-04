@@ -12,8 +12,8 @@ while True:
         break
 inFile.close()
 
-inFile = open('NGLY1-unmapped.aligned.paired6.fa.blated.filtered')
-ouFile = open('NGLY1-unmapped.aligned.paired6.fa.blated.filtered.num', 'w')
+inFile = open('NGLY1-unmapped.aligned.paired6.blated.filtered')
+ouFile = open('NGLY1-unmapped.aligned.paired6.blated.filtered.num', 'w')
 for line in inFile:
     fields = line.split('\t')
     for k in D:
