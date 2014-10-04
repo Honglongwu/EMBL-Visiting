@@ -4,3 +4,5 @@ rownames(BCell)=rownames(x)
 z=read.table('NGLY1-Isoforms-unique-region-CP1234',head=T)
 FCell=data.frame(CP1=z[,7]+z[,8],CP2=z[,11]+z[,12],CP3=z[,15]+z[,16],CP4=z[,19]+z[,20],FCP1=z[,23]+z[,24],MCP1=z[,27]+z[,28],Ctrl.19=z[,3]+z[,4])
 rownames(FCell)=rownames(x)
+FB = merge(FCell, BCell,by.x=0,by.y=0)
+rownames(FB)=FB[,1]
