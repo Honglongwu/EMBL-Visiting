@@ -4,7 +4,7 @@ while True:
     line = inFile.readline().strip()
     if line:
         if line[0] == '>':
-            head = line
+            head = line[1:]
             D.setdefault(head,[])
         else:
             fields = line.split('\t')[0].split('|')
@@ -22,6 +22,11 @@ while True:
         ouFile.write(line1 + '\n')
         ouFile.write(line2 + '\n')
         k = line1.split('\t')[0]
+        k2 = '\t'.join(k.split('_'))
+        v = '\t'.join(D[k2][0::2])
+        if len(D[k2][0::2]) != int(line1.split('_')[0]):
+            print('Warning:'+line1)
+        ouFile.write(v + '\n')
         pass
     else:
         break
