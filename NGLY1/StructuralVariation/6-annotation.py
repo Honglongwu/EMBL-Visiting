@@ -21,22 +21,30 @@ def anno(ch,start,end):
     utr = []
     exon = []
     for k in D:
-        v = D[k]
-        if ch == v[0] : 
-            if  v[2]<= start <= v[3] or v[2] <= end <= v[3]:
-                gene.append(k)
-                if v[2]<= start <= v[4] or v[2]<= end <= v[4] or v[5] <= start <= v[3] or v[5] <= end <= v[3]:
-                    utr.append(gene)
-                else:
-                    ex= 0
-                    for i in range(len(v[6])):
-                        if v[6][i]<= start <= v[7][i] or v[6][i]<= end <= v[7][i]:
-                            exon.append(i+1)
-                            ex =1
+        for v in D[k]:
+            if ch == v[0] : 
+                if  v[2]<= start <= v[3] or v[2] <= end <= v[3]:
+                    gene.append(k)
+                    if v[2]<= start <= v[4] or v[2]<= end <= v[4] or v[5] <= start <= v[3] or v[5] <= end <= v[3]:
+                        utr.append(gene)
+                    else:
+                        for i in range(len(v[6])):
+                            if v[6][i]<= start <= v[7][i] or v[6][i]<= end <= v[7][i]:
+                                exon.append(i+1)
+                        
     result = []
     if gene:
-        result.append()
+        result.append(':'.join(set(gene)))
+        if utr:
+            result.append('UTR')
+        elif exon:
+            result.append('EXON')
+        else:
+            result.append('INTRON')
+    return(result)
+
 inFile = open('NGLY1-unmapped.aligned.paired6.blated.filtered.seq2')
+ouFile = open('NGLY1-unmapped.aligned.paired6.blated.filtered.seq2.anno', 'w')
 while True:
     line1 = inFile.readline().strip()
     line2 = inFile.readline().strip()
@@ -44,10 +52,21 @@ while True:
     line4 = inFile.readline().strip()
     if line1:
         fields = line1.split('\t')
-        ch = fields[]
-        start = int(fields[])
-        end = int(fields[])
-        anno(ch, start,end)
+        ch = 'chr'+fields[1]
+        start = int(fields[8])
+        end = int(fields[9])
+        an=anno(ch, start,end)
+        ouFile.write(line1 +'\t'+ '|'.join(an) + '\n')
+        fields = line2.split('\t')
+        ch = 'chr'+fields[1]
+        start = int(fields[8])
+        end = int(fields[9])
+        an=anno(ch, start,end)
+        ouFile.write(line2 +'\t'+ '|'.join(an) + '\n')
+
+        ouFile.write(line3 + '\n')
+        ouFile.write(line4 + '\n')
     else:
         break
 inFile.close()
+ouFile.close()
