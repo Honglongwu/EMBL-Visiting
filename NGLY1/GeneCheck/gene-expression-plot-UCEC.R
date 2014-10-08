@@ -12,6 +12,8 @@ dev.off()
 
 
 pdf('UCEC-NPC1-DYNC1H1-Normalized-Expression.pdf')
+sf = sizeFactors(dds)
+mat = counts(dds)/sf
 lattice::dotplot(as.matrix(mat)[grepl('^NPC1\\|',rownames(mat)),]~ngly1.control.annotation$condition, group=ngly1.control.annotation$condition, auto.key=TRUE,pch=19, ylab="Gene Expression",main="NPC1")
 
 lattice::dotplot(as.matrix(mat)[grepl('^DYCN1H1\\|',rownames(mat)),]~ngly1.control.annotation$condition, group=ngly1.control.annotation$condition, auto.key=TRUE,pch=19, ylab="Gene Expression",main="DYCN1H1")
