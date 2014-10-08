@@ -69,3 +69,9 @@ dev.off()
 #print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 
 
+pdf("BCells-NPC1-DYNC1H1.pdf", width=8, height=6)
+lattice::dotplot(assay(rld)[ids[ids$gene_name == 'NPC1',]$gene_id,]~sampleAnnot$individual, group=sampleAnnot$sampleStatus, auto.key=TRUE,pch=19, ylab="Normalised gene expression",main="NPC1")
+lattice::dotplot(assay(rld)[ids[ids$gene_name == 'DYNC1H1',]$gene_id,]~sampleAnnot$individual, group=sampleAnnot$sampleStatus, auto.key=TRUE,pch=19, ylab="Normalised gene expression",main="DYHC1H1")
+dev.off()
+
+
