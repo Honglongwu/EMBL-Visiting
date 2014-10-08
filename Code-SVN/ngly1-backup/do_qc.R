@@ -9,14 +9,12 @@ run_QC = function(x,o, ncpu=10){
 
 folder = "/g/steinmetz/wmueller/NGLY1"
 
-seqFolders = c("/g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX",
-    "/g/steinmetz/incoming/solexa/2014-03-25-C365AACXX",
-    "/g/steinmetz/incoming/solexa/2014-05-23-C3PJ2ACXX")
+seqFolders = c("/g/steinmetz/incoming/solexa/2014-09-05-C532NACXX")
 
 infiles = unlist(lapply(seqFolders, dir,pattern="sequence.txt.gz",full.names=TRUE))
 infiles = infiles[!grepl("PhiX", infiles)]
 
-outfolder = file.path(folder, "QC")
+outfolder = file.path(folder, "QC-BCells")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 run_QC(infiles, outfolder)
