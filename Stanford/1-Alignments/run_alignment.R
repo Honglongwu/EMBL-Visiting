@@ -6,7 +6,9 @@ seqFolders = c(#"/g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX",
     #"/g/steinmetz/incoming/solexa/2014-05-23-C3PJ2ACXX"),
     #"/g/steinmetz/incoming/solexa/2014-07-22-C3NVAACXX")
     #"/g/steinmetz/incoming/solexa/2014-09-05-C532NACXX")
-     "/g/steinmetz/incoming/solexa/2014-10-21-C53D8ACXX/")
+    # "/g/steinmetz/incoming/solexa/2014-10-21-C53D8ACXX/")
+    "/g/steinmetz/incoming/solexa/2014-11-10-C53AKACXX")
+
     
 
 get_demultiplxed_fileinfo = function(x){
@@ -21,7 +23,7 @@ fileAnnot$lane = sub(".*(lane\\d).*","\\1", fileAnnot$file)
 fileAnnot$name = with(fileAnnot, paste(sampleName,lane,sep="_"))
 
 folder = "/g/steinmetz/hsun/Stanford/1-Alignments"
-outfile = file.path(folder, "sampleAnnot-2014-10-21.txt")
+outfile = file.path(folder, "sampleAnnot-2014-11-10.txt")
 if(file.exists(outfile)){
     stop("Are you sure you want to rewrite the annotation file?\n")
 } else {
