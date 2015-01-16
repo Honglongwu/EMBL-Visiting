@@ -1,3 +1,4 @@
+from operator import itemgetter
 def format(F):
     inFile = open(F)
     head = inFile.readline()
@@ -37,10 +38,13 @@ def format(F):
 
         #print('\t'.join([sample, biorep, passage, lane]))
         L.append([sample, biorep, passage, lane])
-
             
         #print('\t'.join([sampleName, barcode, lane, name]))
     inFile.close()
+    L.sort(key=itemgetter(0,2,1,3))
+    for item in L:
+        print('\t'.join(item))
+
 
 
 format('sampleAnnot-2014-10-21.txt')
