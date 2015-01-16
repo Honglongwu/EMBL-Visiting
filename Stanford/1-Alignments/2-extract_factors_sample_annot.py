@@ -48,10 +48,10 @@ def format(F):
     inFile.close()
     L.sort(key=itemgetter(5,7,6,8))
     
-    ouFile.write('\t'.join())
+    ouFile.write('\t'.join(['SampleName', 'Barcode', 'Filename', 'LaneName', 'name', 'sample', 'biorep', 'passage', 'lane', 'label']) + '\n')
 
     for item in L:
-        ouFile.write('\t'.join(item))
+        ouFile.write('\t'.join(item) + '\n')
 
     ouFile.close()
 
