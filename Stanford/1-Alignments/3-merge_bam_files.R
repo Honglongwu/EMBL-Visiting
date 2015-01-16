@@ -20,7 +20,8 @@ run_samtools_filter_by_mapping_quality = function(x, mq,o,ncpu){
 }
 
 #f = factor(with(sampleAnnot[jobsHasFinished,], paste(individual,treatment,  biorep, sep="_")))
-f = factor(with(sampleAnnot[jobsHasFinished,], paste(individual, biorep, sep="_")))
+#f = factor(with(sampleAnnot[jobsHasFinished,], paste(individual, biorep, sep="_")))
+f = factor(with(sampleAnnot[jobsHasFinished,], label))
 tmplst = split(sampleAnnot[jobsHasFinished,],f)
 
 ## careful here if one samples doesn't have multiple technical replicates, since samtools merge needs multiple inputs 
@@ -36,7 +37,8 @@ for(i in 1:length(tmplst)){
             file.path(folder,"1-Alignments", thisChunk$name[j], "accepted_hits.bam"), 
             30, 
             #file.path(tmpfolder,paste0(with(thisChunk[j,], paste(individual, treatment, biorep, techrep,sep="_")), ".bam")),
-            file.path(tmpfolder,paste0(with(thisChunk[j,], paste(individual, biorep, techrep,sep="_")), ".bam")),
+            #file.path(tmpfolder,paste0(with(thisChunk[j,], paste(individual, biorep, techrep,sep="_")), ".bam")),
+            file.path(tmpfolder,paste0(with(thisChunk[j,], paste(label, lane,sep="_")), ".bam")),
             10
             )
     }
