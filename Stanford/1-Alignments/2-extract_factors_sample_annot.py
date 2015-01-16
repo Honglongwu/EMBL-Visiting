@@ -1,6 +1,7 @@
 from operator import itemgetter
 def format(F):
     inFile = open(F)
+    ouFile = open(F.split('.txt')[0] + '.formated.txt', 'w')
     head = inFile.readline()
 
     L = []
@@ -10,7 +11,7 @@ def format(F):
         sampleName = fields[0]
         barcode = fields[1]
         filename = fields[2]
-        lane = fields[3]
+        laneName = fields[3]
         name = fields[4]
         if name.find('primary') != -1:
             fds = name.split('_')
@@ -37,13 +38,22 @@ def format(F):
             lane = fds[3]
 
         #print('\t'.join([sample, biorep, passage, lane]))
-        L.append([sample, biorep, passage, lane])
+        if passage != 'None':
+            label = sample + '_' + biorep + '_' + passage
+        else:
+            label = sample + '_' + biorep
+        L.append([sampleName, barcode, filename, laneName, name, sample, biorep, passage, lane, label])
             
         #print('\t'.join([sampleName, barcode, lane, name]))
     inFile.close()
-    L.sort(key=itemgetter(0,2,1,3))
+    L.sort(key=itemgetter(5,7,6,8))
+    
+    ouFile.write('\t'.join())
+
     for item in L:
-        print('\t'.join(item))
+        ouFile.write('\t'.join(item))
+
+    ouFile.close()
 
 
 
