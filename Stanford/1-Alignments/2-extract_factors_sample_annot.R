@@ -2,8 +2,8 @@
 # Author: czhu
 ###############################################################################
 
-folder = "/g/steinmetz/wmueller/NGLY1"
-sampleAnnot = read.delim(file=file.path(folder, "sampleAnnot-BCells.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+folder = "/g/steinmetz/hsun/Stanford/1-Alignments"
+sampleAnnot = read.delim(file=file.path(folder, "sampleAnnot-2014-10-21.txt"), stringsAsFactors=FALSE, check.names=FALSE)
 
 
 #tmpstr = sub("ngly1_(.*?)_(.*)_rep(\\d)_lane(\\d+)","\\1\t\\2\tbiorep\\3\ttechrep\\4",sampleAnnot$fixedName)
