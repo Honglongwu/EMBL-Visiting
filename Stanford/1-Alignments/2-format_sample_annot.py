@@ -22,12 +22,12 @@ def format(F):
                     passage = fds[2]
                     lane = fds[3]
                 elif fds[2] != 'NO': 
-                    sample = fds[1] + '_' + fds[2][0:-1]
+                    sample = fds[1] + '-' + fds[2][0:-1]
                     biorep = 'biorep' + fds[2][-1]
                     passage = fds[3]
                     lane = fds[4]
                 else:
-                    sample = fds[1] + '_' + 'KO'
+                    sample = fds[1] + '-' + 'KO'
                     biorep = 'biorep1'
                     passage = fds[3]
                     lane = fds[4]
@@ -52,6 +52,8 @@ def format(F):
     
         for item in L:
             ouFile.write('\t'.join(item) + '\n')
+            print(item[-1])
+
     elif F == 'sampleAnnot-2014-11-10.txt':
         head = inFile.readline()
         L = []
@@ -63,29 +65,44 @@ def format(F):
             filename = fields[2]
             laneName = fields[3]
             name = fields[4]
+            fds = name.split('_')
             if name.find('primary') != -1:
-                fds = name.split('_')
+                if fds[1][0:2] == 'Wt':
+                    sample = 'WT'
+                    biorep = 'biorep' + fds[1][-1]
+                    passage = fds[2]
+                    lane = fds[3]
+                elif fds[1] == 'DoubleKO':
+                    sample = 'Double-KO'
+                    biorep = 'biorep' + fds[2]
+                    passage = fds[3]
+                    lane = fds[4]
+                else:
+                    sample = fds[1] + '-' + fds[2]
+                    biorep = 'biorep' + fds[3]
+                    passage = fds[4]
+                    lane = fds[5]
+            else:
                 if fds[1][0:2] == 'Wt':
                     sample = 'WT'
                     biorep = 'biorep' + fds[1][-1]
                     passage = fds[2]
                     lane = fds[3]
                 elif fds[1] == 'DoubleKO': 
-                    sample = 'Double_KO'
+                    sample = 'Double-KO'
                     biorep = 'biorep' + fds[2]
                     passage = fds[3]
                     lane = fds[4]
-                else:
-                    sample = fds[1] + '_' + fds[2]
-                    biorep = 'biorep' + fds[3]
-                    passage = fds[4]
-                    lane = fds[5]
-            else:
-                fds = name.split('_')
-                sample = fds[1]
-                biorep = 'biorep' + fds[2]
-                passage = 'None'
-                lane = fds[3]
+                elif fds[1] == 'NGLY1KO': 
+                    sample = 'NGLY1-KO'
+                    biorep = 'biorep' + fds[2]
+                    passage = fds[3]
+                    lane = fds[4]
+                elif fds[1] == 'ENGaseKO': 
+                    sample = 'ENGase-KO'
+                    biorep = 'biorep' + fds[2]
+                    passage = fds[3]
+                    lane = fds[4]
     
             #print('\t'.join([sample, biorep, passage, lane]))
             if passage != 'None':
@@ -101,7 +118,7 @@ def format(F):
     
         for item in L:
             ouFile.write('\t'.join(item) + '\n')
-
+            print(item[-1])
     elif F == 'sampleAnnot-2014-11-12.txt':
         pass
 
@@ -110,6 +127,6 @@ def format(F):
 
 
 
-#format('sampleAnnot-2014-10-21.txt')
+format('sampleAnnot-2014-10-21.txt')
 format('sampleAnnot-2014-11-10.txt')
 
