@@ -2,7 +2,7 @@
 # Author: czhu
 ###############################################################################
 folder = "/g/steinmetz/hsun/Stanford"
-sampleAnnot = read.delim(file=file.path(folder, "1-Alignments/sampleAnnot-2014-10-21.formated.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+sampleAnnot = read.delim(file=file.path(folder, "1-Alignments/sampleAnnot-2014-11-12.formated.txt"), stringsAsFactors=FALSE, check.names=FALSE)
 
 jobsHasFinished = file.exists(file.path(folder, "1-Alignments", sampleAnnot$name, "accepted_hits.bam"))
 
@@ -43,10 +43,10 @@ for(i in 1:length(tmplst)){
             )
     }
     
-    cmd = paste(
-       "samtools merge -r -@ 10 -1", file.path(outfolder, paste0(names(tmplst)[i], ".bam")),
-        paste(dir(tmpfolder, full.names=TRUE), collapse=" "))
-    cat(cmd, "\n")    
-    system(cmd)
-    unlink(tmpfolder,recursive = TRUE)    
+    #cmd = paste(
+    #   "samtools merge -r -@ 10 -1", file.path(outfolder, paste0(names(tmplst)[i], ".bam")),
+    #    paste(dir(tmpfolder, full.names=TRUE), collapse=" "))
+    #cat(cmd, "\n")    
+    #system(cmd)
+    #unlink(tmpfolder,recursive = TRUE)    
 }

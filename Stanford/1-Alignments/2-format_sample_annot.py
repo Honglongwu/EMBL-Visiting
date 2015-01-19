@@ -120,6 +120,37 @@ def format(F):
             ouFile.write('\t'.join(item) + '\n')
             print(item[-1])
     elif F == 'sampleAnnot-2014-11-12.txt':
+        head = inFile.readline()
+        L = []
+        for line in inFile:
+            line = line.strip()
+            fields = line.split('\t')
+            sampleName = fields[0]
+            barcode = fields[1]
+            filename = fields[2]
+            laneName = fields[3]
+            name = fields[4]
+            fds = name.split('_')
+            sample = fds[1] + '-' + fds[2]
+            biorep = 'biorep' + fds[3]
+            passage = 'None'
+            lane = fds[4]
+            #print('\t'.join([sample, biorep, passage, lane]))
+            if passage != 'None':
+                label = sample + '_' + biorep + '_' + passage
+            else:
+                label = sample + '_' + biorep
+            L.append([sampleName, barcode, filename, laneName, name, sample, biorep, passage, lane, label])
+                
+            #print('\t'.join([sampleName, barcode, lane, name]))
+        L.sort(key=itemgetter(5,7,6,8))
+        
+        ouFile.write('\t'.join(['SampleName', 'Barcode', 'Filename', 'LaneName', 'name', 'sample', 'biorep', 'passage', 'lane', 'label']) + '\n')
+    
+        for item in L:
+            ouFile.write('\t'.join(item) + '\n')
+            print(item[-1])
+
         pass
 
     inFile.close()
@@ -127,6 +158,7 @@ def format(F):
 
 
 
-format('sampleAnnot-2014-10-21.txt')
-format('sampleAnnot-2014-11-10.txt')
+#format('sampleAnnot-2014-10-21.txt')
+#format('sampleAnnot-2014-11-10.txt')
+format('sampleAnnot-2014-11-12.txt')
 
