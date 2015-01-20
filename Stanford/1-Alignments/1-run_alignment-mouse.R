@@ -10,7 +10,9 @@ seqFolders = c(#"/g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX",
     #"/g/steinmetz/incoming/solexa/2014-11-10-C53AKACXX")
     #"/g/steinmetz/incoming/solexa/2014-11-12-C4EAFACXX")
 
-    
+folder = "/g/steinmetz/hsun/Stanford/1-Alignments"
+outfile = file.path(folder, "sampleAnnot-mouse-2014-10-21.txt")
+   
 
 get_demultiplxed_fileinfo = function(x){
     cmd = paste("find",x, "-type f -name *barcode* 2>/dev/null")
@@ -26,8 +28,6 @@ fileAnnot$name = with(fileAnnot, paste(sampleName,lane,sep="_"))
 fileAnnot=fileAnnot[!grepl('CP',fileAnnot$name),]
 
 
-folder = "/g/steinmetz/hsun/Stanford/1-Alignments"
-outfile = file.path(folder, "sampleAnnot-2014-11-12.txt")
 if(file.exists(outfile)){
     stop("Are you sure you want to rewrite the annotation file?\n")
 } else {
@@ -36,11 +36,12 @@ if(file.exists(outfile)){
 
 ## build transcript index, do it only once, but saves a lot time for multiples files
 #tophat -G /g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/Homo_sapiens.GRCh37.68.gtf --transcriptome-index=/g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/GRCh37.68.transcriptome.index /g/steinmetz/genome/Homo_sapiens/37.68/indexes/bowtie2/Homo_sapiens.GRCh37.68.withIVTs
+#tophat -G /g/steinmetz/genome/Mus_musculus/38.73/annotation/gtf/Mus_musculus.GRCm38.73.gtf --transcriptome-index=/g/steinmetz/hsun/Stanford/data/Mus_musculus.GRCm38.73.transcriptome.index /g/steinmetz/genome/Mus_musculus/38.73/indexes/bowtie2/Mus_musculus.GRCm38.73
 
 run_tophat = function(x,o,ncpu=25) {
     cmd = paste("tophat --read-gap-length 3 --read-edit-dist 3  --b2-sensitive -p",ncpu,
-        "-o",o, "--transcriptome-index=/g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/GRCh37.68.transcriptome.index", 
-        "/g/steinmetz/genome/Homo_sapiens/37.68/indexes/bowtie2/Homo_sapiens.GRCh37.68.withIVTs", 
+        "-o",o, "--transcriptome-index=/g/steinmetz/hsun/Stanford/data/Mus_musculus.GRCm38.73.transcriptome.index", 
+        "/g/steinmetz/genome/Mus_musculus/38.73/indexes/bowtie2/Mus_musculus.GRCm38.73", 
         x)
     cat(cmd,"\n")
     system(cmd)
