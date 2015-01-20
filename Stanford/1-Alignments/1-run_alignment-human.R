@@ -23,8 +23,10 @@ colnames(fileAnnot) = c("sampleName","barcode","file")
 fileAnnot$lane = sub(".*(lane\\d).*","\\1", fileAnnot$file)
 fileAnnot$name = with(fileAnnot, paste(sampleName,lane,sep="_"))
 
+fileAnnot = fileAnnot[grepl('CP',fileAnnot$name),]
+
 folder = "/g/steinmetz/hsun/Stanford/1-Alignments"
-outfile = file.path(folder, "sampleAnnot-2014-11-12.txt")
+outfile = file.path(folder, "sampleAnnot-human-2014-11-12.txt")
 if(file.exists(outfile)){
     stop("Are you sure you want to rewrite the annotation file?\n")
 } else {
