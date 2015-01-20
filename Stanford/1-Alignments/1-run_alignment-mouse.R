@@ -40,7 +40,7 @@ if(file.exists(outfile)){
 
 run_tophat = function(x,o,ncpu=25) {
     cmd = paste("tophat --read-gap-length 3 --read-edit-dist 3  --b2-sensitive -p",ncpu,
-        "-o",o, "--transcriptome-index=/g/steinmetz/hsun/Stanford/data/Mus_musculus.GRCm38.73.transcriptome.index", 
+        "-o",o, "--transcriptome-index=/g/steinmetz/hsun/Stanford/data/Mus_musculus.GRCm38.73.transcriptome.index/Mus_musculus.GRCm38.73", 
         "/g/steinmetz/genome/Mus_musculus/38.73/indexes/bowtie2/Mus_musculus.GRCm38.73", 
         x)
     cat(cmd,"\n")
