@@ -1,0 +1,1 @@
+tophat -G /g/steinmetz/hsun/Stanford/data/MouseGenome/Mus_musculus.GRCm38.73.gtf --transcriptome-index=/g/steinmetz/hsun/Stanford/data/Mus_musculus.GRCm38.73.transcriptome.index /g/steinmetz/hsun/Stanford/data/MouseGenome/Mus_musculus.GRCm38.73
