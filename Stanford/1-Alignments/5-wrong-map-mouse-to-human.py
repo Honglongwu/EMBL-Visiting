@@ -1,5 +1,6 @@
 import os
-ouFile = open('5-wrong-map-mouse-to-human', 'w')
+#ouFile = open('5-wrong-map-mouse-to-human', 'w')
+ouFile = open('5-wrong-map-mouse-to-human2', 'w')
 Fs = os.listdir('.')
 for F in Fs: 
     Fname = F + '/align_summary.txt'

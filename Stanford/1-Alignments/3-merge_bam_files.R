@@ -2,7 +2,7 @@
 # Author: czhu
 ###############################################################################
 folder = "/g/steinmetz/hsun/Stanford"
-sampleAnnot = read.delim(file=file.path(folder, "1-Alignments/sampleAnnot-2014-10-21.formated.txt"), stringsAsFactors=FALSE, check.names=FALSE)
+sampleAnnot = read.delim(file=file.path(folder, "1-Alignments/sampleAnnot-mouse-2014-11-10.formated.txt"), stringsAsFactors=FALSE, check.names=FALSE)
 
 jobsHasFinished = file.exists(file.path(folder, "1-Alignments", sampleAnnot$name, "accepted_hits.bam"))
 

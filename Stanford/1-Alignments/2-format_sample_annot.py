@@ -3,7 +3,7 @@ def format(F):
     inFile = open(F)
     ouFile = open(F.split('.txt')[0] + '.formated.txt', 'w')
 
-    if F == 'sampleAnnot-2014-10-21.txt':
+    if F.find('2014-10-21.txt')!=-1:
         head = inFile.readline()
         L = []
         for line in inFile:
@@ -54,7 +54,8 @@ def format(F):
             ouFile.write('\t'.join(item) + '\n')
             print(item[-1])
 
-    elif F == 'sampleAnnot-2014-11-10.txt':
+    #elif F == 'sampleAnnot-2014-11-10.txt':
+    elif F.find('2014-11-10.txt')!=-1:
         head = inFile.readline()
         L = []
         for line in inFile:
@@ -119,7 +120,8 @@ def format(F):
         for item in L:
             ouFile.write('\t'.join(item) + '\n')
             print(item[-1])
-    elif F == 'sampleAnnot-2014-11-12.txt':
+    #elif F == 'sampleAnnot-2014-11-12.txt':
+    elif F.find('2014-11-12.txt')!=-1:
         head = inFile.readline()
         L = []
         for line in inFile:
@@ -158,7 +160,8 @@ def format(F):
 
 
 
-#format('sampleAnnot-2014-10-21.txt')
-#format('sampleAnnot-2014-11-10.txt')
-format('sampleAnnot-2014-11-12.txt')
+format('sampleAnnot-human-2014-10-21.txt')
+format('sampleAnnot-mouse-2014-10-21.txt')
+format('sampleAnnot-mouse-2014-11-10.txt')
+format('sampleAnnot-human-2014-11-12.txt')
 
