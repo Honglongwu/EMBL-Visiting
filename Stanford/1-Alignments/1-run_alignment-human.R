@@ -37,7 +37,7 @@ if(file.exists(outfile)){
 #tophat -G /g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/Homo_sapiens.GRCh37.68.gtf --transcriptome-index=/g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/GRCh37.68.transcriptome.index /g/steinmetz/genome/Homo_sapiens/37.68/indexes/bowtie2/Homo_sapiens.GRCh37.68.withIVTs
 
 run_tophat = function(x,o,ncpu=25) {
-    cmd = paste("tophat --read-gap-length 3 --read-edit-dist 3  --b2-sensitive -p",ncpu,
+    cmd = paste("tophat --read-gap-length 3 --read-edit-dist 3 --b2-sensitive -p",ncpu,
         "-o",o, "--transcriptome-index=/g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/GRCh37.68.transcriptome.index", 
         "/g/steinmetz/genome/Homo_sapiens/37.68/indexes/bowtie2/Homo_sapiens.GRCh37.68.withIVTs", 
         x)
