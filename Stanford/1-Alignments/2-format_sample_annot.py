@@ -43,6 +43,9 @@ def format(F):
                 label = sample + '_' + biorep + '_' + passage
             else:
                 label = sample + '_' + biorep
+            
+            if label == 'Double-KO_biorep2_primaryP4':
+                label = 'Double-KO_biorep2_primaryP4_2014.10.21'
             L.append([sampleName, barcode, filename, laneName, name, sample, biorep, passage, lane, label])
                 
             #print('\t'.join([sampleName, barcode, lane, name]))
