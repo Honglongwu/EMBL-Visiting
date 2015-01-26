@@ -52,6 +52,17 @@ def format(F):
                 label = 'WT_biorep2_primaryP4_2014.10.21'
             elif label == 'WT_biorep3_primaryP4':
                 label = 'WT_biorep3_primaryP4_2014.10.21'
+            elif label == 'Double-KO_biorep1_primaryP4':
+                label = 'Double-KO_biorep1_primaryP4_2014.10.21'
+            elif label == 'ENGase-KO_biorep1_primaryP4':
+                label = 'ENGase-KO_biorep1_primaryP4_2014.10.21'
+            elif label == 'Ngly1-KO_biorep1_primaryP4':
+                label = 'NGLY1-KO_biorep1_primaryP4_2014.10.21'
+            elif label == 'Ngly1-KO_biorep2_primaryP4':
+                label = 'NGLY1-KO_biorep2_primaryP4_2014.10.21'
+            elif label == 'Ngly1-KO_biorep1_primaryP4':
+                label = 'NGLY1-KO_biorep1_primaryP4_2014.10.21'
+
             L.append([sampleName, barcode, filename, laneName, name, sample, biorep, passage, lane, label])
                 
             #print('\t'.join([sampleName, barcode, lane, name]))
@@ -128,6 +139,16 @@ def format(F):
                 label = 'WT_biorep2_primaryP4_2014.11.10'
             elif label == 'WT_biorep3_primaryP4':
                 label = 'WT_biorep3_primaryP4_2014.11.10'
+            elif label == 'NGLY1-KO_biorep1_primaryP4':
+                label = 'NGLY1-KO_biorep1_primaryP4_2014.11.10'
+            elif label == 'NGLY1-KO_biorep2_primaryP4':
+                label = 'NGLY1-KO_biorep2_primaryP4_2014.11.10'
+            elif label == 'NGLY1-KO_biorep3_primaryP4':
+                label = 'NGLY1-KO_biorep3_primaryP4_2014.11.10'
+
+
+
+
 
             L.append([sampleName, barcode, filename, laneName, name, sample, biorep, passage, lane, label])
                 
