@@ -20,7 +20,7 @@ if(!file.exists(annotFile)) {
     mma=loadDb(annotFile)
 }
 
-exonsByGene <- exonsBy( hsa, by="gene") 
+exonsByGene <- exonsBy( mma, by="gene") 
 
 #bamLst = BamFileList( dir(file.path(folder, "/alignment_filtered"),pattern="*bam$", full.names=TRUE), yieldSize=100000)
 bamLst = BamFileList( dir(file.path(folder, "2-Alignments_filtered"),pattern=".*(primary|immort).*.bam$", full.names=TRUE), yieldSize=100000)
@@ -59,7 +59,7 @@ pd4 = pd4[,c("sample", "biorep", "passage", "lane", "label")]
 pd =  rbind(pd1, pd2, pd3, pd4)
 pd = pd[grepl("primary|immort",pd$label),]
 ## introns 
-gs = genes(hsa)
+gs = genes(mma)
 myintrons =mclapply(1:length(gs), function(i) {
         gr = GenomicRanges::gaps(exonsByGene[[i]], start(gs)[i], end(gs)[i])
         gr = gr[!strand(gr) == "*"]
