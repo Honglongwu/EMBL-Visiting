@@ -10,12 +10,12 @@ register(MulticoreParam(workers = 30))
 
 folder = "/g/steinmetz/hsun/Stanford"
 
-annotFile = file.path(folder, "data/hsa.sqlite") 
+annotFile = file.path(folder, "data/mma.sqlite") 
 if(!file.exists(annotFile)) {
-    GTFFILE = "/g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/Homo_sapiens.GRCh37.68.gtf"
+    GTFFILE = "/g/steinmetz/hsun/Stanford/data/MouseGenome/Mus_musculus.GRCm38.73.gtf"
     warning("this takes a while to run\n")
-    hsa <- makeTranscriptDbFromGFF( GTFFILE, format="gtf", species="Homo sapiens")
-    saveDb(hsa,file=annotFile)
+    mma <- makeTranscriptDbFromGFF( GTFFILE, format="gtf", species="Homo sapiens")
+    saveDb(mma,file=annotFile)
 } else {
     hsa=loadDb(annotFile)
 }
