@@ -1,0 +1,13 @@
+Double-KO_biorep1_primaryP4.bam
+Double-KO_biorep2_primaryP4_2014.10.21.bam
+Double-KO_biorep2_primaryP4_2014.11.10.bam
+ENGase-KO_biorep1_primaryP4.bam
+Ngly1-KO_biorep1_primaryP4.bam
+NGLY1-KO_biorep1_primaryP4.bam
+Ngly1-KO_biorep2_primaryP4.bam
+NGLY1-KO_biorep2_primaryP4.bam
+Ngly1-KO_biorep3_primaryP4.bam
+NGLY1-KO_biorep3_primaryP4.bam
+WT_biorep1_primaryP4_2014.10.21.bam
+WT_biorep2_primaryP4_2014.10.21.bam
+WT_biorep3_primaryP4_2014.10.21.bam
