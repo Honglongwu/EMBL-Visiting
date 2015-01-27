@@ -6,7 +6,7 @@ library( "GenomicAlignments" )
 library( "Rsamtools" )
 library( "GenomicFeatures" )
 library(BiocParallel)
-register(MulticoreParam(workers = 30))
+register(MulticoreParam(workers = 20))
 
 folder = "/g/steinmetz/hsun/Stanford"
 
