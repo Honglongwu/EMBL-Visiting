@@ -10,28 +10,15 @@ outfolder = file.path(folder, "3-DESeq")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 load(file.path(folder, "Counts-Mouse-2014-1011.rda"))
-#load(file.path(folder, "sampleAnnot-CP4.rda"))
+pdx=unique(pd[,c("sample","biorep","passage","label")])
+re = '.*(NGLY1-KO|WT).*2014.11.10'
+sampleAnnot=pdx[grepl(re,pdx$label),]
+sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("WT","NGLY1-KO"))
 
-
-## first look at gene counts
 mat = assay(geneCounts)
+mat = mat[, grepl(re,colnames(geneCounts))]
 
-## remove 19 for the moment and only consider the mock treated samples
-#wh = which(sampleAnnot$individual != 19 & sampleAnnot$treatment == "DMSO")
-#for patient specific analysis
-#wh = which(grepl("^CP.*", sampleAnnot$individual) & sampleAnnot$treatment == "DMSO" )
-##interfamily differences
-#wh = which(sampleAnnot$family == "w" & sampleAnnot$treatment == "DMSO")
-#CP2 v CP3
-wh = which(grepl("^CP[14].*", sampleAnnot$individual) & sampleAnnot$treatment == "DMSO" )
-wh = which(grepl('.*(NGLY1-KO|WT).*2014.11.10',colnames(geneCounts)))
-
-sampleAnnot = droplevels(sampleAnnot[wh,])
-mat = mat[, wh]
-
-#dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleOrigin+ sampleStatus + treatment)
-#dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender + sampleStatus)
-dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~individual) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
+dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample)
 dds = DESeq(dds)
 
 #dds = DESeq(dds, test="LRT", reduce=~treatment)
