@@ -11,10 +11,10 @@ if (!file.exists(outfolder))  dir.create(outfolder)
 
 load(file.path(folder, "Counts-Human-2014-1011.rda"))
 pdx=unique(pd[,c("sample","biorep","passage","label")])
-re = '.*(CP1-B|MCP1-B).*'
-cmp = "CP1-B_MCP1-B"
+re = '.*(CP3-B|Ctrl-B).*'
+cmp = "CP3-B_Ctrl-B"
 sampleAnnot=pdx[grepl(re,pdx$label),]
-sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("MCP1-B","CP1-B"))
+sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("Ctrl-B","CP3-B"))
 
 mat = assay(geneCounts)
 mat = mat[, grepl(re,colnames(geneCounts))]
