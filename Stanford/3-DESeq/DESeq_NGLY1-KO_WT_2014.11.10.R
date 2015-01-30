@@ -32,19 +32,19 @@ cmp = "NGLY1-KO_WT_2014.11.10"
 write.table( res, file=file.path(outfolder, paste0("de_",cmp, ".txt")), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
-save(dds, rld, res,sampleAnnot,file=file.path(outfolder, paste0("res_",cmp,".rda") )
-##
-##pdf(file.path(outfolder, paste0("plot-PCA_", cmp, ".pdf")), width=8, height=6)
-##print(plotPCA(rld, intgroup="sample")
-##dev.off()
-##
-##pdf(file.path(outfolder, paste0("plot-MA_",cmp, ".pdf")), width=8, height=6)
-##plotMA(results(dds), alpha=0.01)
-##dev.off()
-##
-##pdf(file.path(outfolder,past0("plot-dispEst_",cmp,".pdf")), width=8, height=6)
-##plotDispEsts(dds)
-##dev.off()
+save(dds, rld, res,sampleAnnot,file=file.path(outfolder, paste0("res_",cmp,".rda")))
+
+pdf(file.path(outfolder, paste0("plot-PCA_", cmp, ".pdf")), width=8, height=6)
+print(plotPCA(rld, intgroup="sample"))
+dev.off()
+
+pdf(file.path(outfolder, paste0("plot-MA_",cmp, ".pdf")), width=8, height=6)
+plotMA(results(dds), alpha=0.01)
+dev.off()
+
+pdf(file.path(outfolder,past0("plot-dispEst_",cmp,".pdf")), width=8, height=6)
+plotDispEsts(dds)
+dev.off()
 
 #library("ReportingTools")
 #desReport <- HTMLReport(shortName = 'RNAseq_analysis_with_DESeq',
