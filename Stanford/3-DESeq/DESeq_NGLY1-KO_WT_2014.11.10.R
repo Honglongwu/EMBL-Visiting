@@ -22,28 +22,29 @@ dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample)
 dds = DESeq(dds)
 
 #dds = DESeq(dds, test="LRT", reduce=~treatment)
-load(file.path(folder, "gtf.rda"))
+load(file.path(folder, "data/MouseGenome/MouseGTF.rda"))
 res = results(dds)
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 res = res[order(res$padj), ]
 
+cmp = "NGLY1-KO_WT_2014.11.10"
 #..#write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
-write.table( res, file=file.path(outfolder, "deCP1CP4.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res, file=file.path(outfolder, paste0("de_",cmp, ".txt")), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
-save(dds, rld, res,sampleAnnot,file=file.path(outfolder, "resCP1vCP4.rda"))
-
-pdf(file.path(outfolder, "plot_PCA-deCP1CP4.pdf"), width=8, height=6)
-print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
-dev.off()
-
-pdf(file.path(outfolder, "plot_MA-deCP1CP4.pdf"), width=8, height=6)
-plotMA(results(dds), alpha=0.01)
-dev.off()
-
-pdf(file.path(outfolder, "plot_dispEst-deCP1CP4.pdf"), width=8, height=6)
-plotDispEsts(dds)
-dev.off()
+save(dds, rld, res,sampleAnnot,file=file.path(outfolder, paste0("res_",cmp,".rda") )
+##
+##pdf(file.path(outfolder, paste0("plot-PCA_", cmp, ".pdf")), width=8, height=6)
+##print(plotPCA(rld, intgroup="sample")
+##dev.off()
+##
+##pdf(file.path(outfolder, paste0("plot-MA_",cmp, ".pdf")), width=8, height=6)
+##plotMA(results(dds), alpha=0.01)
+##dev.off()
+##
+##pdf(file.path(outfolder,past0("plot-dispEst_",cmp,".pdf")), width=8, height=6)
+##plotDispEsts(dds)
+##dev.off()
 
 #library("ReportingTools")
 #desReport <- HTMLReport(shortName = 'RNAseq_analysis_with_DESeq',
