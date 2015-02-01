@@ -62,6 +62,8 @@ def format(F):
                 label = 'NGLY1-KO_biorep2_primaryP4_2014.10.21'
             elif label == 'Ngly1-KO_biorep3_primaryP4':
                 label = 'NGLY1-KO_biorep3_primaryP4_2014.10.21'
+            if sample == 'Ngly1-KO':
+                sample = 'NGLY1-KO'
 
             L.append([sampleName, barcode, filename, laneName, name, sample, biorep, passage, lane, label])
                 

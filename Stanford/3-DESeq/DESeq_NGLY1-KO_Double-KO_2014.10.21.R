@@ -17,11 +17,11 @@ pdx=unique(pd[,c("sample","biorep","passage","label")])
 pdx$label[pdx$label=='Ngly1-KO_biorep3_primaryP4']='NGLY1-KO_biorep3_primaryP4_2014.10.21'
 pdx$sample[pdx$sample=='Ngly1-KO']='NGLY1-KO'
 #######
-re = '.*(NGLY1-KO|WT).*2014.10.21'
-cmp = "NGLY1-KO_WT_2014.10.21"
+re = '.*(NGLY1-KO|Double-KO).*2014.10.21'
+cmp = "NGLY1-KO_Double-KO_2014.10.21"
 #######
 sampleAnnot=pdx[grepl(re,pdx$label),]
-sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("WT","NGLY1-KO"))
+sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("Double-KO","NGLY1-KO"))
 
 mat = assay(geneCounts)
 mat = mat[, grepl(re,colnames(geneCounts))]
