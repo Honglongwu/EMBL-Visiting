@@ -4,6 +4,7 @@
 library(GenomicRanges)
 library(DESeq2)
 
+SIG = 0.05
 folder = "/g/steinmetz/hsun/Stanford"
 
 outfolder = file.path(folder, "3-DESeq")
@@ -12,6 +13,7 @@ if (!file.exists(outfolder))  dir.create(outfolder)
 load(file.path(folder, "Counts-Mouse-2014-1011.rda"))
 pdx=unique(pd[,c("sample","biorep","passage","label")])
 re = '.*(NGLY1-KO|WT).*2014.11.10'
+cmp = "NGLY1-KO_WT_2014.11.10"
 sampleAnnot=pdx[grepl(re,pdx$label),]
 sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("WT","NGLY1-KO"))
 
@@ -27,9 +29,13 @@ res = results(dds)
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 res = res[order(res$padj), ]
 
-cmp = "NGLY1-KO_WT_2014.11.10"
 #..#write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
 write.table( res, file=file.path(outfolder, paste0("de_",cmp, ".txt")), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+
+res.sig=res[which(res$padj<SIG),]
+
+#..#write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
+write.table( res.sig, file=file.path(outfolder, paste0("de_",cmp, ".sig.txt")), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
 save(dds, rld, res,sampleAnnot,file=file.path(outfolder, paste0("res_",cmp,".rda")))
@@ -42,7 +48,7 @@ pdf(file.path(outfolder, paste0("plot-MA_",cmp, ".pdf")), width=8, height=6)
 plotMA(results(dds), alpha=0.01)
 dev.off()
 
-pdf(file.path(outfolder,past0("plot-dispEst_",cmp,".pdf")), width=8, height=6)
+pdf(file.path(outfolder,paste0("plot-dispEst_",cmp,".pdf")), width=8, height=6)
 plotDispEsts(dds)
 dev.off()
 
