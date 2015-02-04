@@ -1,9 +1,10 @@
 D = {}
 inFile = open('/g/steinmetz/hsun/Stanford/data/Ensembl/Ortholog-Human-Mouse.txt')
 for line in inFile:
-    line = line.strip()
+    line = line.rstrip()
     fields = line.split('\t')
-    mouse = fields[2]
+    mouse = fields[3]
+    print(mouse)
     D.setdefault(mouse, [])
     D[mouse].append(line)
 inFile.close()
