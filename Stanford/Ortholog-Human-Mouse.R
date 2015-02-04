@@ -1,0 +1,7 @@
+library(biomaRt)
+human = useMart("ensembl", dataset = "hsapiens_gene_ensembl")
+mouse = useMart("ensembl", dataset = "mmusculus_gene_ensembl") 
+human.mouse=getLDS(attributes = c("hgnc_symbol","ensembl_gene_id"), mart = human, attributesL = c("hgnc_symbol","ensembl_gene_id"), martL = mouse)
+write.table(human.mouse,file="Ortholog-Human-Mouse.txt", sep="\t",quote=F,row.names=F, col.names=F)
+savehistory("Ortholog-Human-Mouse.R")
+save(human.mouse,file="Ortholog-Human-Mouse.rda")
