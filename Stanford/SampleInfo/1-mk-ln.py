@@ -2,7 +2,8 @@ import os
 import stat
 inFile = open('NGLY1-Samples-To-Healx')
 ouFile = open('NGLY1-Samples-To-Healx.sh', 'w')
-ouFile3 = open('NGLY1-Samples-To-Healx-need-permission.sh', 'w')
+ouFile3 = open('NGLY1-Samples-To-Healx-need-permission.txt', 'w')
+ouFile4 = open('NGLY1-Samples-To-Healx-need-permission.sh', 'w')
 ouFile2 = open('NGLY1-Samples-To-Healx.txt', 'w')
 head = inFile.readline().strip()
 ouFile2.write(head + '\n')
@@ -17,6 +18,7 @@ for line in inFile:
     if mask == 0 :
         ouFile.write('#ln -s ' + fields[1] + ' ' + name + '\n')
         ouFile3.write(fields[1] + '\n')
+        ouFile4.write("ncftpput -u hansun@stanford.edu -p Stanford2015 ftp.box.com \"/Han's Externally Shareable Files/NGLY1-To-Healx\" " + fields[1] + '\n')
     else:
         ouFile.write('ln -s ' + fields[1] + ' ' + name + '\n')
 
@@ -25,3 +27,4 @@ inFile.close()
 ouFile.close()
 ouFile2.close()
 ouFile3.close()
+ouFile4.close()
