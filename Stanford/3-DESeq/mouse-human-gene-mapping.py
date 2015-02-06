@@ -4,9 +4,8 @@ for line in inFile:
     line = line.rstrip()
     fields = line.split('\t')
     mouse = fields[3]
-    print(mouse)
     D.setdefault(mouse, [])
-    D[mouse].append(line)
+    D[mouse].append('\t'.join([fields[1], fields[0]]))
 inFile.close()
 
 def ortholog(inF):
@@ -19,7 +18,6 @@ def ortholog(inF):
         fields = line.split('\t')
         mouse = fields[0]
         if mouse in D:
-            print(D[mouse])
             ouFile.write(line + '\t' + D[mouse][0] + '\n')
         else:
             ouFile.write(line + '\t' + '' + '\n')
@@ -27,4 +25,5 @@ def ortholog(inF):
     ouFile.close()
 
 ortholog('de_ENGase-KO_Double-KO_immortP3.sig.txt')
+ortholog('de_NGLY1-KO_WT_2014.10.21.sig.txt')
     
