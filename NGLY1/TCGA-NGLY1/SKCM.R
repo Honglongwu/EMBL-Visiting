@@ -57,14 +57,14 @@ colnames(NGLY1.count.t) = "reads.number"
 NGLY1.count.t.hiseq = subset(NGLY1.count.t,annotation$platform=="hiseq")
 
 ###
-selection = NGLY1.count.t<=600 & NGLY1.count.t >= 500 & annotation$platform=='ga' & annotation$tumor_status=='TUMOR FREE' & annotation$race=='WHITE' & annotation$age <= 70 & annotation$age >= 50
+selection = NGLY1.count.t<=3000 & NGLY1.count.t >= 2000 & annotation$platform=='hiseq'
 control=count[,selection]
 control.annotation = annotation[selection,]
-write.table(control,file="UCEC-36control",quote=F,col.names=NA)
+write.table(control,file="SKCM-96control",quote=F,col.names=NA)
 ###ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-D1-A103-01|TCGA-B5-A11N-01",colnames(count))]
-ngly1=count[,grepl("TCGA-D1-A17Q-01|TCGA-B5-A0JY-01|TCGA-B5-A11N-01",colnames(count))]
+ngly1=count[,grepl("TCGA-EE-A2GR-06|TCGA-GN-A266-06|TCGA-FW-A3R5-06|TCGA-EE-A3JA-06",colnames(count))]
 ngly1.annotation = annotation[annotation$sample %in% colnames(ngly1),]
-write.table(ngly1,file="UCEC-3NGLY1",quote=F,col.names=NA)
+write.table(ngly1,file="SKCM-4NGLY1",quote=F,col.names=NA)
 
 ### merge ngly1 and control
 condition = rep(c('ngly1','control'), times=c(dim(ngly1.annotation)[1], dim(control.annotation)[1]))
@@ -83,7 +83,7 @@ dds <- DESeq(dds)
 dds.results=results(dds)
 dds.results=dds.results[order(dds.results$padj),]
 dds.results.significant=dds.results[which(dds.results$padj<0.05),]
-save.image(file="UCEC.rda")
+save.image(file="SKCM.rda")
 
 #rld = rlog(dds, blind=FALSE)
 #

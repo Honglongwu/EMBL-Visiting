@@ -21,21 +21,21 @@ save(count,sample,file='SKCM-NGLY1-hiseq.rda')
 
 
 library(ggplot2)
-pdf('SKCM-NGLY1-hiseq-count-distribution-bin50.pdf')
-color = rep(c("white", "red", "white", "red", "white", "red", "white","red", "white"), times=c(5,3,12,1,53))
-ggplot(df, aes(x=count)) + geom_histogram(binwidth=50,colour="black", fill=color) + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq reads count)')
+#pdf('SKCM-NGLY1-hiseq-count-distribution-bin50.pdf')
+#color = rep(c("white", "red", "white", "red", "white", "red", "white","red", "white"), times=c(5,3,12,1,53))
+#ggplot(df, aes(x=count)) + geom_histogram(binwidth=50,colour="black", fill=color) + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq reads count)')
 #ggplot(df, aes(x=count)) + geom_histogram(colour="black", fill="white") + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq raw reads count)')
-dev.off()
+#dev.off()
 
 pdf('SKCM-NGLY1-hiseq-count-distribution-bin100.pdf')
 ##color = rep(c("white", "red", "white", "red", "white"), times=c(3,2,6,1,27))
-color = rep(c("white", "red", "white", "red", "white", "red", "white","red", "white"), times=c(5,1,3,1,3,1,3,1,27))
+color = rep(c("white", "red", "white", "red", "white", "red", "white","red", "white"), times=c(6,1,3,1,3,1,3,1,26))
 ggplot(df, aes(x=count)) + geom_histogram(binwidth=100,colour="black",fill=color) + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq reads count)')
-ggplot(df, aes(x=count)) + geom_histogram(binwidth=100,colour="black") + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq reads count)')
 dev.off()
 
-pdf('SKCM-NGLY1-hiseq-count-distribution-bin100-2.pdf')
-color = rep(c("white", "red", "white","blue", "white"), times=c(3,2,1,1,32))
-ggplot(df, aes(x=count)) + geom_histogram(binwidth=100,colour="black",fill=color) + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq reads count)')
-dev.off()
+
+#pdf('SKCM-NGLY1-hiseq-count-distribution-bin100-2.pdf')
+#color = rep(c("white", "red", "white","blue", "white"), times=c(3,2,1,1,32))
+#ggplot(df, aes(x=count)) + geom_histogram(binwidth=100,colour="black",fill=color) + ylab("Number of Samples") + xlab('NGLY1 Expression (RNA-Seq reads count)')
+#dev.off()
 
