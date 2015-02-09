@@ -16,5 +16,5 @@ def intersect(*F):
         if len(item[1]) == len(F):
             print(item[0] + '\t' + '\t'.join(item[1]))
 
-intersect('de_NGLY1-KO_WT_2014.10.21.sig.txt','de_NGLY1-KO_WT_2014.11.10.sig.txt')
+intersect('de_NGLY1-KO_WT_2014.10.21.sig.ortholog.txt','de_NGLY1-KO_WT_2014.11.10.sig.ortholog.txt')
     
