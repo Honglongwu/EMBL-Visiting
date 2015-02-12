@@ -1,8 +1,12 @@
+library(DESeq2)
 folder = '/g/steinmetz/hsun/Stanford'
 load(file.path(folder,'Counts-Mouse-2014-1011.rda'))
 load(file.path(folder,'data/MouseGenome/MouseGTF.rda'))
 
-library(DESeq2)
+write.table(data.frame(colnames(geneCounts), colnames(geneCounts)),file=file.path(folder, "/5-geneCheck/MouseSampleAnnot.txt"),col.names=F, row.names=F,sep ="\t",quote=F)
+
+write.table(data.frame(colnames(geneCounts)),file=file.path(folder, "/5-geneCheck/MouseSampleAnnot.txt"),col.names=T, row.names=F,sep ="\t")
+
 mat=assay(geneCounts)
 dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~individual)
 sf = estimateSizeFactors(dds)
