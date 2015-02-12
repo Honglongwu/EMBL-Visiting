@@ -8,6 +8,8 @@ load(file.path(folder,'data/MouseGenome/MouseGTF.rda'))
 ##### need manual modify
 sampleAnnot = read.table(file.path(folder,"/5-geneCheck/MouseSampleAnnot.txt"), head=T)
 sampleAnnot$sample = relevel(sampleAnnot$sample,"WT_primaryP4_2014.11.10")
+#sampleAnnot$condition=factor(sampleAnnot$condition,levels=c("Ngly1-KO","Engase-KO","Double-KO","WT"))
+sampleAnnot$condition=factor(sampleAnnot$condition,levels=c("WT","Double-KO","Engase-KO","Ngly1-KO"))
 
 
 mat=assay(geneCounts)
@@ -18,5 +20,6 @@ mat.sf = mat/sizeFactors(sf)
 pdf(file.path(folder, '/5-geneCheck/Mouse-NGLY1-Normalized-Expression.pdf'))
 gene = unname(unlist(mat.sf["ENSMUSG00000021785",]))
 data = data.frame(sampleAnnot,gene)
-lattice::dotplot(condition~gene|passage,data=data, auto.key=T, pch=19, ylab="Gene Expression",main="NGLY1", horizontal=F) 
+
+lattice::dotplot(condition~gene|passage,data=data, auto.key=T, pch=19, ylab="Gene Expression",main="NGLY1") 
 dev.off()
