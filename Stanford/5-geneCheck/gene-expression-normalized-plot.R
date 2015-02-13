@@ -21,5 +21,13 @@ pdf(file.path(folder, '/5-geneCheck/Mouse-NGLY1-Normalized-Expression.pdf'))
 gene = unname(unlist(mat.sf["ENSMUSG00000021785",]))
 data = data.frame(sampleAnnot,gene)
 
-lattice::dotplot(condition~gene|passage,data=data, auto.key=T, pch=19, ylab="Gene Expression",main="NGLY1") 
+lattice::dotplot(condition~gene|passage,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="Ngly1") 
+dev.off()
+
+
+pdf(file.path(folder, '/5-geneCheck/Mouse-ENGase-Normalized-Expression.pdf'))
+gene = unname(unlist(mat.sf["ENSMUSG00000033857",]))
+data = data.frame(sampleAnnot,gene)
+
+lattice::dotplot(condition~gene|passage,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="Engase") 
 dev.off()
