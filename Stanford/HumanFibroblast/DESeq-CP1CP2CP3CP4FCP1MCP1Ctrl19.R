@@ -23,7 +23,7 @@ mat = assay(geneCounts)
 #wh = which(sampleAnnot$family == "w" & sampleAnnot$treatment == "DMSO")
 #CP2 v CP3
 #wh = which(sampleAnnot$treatment == "DMSO")
-wh = wh = c(7,8,11,12,15,16,19,20,23,24,27,28,3,4)
+wh = c(7,8,11,12,15,16,19,20,23,24,27,28,3,4)
 
 sampleAnnot = droplevels(sampleAnnot[wh,])
 sampleAnnot$individual=relevel(sampleAnnot$individual,'FCP1')
@@ -42,12 +42,16 @@ res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name"
 res = res[order(res$padj), ]
 res.sig = res[which(res$padj<0.05),]
 res.sig.proteincoding = res.sig[res.sig$gene_biotype == "protein_coding",]
+res.sig.proteincoding.up = res.sig.proteincoding[res.sig.proteincoding$log2FoldChange>=0,]
+res.sig.proteincoding.down = res.sig.proteincoding[res.sig.proteincoding$log2FoldChange<0,]
 res.sig.nonproteincoding = res.sig[res.sig$gene_biotype != "protein_coding",]
 
 #..#write.table( res, file=file.path(outfolder, "deCP1vCP4.txt"), quote = FALSE, sep = "\t",  row.names = FALSE)
 write.table( res, file=file.path(outfolder, "deCP1CP2CP3CP4FCP1MCP1Ctrl19.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 write.table( res.sig, file=file.path(outfolder, "deCP1CP2CP3CP4FCP1MCP1Ctrl19_sig.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 write.table( res.sig.proteincoding, file=file.path(outfolder, "deCP1CP2CP3CP4FCP1MCP1Ctrl19_sig_proteincoding.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig.proteincoding.up, file=file.path(outfolder, "deCP1CP2CP3CP4FCP1MCP1Ctrl19_sig_proteincoding_up.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig.proteincoding.down, file=file.path(outfolder, "deCP1CP2CP3CP4FCP1MCP1Ctrl19_sig_proteincoding_down.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 write.table( res.sig.nonproteincoding, file=file.path(outfolder, "deCP1CP2CP3CP4FCP1MCP1Ctrl19_sig_nonproteincoding.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
