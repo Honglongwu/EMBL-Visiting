@@ -36,7 +36,7 @@ dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleStatus+gender) #to 
 dds = DESeq(dds)
 
 #dds = DESeq(dds, test="LRT", reduce=~treatment)
-load(file.path(folder, "/g/steinmetz/hsun/Stanford/data/HumanGTF.rda"))
+load("/g/steinmetz/hsun/Stanford/data/HumanGTF.rda")
 res = results(dds)
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 res = res[order(res$padj), ]
@@ -51,7 +51,7 @@ write.table( res.sig.proteincoding, file=file.path(outfolder, "deCP1CP2CP3CP4FCP
 write.table( res.sig.nonproteincoding, file=file.path(outfolder, "deCP1CP2CP3CP4FCP1MCP1Ctrl19_sig_nonproteincoding.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 rld = rlog(dds, blind=FALSE)
-save(dds, rld, res, res.sig,sampleAnnot,file=file.path(outfolder, "resCP1CP2CP3CP4FCP1MCP1Ctrl19.rda"))
+save(dds, rld, res, res.sig,res.sig.proteincoding,res.sig.nonproteincoding,sampleAnnot,file=file.path(outfolder, "resCP1CP2CP3CP4FCP1MCP1Ctrl19.rda"))
 
 pdf(file.path(outfolder, "plot_PCA-deCP1CP2CP3CP4FCP1MCP1Ctrl19.pdf"), width=8, height=6)
 print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
