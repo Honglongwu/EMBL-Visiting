@@ -68,3 +68,9 @@ dev.off()
 pdf(file.path(outfolder, "plot_dispEst-deCP1CP2CP3CP4FCP1MCP1Ctrl19.pdf"), width=8, height=6)
 plotDispEsts(dds)
 dev.off()
+
+
+counts.norm = counts(dds, normalized=T)
+cn = cbind.data.frame(ids[match(rownames(counts.norm), ids$gene_id), c("gene_name")],counts.norm)
+colnames(cn)[1]='gene_symbol'
+write.table(cn, file="Human-Fibroblast-Normalized-Counts.txt",quote=F,sep="\t",row.names=T,col.names=NA)
