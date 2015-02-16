@@ -6,7 +6,7 @@ load(file.path(folder,'HumanFibroblast/SampleAnnot-CP1CP2CP3CP4FCP1MCP1Ctrl19.rd
 load(file.path(folder,'data/HumanGTF.rda'))
 
 
-wh = c(7,8,11,12,15,16,19,20,23,24,27,28,3,4)
+wh = c(7,8,11,12,15,16,19,20,23,24,27,28)
 
 sampleAnnot = droplevels(sampleAnnot[wh,])
 sampleAnnot$individual=relevel(sampleAnnot$individual,'FCP1')
@@ -28,11 +28,11 @@ ddsed.norm = counts(ddsed,norm=T)
 
 gene.plot=function(gene)
 {
-pdf(file.path(folder, paste0('/5-geneCheck/Human-',gene,'-Normalized-Expression.pdf')))
-gene = unname(unlist(ddsed.norm["ENSG00000114374",]))
+pdf(file.path(folder, paste0('/5-geneCheck/Human-Fibroblast-',gene,'-Normalized-Expression.pdf')))
+gene = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,]))
 data = data.frame(sampleAnnot,gene)
 
-lattice::dotplot(condition~gene,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="USP9Y") 
+lattice::dotplot(condition~gene,data=data, auto.key=T, pch=19, ylab="Normalized Gene Expression",xlab=gene) 
 dev.off()
 }
 
