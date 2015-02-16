@@ -18,7 +18,7 @@ mat = mat[, wh]
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleOrigin+ sampleStatus + treatment)
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender + sampleStatus)
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~individual) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
-dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleStatus+gender) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
+dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender+sampleStatus) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
 ddsed = DESeq(dds)
 ddsed.norm = counts(ddsed,norm=T)
 
@@ -26,9 +26,20 @@ ddsed.norm = counts(ddsed,norm=T)
 #sf = estimateSizeFactors(dds)
 #mat.sf = mat/sizeFactors(sf)
 
-pdf(file.path(folder, '/5-geneCheck/Human-USP9Y-Normalized-Expression.pdf'))
-gene = unname(unlist(ddsed.norm["ENSMUSG00000021785",]))
+gene.plot=function(gene)
+{
+pdf(file.path(folder, paste0('/5-geneCheck/Human-',gene,'-Normalized-Expression.pdf')))
+gene = unname(unlist(ddsed.norm["ENSG00000114374",]))
 data = data.frame(sampleAnnot,gene)
 
-lattice::dotplot(condition~gene|passage,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="Ngly1") 
+lattice::dotplot(condition~gene,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="USP9Y") 
+dev.off()
+}
+
+
+gene = unname(unlist(ddsed.norm["ENSG00000114374",]))
+data = data.frame(sampleAnnot,gene)
+
+pdf(file.path(folder, '/5-geneCheck/Human-USP9Y-Normalized-Expression.pdf'))
+lattice::dotplot(gene~individual,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="USP9Y") 
 dev.off()
