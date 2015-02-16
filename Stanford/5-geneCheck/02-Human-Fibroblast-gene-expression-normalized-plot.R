@@ -37,9 +37,9 @@ dev.off()
 }
 
 
-gene = unname(unlist(ddsed.norm["ENSG00000114374",]))
+gene = unname(unlist(ddsed.norm["ENSG00000154277",]))
 data = data.frame(sampleAnnot,gene)
 
-pdf(file.path(folder, '/5-geneCheck/Human-USP9Y-Normalized-Expression.pdf'))
-lattice::dotplot(gene~individual,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="USP9Y") 
+pdf(file.path(folder, '/5-geneCheck/Human-UCHL1-Normalized-Expression.pdf'))
+lattice::dotplot(gene~individual+sampleStatus,data=data, auto.key=T, pch=19, xlab="Gene Expression",ylab="USP9Y") 
 dev.off()
