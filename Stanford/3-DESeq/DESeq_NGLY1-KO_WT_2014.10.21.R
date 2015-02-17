@@ -13,10 +13,6 @@ if (!file.exists(outfolder))  dir.create(outfolder)
 load(file.path(folder, "Counts-Mouse-2014-1011.rda"))
 pdx=unique(pd[,c("sample","biorep","passage","label")])
 
-###should remove
-pdx$label[pdx$label=='Ngly1-KO_biorep3_primaryP4']='NGLY1-KO_biorep3_primaryP4_2014.10.21'
-pdx$sample[pdx$sample=='Ngly1-KO']='NGLY1-KO'
-#######
 re = '.*(NGLY1-KO|WT).*2014.10.21'
 cmp = "NGLY1-KO_WT_2014.10.21"
 #######
