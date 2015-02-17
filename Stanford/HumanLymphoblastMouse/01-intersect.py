@@ -28,12 +28,12 @@ def intersect(inF1, inF2, ouF):
             ouFile.write('\t'.join(D[k]) + '\n')
     ouFile.close()
 
-inF1 = 'deCP1CP3MCP1_sig_proteincoding_down.txt'
+inF1 = 'deCP1CP3MCP1Ctrl_sig_proteincoding_down.txt'
 inF2 = 'de_NGLY1-KO_WT_human_ortholog_down.txt'
 ouF = 'Human-Lymphoblast-Mouse-sig-proteincoding-down.txt'
 intersect(inF1, inF2, ouF)
 
-inF1 = 'deCP1CP3MCP1_sig_proteincoding_up.txt'
+inF1 = 'deCP1CP3MCP1Ctrl_sig_proteincoding_up.txt'
 inF2 = 'de_NGLY1-KO_WT_human_ortholog_up.txt'
 ouF = 'Human-Lymphoblast-Mouse-sig-proteincoding-up.txt'
 intersect(inF1, inF2, ouF)
