@@ -34,4 +34,5 @@ def union(inF1, inF2, inF3, ouF):
 
     ouFile.close()
 
-union('de_NGLY1-KO_WT_2014.10.21.sig.ortholog.human.down.txt','de_NGLY1-KO_WT_2014.11.10.sig.ortholog.human.down.txt','de_NGLY1-KO_WT_immortP5.sig.ortholog.human.down.txt','test')
+union('de_NGLY1-KO_WT_2014.10.21.sig.ortholog.human.down.txt','de_NGLY1-KO_WT_2014.11.10.sig.ortholog.human.down.txt','de_NGLY1-KO_WT_immortP5.sig.ortholog.human.down.txt','de_NGLY1-KO_WT_human_ortholog_down.txt')
+union('de_NGLY1-KO_WT_2014.10.21.sig.ortholog.human.up.txt','de_NGLY1-KO_WT_2014.11.10.sig.ortholog.human.up.txt','de_NGLY1-KO_WT_immortP5.sig.ortholog.human.up.txt','de_NGLY1-KO_WT_human_ortholog_up.txt')
