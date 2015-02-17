@@ -1,7 +1,7 @@
 library(DESeq2)
 folder = '/g/steinmetz/hsun/Stanford'
-load(file.path(folder,'HumanLymphoblastNoCtrl/Counts-CP1CP3MCP1Ctrl.rda'))
-load(file.path(folder,'HumanLymphoblastNoCtrl/SampleAnnot-CP1CP3MCP1Ctrl.rda'))
+load(file.path(folder,'HumanLymphoblastWithCtrl/Counts-CP1CP3MCP1Ctrl.rda'))
+load(file.path(folder,'HumanLymphoblastWithCtrl/SampleAnnot-CP1CP3MCP1Ctrl.rda'))
 
 load(file.path(folder,'data/HumanGTF.rda'))
 
@@ -31,7 +31,7 @@ pdf(file.path(folder, paste0('/5-geneCheck/Human-Lymphoblast-',gene,'-Normalized
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~individual,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in lymphoblast cells")))
+print(lattice::dotplot(gn~factor(individual,level=c("CP1-B","CP3-B","MCP1-B","Ctrl-B")),group=factor(sampleStatus,level=c("patient","control")),data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in lymphoblast cells")))
 dev.off()
 }
 
