@@ -39,6 +39,13 @@ dev.off()
 
 
 gene.plot("UCHL1")
+gene.plot("AK4")
+gene.plot("GAS6")
+
+gene.plot("ATF5")
+gene.plot("SPARC")
+gene.plot("ALDH1L2")
+gene.plot("VLDLR")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))

@@ -45,6 +45,11 @@ dev.off()
 gene.plot("Gas6")
 gene.plot("Ak4")
 
+gene.plot("Atf5")
+gene.plot("Sparc")
+gene.plot("Aldh1l2")
+gene.plot("Vldlr")
+
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))
 #data = data.frame(sampleAnnot,gene)
