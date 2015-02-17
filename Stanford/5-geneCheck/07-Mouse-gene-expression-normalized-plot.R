@@ -11,11 +11,11 @@ load(file.path(folder, "Counts-Mouse-2014-1011.rda"))
 load(file.path(folder,'data/MouseGenome/MouseGTF.rda'))
 pdx=unique(pd[,c("sample","biorep","passage","label")])
 
-re = '.*(NGLY1-KO|WT).*2014.10.21'
-cmp = "NGLY1-KO_WT_2014.10.21"
-#######
+re = '.*(NGLY1-KO|WT).*immortP5'
+cmp = "NGLY1-KO_WT_immortP5"
+
 sampleAnnot=pdx[grepl(re,pdx$label),]
-sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("WT","Ngly1-KO"))
+sampleAnnot$sample = factor(rep(c("Ngly1-KO","WT"),times=c(2,3)), levels = c("WT","Ngly1-KO"))
 
 mat = assay(geneCounts)
 mat = mat[, grepl(re,colnames(geneCounts))]
@@ -34,11 +34,11 @@ ddsed.norm = counts(ddsed,norm=T)
 
 gene.plot=function(gene)
 {
-pdf(file.path(folder, paste0('/5-geneCheck/Mouse-2014_10_21_',gene,'-Normalized-Expression.pdf')))
+pdf(file.path(folder, paste0('/5-geneCheck/Mouse-immortP5-',gene,'-Normalized-Expression.pdf')))
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,][1],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~sample,group=sample,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in primaryP4 cells")))
+print(lattice::dotplot(gn~sample,group=sample,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in immortP5 cells")))
 dev.off()
 }
 

@@ -38,7 +38,7 @@ pdf(file.path(folder, paste0('/5-geneCheck/Mouse-2014_11_10_',gene,'-Normalized-
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,][1],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~sample,group=sample,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in PrimaryP4 cells")))
+print(lattice::dotplot(gn~sample,group=sample,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in primaryP4 cells")))
 dev.off()
 }
 
