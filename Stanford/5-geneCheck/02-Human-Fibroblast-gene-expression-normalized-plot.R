@@ -32,7 +32,7 @@ pdf(file.path(folder, paste0('/5-geneCheck/Human-Fibroblast-',gene,'-Normalized-
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~individual,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized Gene Expression",xlab=paste0(gene," in fibroblast cells")))
+print(lattice::dotplot(gn~individual,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in fibroblast cells")))
 dev.off()
 }
 
