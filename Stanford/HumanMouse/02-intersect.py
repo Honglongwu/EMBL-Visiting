@@ -18,7 +18,6 @@ def intersect(inF1, inF2, ouF):
         line = line.rstrip()
         fields = line.split('\t')
         gene = fields[-2]
-        print(gene)
         D.setdefault(gene, [])
         D[gene].append(line)
     inFile.close()
