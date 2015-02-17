@@ -18,6 +18,7 @@ def intersect(inF1, inF2, ouF):
         line = line.rstrip()
         fields = line.split('\t')
         gene = fields[-2]
+        print(gene)
         D.setdefault(gene, [])
         D[gene].append(line)
     inFile.close()
@@ -28,12 +29,12 @@ def intersect(inF1, inF2, ouF):
             ouFile.write('\t'.join(D[k]) + '\n')
     ouFile.close()
 
-inF1 = 'Human-Fibroblast-Lymphoblast-sig-proteincoding-down.txt'
-inF2 = 'de_NGLY1-KO_WT_human_ortholog_down.txt'
-ouF = 'Human-Fibroblast-Lymphoblast-Mouse-sig-proteincoding-down.txt'
+inF1 = 'deCP1CP2CP3CP4FCP1MCP1_sig_proteincoding_up.txt'
+inF2 = 'de_NGLY1-KO_WT_human_ortholog_up.txt'
+ouF = 'Human-Fibroblast-Mouse-sig-proteincoding-up.txt'
 intersect(inF1, inF2, ouF)
 
-inF1 = 'Human-Fibroblast-Lymphoblast-sig-proteincoding-up.txt'
-inF2 = 'de_NGLY1-KO_WT_human_ortholog_up.txt'
-ouF = 'Human-Fibroblast-Lymphoblast-Mouse-sig-proteincoding-up.txt'
+inF1 = 'deCP1CP2CP3CP4FCP1MCP1_sig_proteincoding_down.txt'
+inF2 = 'de_NGLY1-KO_WT_human_ortholog_down.txt'
+ouF = 'Human-Fibroblast-Mouse-sig-proteincoding-down.txt'
 intersect(inF1, inF2, ouF)
