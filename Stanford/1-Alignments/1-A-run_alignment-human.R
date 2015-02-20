@@ -6,14 +6,15 @@ seqFolders = c(#"/g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX",
     #"/g/steinmetz/incoming/solexa/2014-05-23-C3PJ2ACXX"),
     #"/g/steinmetz/incoming/solexa/2014-07-22-C3NVAACXX")
     #"/g/steinmetz/incoming/solexa/2014-09-05-C532NACXX")
-    # "/g/steinmetz/incoming/solexa/2014-10-21-C53D8ACXX/")
+    #"/g/steinmetz/incoming/solexa/2014-10-21-C53D8ACXX/")
     #"/g/steinmetz/incoming/solexa/2014-11-10-C53AKACXX")
     #"/g/steinmetz/incoming/solexa/2014-11-12-C4EAFACXX")
-    "/g/steinmetz/incoming/solexa/2014-11-24-C4DEWACXX")
+    #"/g/steinmetz/incoming/solexa/2014-11-24-C4DEWACXX")
+    "/g/steinmetz/incoming/solexa/2015-01-07-C56Y6ACXX")
 
 folder = "/g/steinmetz/hsun/Stanford/1-Alignments"
-outfile = file.path(folder, "sampleAnnot-mouse-2014-11-24.txt")
-   
+outfile = file.path(folder, "sampleAnnot-human-2015-01-07.txt")
+    
 
 get_demultiplxed_fileinfo = function(x){
     cmd = paste("find",x, "-type f -name *barcode* 2>/dev/null")
@@ -26,8 +27,7 @@ colnames(fileAnnot) = c("sampleName","barcode","file")
 fileAnnot$lane = sub(".*(lane\\d).*","\\1", fileAnnot$file)
 fileAnnot$name = with(fileAnnot, paste(sampleName,lane,sep="_"))
 
-fileAnnot=fileAnnot[!grepl('CP',fileAnnot$name),]
-
+fileAnnot = fileAnnot[grepl('CP',fileAnnot$name),]
 
 if(file.exists(outfile)){
     stop("Are you sure you want to rewrite the annotation file?\n")
@@ -37,12 +37,11 @@ if(file.exists(outfile)){
 
 ## build transcript index, do it only once, but saves a lot time for multiples files
 #tophat -G /g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/Homo_sapiens.GRCh37.68.gtf --transcriptome-index=/g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/GRCh37.68.transcriptome.index /g/steinmetz/genome/Homo_sapiens/37.68/indexes/bowtie2/Homo_sapiens.GRCh37.68.withIVTs
-#tophat -G /g/steinmetz/genome/Mus_musculus/38.73/annotation/gtf/Mus_musculus.GRCm38.73.gtf --transcriptome-index=/g/steinmetz/hsun/Stanford/data/Mus_musculus.GRCm38.73.transcriptome.index /g/steinmetz/genome/Mus_musculus/38.73/indexes/bowtie2/Mus_musculus.GRCm38.73
 
 run_tophat = function(x,o,ncpu=25) {
-    cmd = paste("tophat --read-gap-length 3 --read-edit-dist 3 --segment-length 25  --b2-sensitive -p",ncpu,
-        "-o",o, "--transcriptome-index=/g/steinmetz/hsun/Stanford/data/MouseGenome/Mus_musculus.GRCm38.73.transcriptome.index", 
-        "/g/steinmetz/hsun/Stanford/data/MouseGenome/Mus_musculus.GRCm38.73", 
+    cmd = paste("tophat --read-gap-length 3 --read-edit-dist 3 --b2-sensitive -p",ncpu,
+        "-o",o, "--transcriptome-index=/g/steinmetz/genome/Homo_sapiens/37.68/annotation/gtf/GRCh37.68.transcriptome.index", 
+        "/g/steinmetz/genome/Homo_sapiens/37.68/indexes/bowtie2/Homo_sapiens.GRCh37.68.withIVTs", 
         x)
     cat(cmd,"\n")
     system(cmd)
