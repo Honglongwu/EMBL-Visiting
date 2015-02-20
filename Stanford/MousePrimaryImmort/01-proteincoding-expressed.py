@@ -5,13 +5,17 @@ for line in inFile:
     fields = line.split('\t')
     mouse = fields[3]
     D.setdefault(mouse, [])
-    D[mouse].append('\t'.join([fields[1], fields[0]]))
+    if D[mouse]:
+        pass
+    else:
+        D[mouse].append('\t'.join([fields[1], fields[0]]))
 inFile.close()
 
 
 def express(inF, ouF):
     inFile = open(inF)
     ouFile = open(ouF, 'w')
+    ouFile.write('\t'.join(['Mouse.Ensembl.ID','Mouse.Gene.Symbol','Human.Ensembl.ID','Human.Gene.Symbol'])+ '\n')
     head = inFile.readline()
     for line in inFile:
         line = line.strip()
