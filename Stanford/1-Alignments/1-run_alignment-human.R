@@ -6,12 +6,13 @@ seqFolders = c(#"/g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX",
     #"/g/steinmetz/incoming/solexa/2014-05-23-C3PJ2ACXX"),
     #"/g/steinmetz/incoming/solexa/2014-07-22-C3NVAACXX")
     #"/g/steinmetz/incoming/solexa/2014-09-05-C532NACXX")
-    "/g/steinmetz/incoming/solexa/2014-10-21-C53D8ACXX/")
+    #"/g/steinmetz/incoming/solexa/2014-10-21-C53D8ACXX/")
     #"/g/steinmetz/incoming/solexa/2014-11-10-C53AKACXX")
     #"/g/steinmetz/incoming/solexa/2014-11-12-C4EAFACXX")
+    "/g/steinmetz/incoming/solexa/2014-11-24-C4DEWACXX")
 
 folder = "/g/steinmetz/hsun/Stanford/1-Alignments"
-outfile = file.path(folder, "sampleAnnot-human-2014-10-21.txt")
+outfile = file.path(folder, "sampleAnnot-human-2014-11-24.txt")
     
 
 get_demultiplxed_fileinfo = function(x){
