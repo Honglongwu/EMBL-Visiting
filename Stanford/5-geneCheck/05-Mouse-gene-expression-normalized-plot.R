@@ -42,13 +42,15 @@ print(lattice::dotplot(gn~sample,group=sample,data=data, auto.key=T, pch=19, yla
 dev.off()
 }
 
-gene.plot("Gas6")
-gene.plot("Ak4")
+#gene.plot("Gas6")
+#gene.plot("Ak4")
 
-gene.plot("Atf5")
-gene.plot("Sparc")
-gene.plot("Aldh1l2")
-gene.plot("Vldlr")
+#gene.plot("Atf5")
+#gene.plot("Sparc")
+#gene.plot("Aldh1l2")
+#gene.plot("Vldlr")
+gene.plot("Gpc4")
+gene.plot("Sdc2")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))

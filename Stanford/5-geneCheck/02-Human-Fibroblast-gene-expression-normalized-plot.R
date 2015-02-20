@@ -1,7 +1,7 @@
 library(DESeq2)
 folder = '/g/steinmetz/hsun/Stanford'
-load(file.path(folder,'HumanFibroblast/Counts-CP1CP2CP3CP4FCP1MCP1Ctrl19.rda'))
-load(file.path(folder,'HumanFibroblast/SampleAnnot-CP1CP2CP3CP4FCP1MCP1Ctrl19.rda'))
+load(file.path(folder,'HumanFibroblastWithCtrl19/Counts-CP1CP2CP3CP4FCP1MCP1Ctrl19.rda'))
+load(file.path(folder,'HumanFibroblastWithCtrl19/SampleAnnot-CP1CP2CP3CP4FCP1MCP1Ctrl19.rda'))
 
 load(file.path(folder,'data/HumanGTF.rda'))
 
@@ -38,10 +38,12 @@ dev.off()
 
 
 
-gene.plot("UCHL1")
-gene.plot("DYNC1H1")
-gene.plot("GAS6")
-gene.plot("AK4")
+#gene.plot("UCHL1")
+#gene.plot("DYNC1H1")
+#gene.plot("GAS6")
+#gene.plot("AK4")
+gene.plot("GPC2")
+gene.plot("GPC5")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))
