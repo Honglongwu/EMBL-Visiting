@@ -1,0 +1,9 @@
+ln -s /g/steinmetz/incoming/solexa/2014-05-26-C3PJ9ACXX
+ln -s /g/steinmetz/incoming/solexa/2014-03-25-C365AACXX
+ln -s /g/steinmetz/incoming/solexa/2014-05-23-C3PJ2ACXX
+ln -s /g/steinmetz/incoming/solexa/2014-07-22-C3NVAACXX
+ln -s /g/steinmetz/incoming/solexa/2014-09-05-C532NACXX
+ln -s /g/steinmetz/incoming/solexa/2014-10-21-C53D8ACXX
+ln -s /g/steinmetz/incoming/solexa/2014-11-10-C53AKACXX
+ln -s /g/steinmetz/incoming/solexa/2014-11-12-C4EAFACXX
+ln -s /g/steinmetz/incoming/solexa/2014-11-24-C4DEWACXX
