@@ -195,7 +195,7 @@ def format(F):
             ouFile.write('\t'.join(item) + '\n')
             print(item[-1])
 
-    elif F.find('2014-11-24.txt') != -1:
+    elif F.find('human-2014-11-24.txt') != -1:
         head = inFile.readline()
         L = []
         for line in inFile:
@@ -266,7 +266,7 @@ def format(F):
             ouFile.write('\t'.join(item) + '\n')
             print(item[-1])
 
-    elif F.find('mouse-2015-01-07.txt') != -1:
+    elif F.find('mouse-2014-11-24.txt') != -1:
         head = inFile.readline()
         L = []
         for line in inFile:
@@ -280,7 +280,6 @@ def format(F):
             fds = name.split('_')
             sample = fds[1] + '-' + fds[2]
             biorep = 'biorep' + fds[3]
-            print(sample)
             if sample == 'NGLY1-KO':
                 passage = 'immortP3'
             elif sample == 'Double-KO':
