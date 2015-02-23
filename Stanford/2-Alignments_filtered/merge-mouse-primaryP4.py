@@ -1,12 +1,15 @@
 import os
+ouFile = open('merge-mouse-primaryP4.sh', 'w')
 Fs = os.listdir('.')
 D = {}
 for F in Fs:
-    if F.find('_primaryP4_2014') != -1:
-        sample = F.split('_primaryP4_2014')[0]
+    if F.find('_2014.') != -1:
+        sample = F.split('_2014')[0]
         D[sample] = 1
 for sample in D:
-    print('samtools merge %s %s %s'%(sample+'.bam', sample+'_primaryP4_2014.10.21.bam', sample+'_primaryP4_2014.11.10.bam'))
+    ouFile.write('samtools merge -r -@ 10 -1 %s %s %s'%(sample+'.bam', sample+'_2014.10.21.bam', sample+'_2014.11.10.bam') + '\n')
+    ouFile.write('samtools index %s'%sample+'.bam' + '\n')
+ouFile.close()    
 
 
 
