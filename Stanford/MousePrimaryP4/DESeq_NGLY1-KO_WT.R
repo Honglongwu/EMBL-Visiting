@@ -5,17 +5,18 @@ library(GenomicRanges)
 library(DESeq2)
 
 SIG = 0.05
-folder = "/g/steinmetz/hsun/Stanford/MousePrimaryP4"
-outfolder = folder
+folder = "/g/steinmetz/hsun/Stanford"
+
+outfolder = file.path(folder, "MousePrimaryP4")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
-load(file.path(folder, "Counts-Mouse-primaryP4.rda"))
-pdx=unique(pd[,c("sample","biorep","passage","label")])
+load(file.path(folder, "MousePrimaryP4/Counts-Mouse-PrimaryP4.rda"))
 
-re = '.*(NGLY1-KO|WT).*2014.10.21'
-cmp = "NGLY1-KO_WT_2014.10.21"
+re = '.*(NGLY1-KO|WT).*'
+cmp = "NGLY1-KO_WT"
 #######
-sampleAnnot=pdx[grepl(re,pdx$label),]
+sampleAnnot = read.table('SampleAnnot.txt', head=T)
+sampleAnnot=sampleAnnot[grepl(re, sampleAnnot$label),]
 sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("WT","NGLY1-KO"))
 
 mat = assay(geneCounts)
