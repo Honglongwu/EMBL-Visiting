@@ -12,18 +12,18 @@ if (!file.exists(outfolder))  dir.create(outfolder)
 
 load(file.path(folder, "MousePrimaryP4/Counts-Mouse-PrimaryP4.rda"))
 
-re = '.*(NGLY1-KO|WT).*'
-cmp = "NGLY1-KO_WT"
+
 #######
 sampleAnnot = read.table('SampleAnnot.txt', head=T)
-sampleAnnot=sampleAnnot[grepl(re, sampleAnnot$label),]
+sampleAnnot=sampleAnnot[c(1,2,3,4,5,6),]
 sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("WT","NGLY1-KO"))
 
 mat = assay(geneCounts)
-mat = mat[, grepl(re,colnames(geneCounts))]
+mat = mat[, c(1,2,3,4,5,6)]
 
 dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample)
 dds = DESeq(dds)
+save(sampleAnnot, file = 'sampleAnnot.rda')
 
 #dds = DESeq(dds, test="LRT", reduce=~treatment)
 load(file.path(folder, "data/MouseGenome/MouseGTF.rda"))
