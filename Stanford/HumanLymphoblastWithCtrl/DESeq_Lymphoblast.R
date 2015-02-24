@@ -22,6 +22,8 @@ sampleAnnot$sampleStatus = relevel(sampleAnnot$sampleStatus,"control")
 rownames(sampleAnnot) = sampleAnnot$label
 mat = mat[, c(1,2,3,4,7,8,9,10,5,6)]
 
+save(sampleAnnot,file = 'sampleAnnot.rda')
+
 
 
 
