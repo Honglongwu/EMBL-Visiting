@@ -8,11 +8,12 @@ outfolder = file.path(folder, "5")
 if (!file.exists(outfolder))  dir.create(outfolder)
 
 load(file.path(folder, "MousePrimaryP4/Counts-Mouse-PrimaryP4.rda"))
+load(file.path(folder, "MousePrimaryP4/sampleAnnot.rda"))
 load(file.path(folder,'data/MouseGenome/MouseGTF.rda'))
 
 
 mat = assay(geneCounts)
-mat = mat[, grepl(re,colnames(geneCounts))]
+mat = mat[,c(1,2,3,4,5,6)] 
 
 dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample)
 
@@ -28,7 +29,7 @@ ddsed.norm = counts(ddsed,norm=T)
 
 gene.plot=function(gene)
 {
-pdf(file.path(folder, paste0('/5-geneCheck/Mouse-2014_10_21_',gene,'-Normalized-Expression.pdf')))
+pdf(file.path(folder, paste0('/5-geneCheckUpdated/Mouse-primaryP4-',gene,'-Normalized-Expression.pdf')))
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,][1],]))
 data = data.frame(sampleAnnot,gn)
 
@@ -44,7 +45,7 @@ dev.off()
 #gene.plot("Aldh1l2")
 #gene.plot("Vldlr")
 gene.plot("Gpc4")
-gene.plot("Sdc2")
+gene.plot("Marcksl1")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))
