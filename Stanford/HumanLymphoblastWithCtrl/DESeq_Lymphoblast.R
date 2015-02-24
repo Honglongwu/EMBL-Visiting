@@ -15,12 +15,12 @@ sampleAnnot = read.table('SampleAnnot.txt',head=T)
 
 mat = assay(geneCounts)
 
-wh = c(1,2,3,4,5,6,7,8)
+wh = c(1,2,3,4,5,6,7,8,9,10)
 sampleAnnot = droplevels(sampleAnnot[wh,])
-sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("MCP1","FCP1","CP1","CP3"))
+sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("Ctrl-B","FCP1-B","MCP1-B","CP1-B","CP3-B"))
 sampleAnnot$sampleStatus = relevel(sampleAnnot$sampleStatus,"control")
 rownames(sampleAnnot) = sampleAnnot$label
-mat = mat[, wh]
+mat = mat[, c(1,2,3,4,7,8,9,10,5,6)]
 
 
 
@@ -34,11 +34,6 @@ mat = mat[, wh]
 #CP2 v CP3
 #wh = which(grepl("^[MCP1|CP1]", sampleAnnot$individual))
 #wh = which(grepl("CP", sampleAnnot$individual))
-wh=c(1,2,3,4,7,8,5,6)
-
-sampleAnnot = droplevels(sampleAnnot[wh,])
-rownames(sampleAnnot) = sampleAnnot$label
-mat = mat[, wh]
 
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleOrigin+ sampleStatus + treatment)
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender + sampleStatus)
@@ -58,27 +53,27 @@ res.sig.proteincoding.down = res.sig.proteincoding[res.sig.proteincoding$log2Fol
 res.sig.nonproteincoding = res.sig[res.sig$gene_biotype != "protein_coding",]
 
 
-write.table( res, file=file.path(outfolder, "deCP1CP3MCP1Ctrl.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
-write.table( res.sig, file=file.path(outfolder, "deCP1CP3MCP1Ctrl_sig.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
-write.table( res.sig.proteincoding, file=file.path(outfolder, "deCP1CP3MCP1Ctrl_sig_proteincoding.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
-write.table( res.sig.proteincoding.up, file=file.path(outfolder, "deCP1CP3MCP1Ctrl_sig_proteincoding_up.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
-write.table( res.sig.proteincoding.down, file=file.path(outfolder, "deCP1CP3MCP1Ctrl_sig_proteincoding_down.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
-write.table( res.sig.nonproteincoding, file=file.path(outfolder, "deCP1CP3MCP1Ctrl_sig_nonproteincoding.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res, file=file.path(outfolder, "deLymphoblast.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig, file=file.path(outfolder, "deLymphoblast_sig.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig.proteincoding, file=file.path(outfolder, "deLymphoblast_sig_proteincoding.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig.proteincoding.up, file=file.path(outfolder, "deLymphoblast_sig_proteincoding_up.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig.proteincoding.down, file=file.path(outfolder, "deLymphoblast_sig_proteincoding_down.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
+write.table( res.sig.nonproteincoding, file=file.path(outfolder, "deLymphoblast_sig_nonproteincoding.txt"), quote = FALSE, sep = "\t",  row.names = T, col.names=NA)
 
 
 rld = rlog(dds, blind=FALSE)
 save(dds, rld, res,sampleAnnot,file=file.path(outfolder, "resCP1CP3vMCP1Ctrl.rda"))
 
 
-pdf(file.path(outfolder, "plot_PCA-deCP1CP3MCP1Ctrl.pdf"), width=8, height=6)
-print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
+pdf(file.path(outfolder, "plot_PCA-deLymphoblast.pdf"), width=8, height=6)
+print(plotPCA(rld, intgroup=c("sample", "sampleStatus")))
 dev.off()
 
-pdf(file.path(outfolder, "plot_MA-deCP1CP3MCP1Ctrl.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_MA-deLymphoblast.pdf"), width=8, height=6)
 plotMA(results(dds), alpha=0.01)
 dev.off()
 
-pdf(file.path(outfolder, "plot_dispEst-deCP1CP3MCP1Ctrl.pdf"), width=8, height=6)
+pdf(file.path(outfolder, "plot_dispEst-deLymphoblast.pdf"), width=8, height=6)
 plotDispEsts(dds)
 dev.off()
 

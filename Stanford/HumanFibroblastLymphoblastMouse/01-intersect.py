@@ -29,12 +29,12 @@ def intersect(inF1, inF2, ouF):
     ouFile.close()
 
 inF1 = 'Human-Fibroblast-Lymphoblast-sig-proteincoding-down.txt'
-inF2 = 'de_NGLY1-KO_WT_human_ortholog_down.txt'
+inF2 = 'de_NGLY1-KO_WT.sig.ortholog.proteincoding.human.down.txt'
 ouF = 'Human-Fibroblast-Lymphoblast-Mouse-sig-proteincoding-down.txt'
 intersect(inF1, inF2, ouF)
 
 inF1 = 'Human-Fibroblast-Lymphoblast-sig-proteincoding-up.txt'
-inF2 = 'de_NGLY1-KO_WT_human_ortholog_up.txt'
+inF2 = 'de_NGLY1-KO_WT.sig.ortholog.proteincoding.human.up.txt'
 ouF = 'Human-Fibroblast-Lymphoblast-Mouse-sig-proteincoding-up.txt'
 intersect(inF1, inF2, ouF)
 
