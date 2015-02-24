@@ -5,7 +5,12 @@ def classification(inF):
     ouFile2 = open(inF.split('.txt')[0] + '.proteincoding.down.txt','w')
     ouFile3 = open(inF.split('.txt')[0] + '.proteincoding.human.up.txt','w')
     ouFile4 = open(inF.split('.txt')[0] + '.proteincoding.human.down.txt','w')
-    head = inFile.readline().rstrip()
+    head = inFile.readline()
+    ouFile0.write(head)
+    ouFile1.write(head)
+    ouFile2.write(head)
+    ouFile3.write(head)
+    ouFile4.write(head)
     for line in inFile:
         line = line.rstrip()
         fields = line.split('\t')
