@@ -2,7 +2,7 @@ def intersect(inF1, inF2, ouF):
     D = {}
     L = []
     inFile = open(inF1)
-    head = inFile.readline().strip('\n')
+    head1 = inFile.readline().strip('\n')
     for line in inFile:
         line = line.rstrip()
         fields = line.split('\t')
@@ -13,7 +13,7 @@ def intersect(inF1, inF2, ouF):
     inFile.close()
 
     inFile = open(inF2)
-    head = inFile.readline().strip('\n')
+    head2 = inFile.readline().strip('\n')
     for line in inFile:
         line = line.rstrip()
         fields = line.split('\t')
@@ -23,6 +23,7 @@ def intersect(inF1, inF2, ouF):
     inFile.close()
 
     ouFile = open(ouF, 'w')
+    ouFile.write(head1 + '\t' + head2 + '\n')
     for k in L:
         if len(D[k]) == 2:
             ouFile.write('\t'.join(D[k]) + '\n')
