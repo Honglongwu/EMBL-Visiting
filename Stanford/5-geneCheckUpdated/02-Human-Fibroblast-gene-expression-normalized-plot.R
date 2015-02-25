@@ -53,5 +53,6 @@ gene.plot("MOXD1")
 gene.plot("INPP4B")
 gene.plot("UCHL1")
 gene.plot("RBPJ")
+gene.plot("GPC3")
 
 

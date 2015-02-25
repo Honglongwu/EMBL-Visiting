@@ -48,7 +48,7 @@ load("/g/steinmetz/hsun/Stanford/data/HumanGTF.rda")
 res = results(dds)
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 res = res[order(res$padj), ]
-res.sig=res[which(res$padj<0.05),]
+res.sig=res[which(res$padj<0.05 & res$baseMean > 20),]
 res.sig.proteincoding = res.sig[res.sig$gene_biotype == "protein_coding",]
 res.sig.proteincoding.up = res.sig.proteincoding[res.sig.proteincoding$log2FoldChange>=0,]
 res.sig.proteincoding.down = res.sig.proteincoding[res.sig.proteincoding$log2FoldChange<0,]

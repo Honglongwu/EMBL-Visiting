@@ -14,16 +14,17 @@ def classification(inF):
     for line in inFile:
         line = line.rstrip()
         fields = line.split('\t')
-        if fields[8] == 'protein_coding':
-            ouFile0.write(line + '\n')
-            if float(fields[2]) >= 0:
-                ouFile1.write(line + '\n')
-                if len(fields)>9:
-                    ouFile3.write(line + '\n')
-            else:
-                ouFile2.write(line + '\n')
-                if len(fields)>9:
-                    ouFile4.write(line + '\n')
+        if float(fields[1]) > 20: 
+            if fields[8] == 'protein_coding':
+                ouFile0.write(line + '\n')
+                if float(fields[2]) >= 0:
+                    ouFile1.write(line + '\n')
+                    if len(fields)>9:
+                        ouFile3.write(line + '\n')
+                else:
+                    ouFile2.write(line + '\n')
+                    if len(fields)>9:
+                        ouFile4.write(line + '\n')
     inFile.close()
     ouFile0.close()
     ouFile1.close()
