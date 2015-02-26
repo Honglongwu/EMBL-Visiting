@@ -54,5 +54,17 @@ gene.plot("INPP4B")
 gene.plot("UCHL1")
 gene.plot("RBPJ")
 gene.plot("GPC3")
+gene.plot("FBN2")
+gene.plot("TSPAN11")
+gene.plot("CCDC8")
+gene.plot("HOXB3")
+gene.plot("ST3GAL5")
+gene.plot("HOXC5")
+gene.plot("ABI3BP")
+gene.plot("HMOX1")
+gene.plot("WISP2")
+gene.plot("CRLF1")
+
+
 
 
