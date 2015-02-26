@@ -65,12 +65,14 @@ plotDispEsts(dds)
 dev.off()
 
 
-counts.norm = counts(dds, normalized=T)
-cn = cbind.data.frame(ids[match(rownames(counts.norm), ids$gene_id), c("gene_name")],counts.norm)
+Counts.norm = counts(dds, normalized=T)
+save(Counts.norm, file = "Counts-Normalized-Human-Fibroblast.rda")
+cn = cbind.data.frame(ids[match(rownames(Counts.norm), ids$gene_id), c("gene_name")],Counts.norm)
 colnames(cn)[1]='gene_symbol'
 write.table(cn, file="Human-Fibroblast-Normalized-Counts.txt",quote=F,sep="\t",row.names=T,col.names=NA)
 
 counts.norm = counts(dds, normalized=F)
+save
 cn = cbind.data.frame(ids[match(rownames(counts.norm), ids$gene_id), c("gene_name")],counts.norm)
 colnames(cn)[1]='gene_symbol'
-write.table(cn, file="Counts-Human-Fibroblast",quote=F,sep="\t",row.names=T,col.names=NA)
+write.table(cn, file="Counts-Human-Fibroblast.txt",quote=F,sep="\t",row.names=T,col.names=NA)
