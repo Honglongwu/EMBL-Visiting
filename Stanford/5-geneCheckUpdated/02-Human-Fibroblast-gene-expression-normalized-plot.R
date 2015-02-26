@@ -6,8 +6,8 @@ load(file.path(folder,'HumanFibroblastNoCtrl19/sampleAnnot.rda'))
 load(file.path(folder,'data/HumanGTF.rda'))
 
 
-wh = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14)
 
+wh = seq(1,14)
 sampleAnnot = droplevels(sampleAnnot[wh,])
 sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("FCP1","MCP1","CP1", "CP2","CP3","CP4","CP7"))
 rownames(sampleAnnot) = sampleAnnot$label
