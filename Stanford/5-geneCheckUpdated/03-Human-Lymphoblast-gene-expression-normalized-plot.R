@@ -52,6 +52,11 @@ gene.plot("MOXD1")
 gene.plot("INPP4B")
 gene.plot("UCHL1")
 gene.plot("RBPJ")
+gene.plot("")
+gene.plot("")
+gene.plot("")
+gene.plot("")
+gene.plot("")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))
