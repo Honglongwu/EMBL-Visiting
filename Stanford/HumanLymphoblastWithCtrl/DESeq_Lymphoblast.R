@@ -84,3 +84,11 @@ counts.norm = counts(dds, normalized=T)
 cn = cbind.data.frame(ids[match(rownames(counts.norm), ids$gene_id), c("gene_name")],counts.norm)
 colnames(cn)[1]='gene_symbol'
 write.table(cn, file="Human-Lymphoblast-Normalized-Counts.txt",quote=F,sep="\t",row.names=T,col.names=NA)
+
+
+counts.norm = counts(dds, normalized=F)
+cn = cbind.data.frame(ids[match(rownames(counts.norm), ids$gene_id), c("gene_name")],counts.norm)
+colnames(cn)[1]='gene_symbol'
+write.table(cn, file="Counts-Human-Lymphoblast.txt",quote=F,sep="\t",row.names=T,col.names=NA)
+
+
