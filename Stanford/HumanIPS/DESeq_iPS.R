@@ -17,7 +17,7 @@ mat = assay(geneCounts)
 
 wh = c(1,2,3,4,5,6)
 sampleAnnot = droplevels(sampleAnnot[wh,])
-sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("FCP1-iPS","MCP1-iPS","CP1-iPS")
+sampleAnnot$sample = factor(sampleAnnot$sample, levels = c("FCP1-iPS","MCP1-iPS","CP1-iPS"))
 sampleAnnot$sampleStatus = relevel(sampleAnnot$sampleStatus,"control")
 rownames(sampleAnnot) = sampleAnnot$label
 mat = mat[, c(1,2,3,4,5,6)]
