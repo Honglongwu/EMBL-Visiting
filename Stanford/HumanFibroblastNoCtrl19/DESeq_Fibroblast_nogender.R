@@ -27,12 +27,12 @@ save(sampleAnnot,file = 'sampleAnnot.rda')
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleOrigin+ sampleStatus + treatment)
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender + sampleStatus)
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~individual) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
-dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample + gender) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
+dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleStatus) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
 dds = DESeq(dds)
 
 #dds = DESeq(dds, test="LRT", reduce=~treatment)
 load("/g/steinmetz/hsun/Stanford/data/HumanGTF.rda")
-res = results(dds)
+res = results(dds, contrast=c('sampleStatus','patient','control'))
 res = cbind.data.frame(res, ids[match(rownames(res), ids$gene_id), c("gene_name","gene_biotype")])
 res = res[order(res$padj), ]
 res.sig = res[which(res$padj<0.05 & res$baseMean > 20),]
