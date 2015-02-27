@@ -49,7 +49,7 @@ rld = rlog(dds, blind=FALSE)
 save(dds, rld, res, res.sig,res.sig.proteincoding,res.sig.nonproteincoding,sampleAnnot,file=file.path(outfolder, "resNGLY1.rda"))
 
 pdf(file.path(outfolder, "plot_PCA-deNGLY1.pdf"), width=8, height=6)
-print(plotPCA(rld, intgroup=c("sample", "sampleStatus")))
+print(plotPCA(rld, intgroup=c("individual", "sampleStatus")))
 dev.off()
 
 pdf(file.path(outfolder, "plot_MA-deNGLY1.pdf"), width=8, height=6)
