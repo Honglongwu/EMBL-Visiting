@@ -28,7 +28,7 @@ save(sampleAnnot,file = 'sampleAnnot.rda')
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender + sampleStatus)
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~individual) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
 ###dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender+sampleStatus) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
-dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
+dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sampleStatus) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
 dds = DESeq(dds)
 
 #dds = DESeq(dds, test="LRT", reduce=~treatment)
@@ -73,7 +73,6 @@ colnames(cn)[1]='gene_symbol'
 write.table(cn, file="Human-Fibroblast-Normalized-Counts.nogender.txt",quote=F,sep="\t",row.names=T,col.names=NA)
 
 counts.norm = counts(dds, normalized=F)
-save
 cn = cbind.data.frame(ids[match(rownames(counts.norm), ids$gene_id), c("gene_name")],counts.norm)
 colnames(cn)[1]='gene_symbol'
 write.table(cn, file="Counts-Human-Fibroblast.nogender.txt",quote=F,sep="\t",row.names=T,col.names=NA)
