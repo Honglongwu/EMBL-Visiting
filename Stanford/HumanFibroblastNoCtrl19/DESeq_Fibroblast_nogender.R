@@ -28,7 +28,7 @@ save(sampleAnnot,file = 'sampleAnnot.rda')
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender + sampleStatus)
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~individual) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
 ###dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender+sampleStatus) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
-dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~gender+sampleStatus) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
+dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample) #to compare CP2 and CP3 to CP1, unable to use family/gender difference, same comparison here
 dds = DESeq(dds)
 
 #dds = DESeq(dds, test="LRT", reduce=~treatment)
