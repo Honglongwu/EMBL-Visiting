@@ -3,34 +3,16 @@ library(DESeq2)
 load('resNGLY1.rda')
 load('/g/steinmetz/hsun/Stanford/data/HumanGTF.rda')
 ddsed.norm = counts(dds,norm=T)
+
 gene.plot=function(gene)
 {
 pdf(paste0(gene,'-Normalized-Expression.pdf'))
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1))))
+print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(1,4))))
 dev.off()
 }
-
-gene.plot2=function()
-{
-pdf(paste0('NGLY1-PSM','-Normalized-Expression.pdf'))
-gene = 'NGLY1'
-gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
-data = data.frame(sampleAnnot,gn)
-print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1))))
-
-gene = 'PSMD1'
-gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
-data = data.frame(sampleAnnot,gn)
-print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1))))
-
-dev.off()
-}
-gene.plot2()
-
-
 
 #gene.plot("UCHL1")
 #gene.plot("AK4")
@@ -52,12 +34,12 @@ gene.plot2()
 #gene.plot("RBPJ")
 
 
-#gene.plot("NGLY1")
-#gene.plot("PSMB1")
-#gene.plot("PSMD1")
-#gene.plot("PSMD11")
-#gene.plot("PSMD14")
-#gene.plot("PSMC2")
+gene.plot("NGLY1")
+gene.plot("PSMB1")
+gene.plot("PSMD1")
+gene.plot("PSMD11")
+gene.plot("PSMD14")
+gene.plot("PSMC2")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))
