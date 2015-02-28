@@ -75,4 +75,4 @@ intronCounts <- summarizeOverlaps( intronsByGene, bamLst,
 
 #save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts,  pd, file=file.path(folder, "Counts-Mouse-2014-1011.rda"))
 #save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts,  pd, file=file.path(folder, "Counts-Mouse-2014-1011-3.rda"))
-save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts, file=file.path(folder, "Counts-Mouse-immortP3.rda"))
+save(exonsByGene, intronsByGene, geneCounts, exonCounts, intronCounts, file=file.path(folder, "MouseImmortP3/Counts-Mouse-immortP3.rda"))

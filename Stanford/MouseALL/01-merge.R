@@ -1,18 +1,15 @@
 library(DESeq2)
-load('Counts-Human-Fibroblast.rda')
-fibroblast=assay(geneCounts)
-load('Counts-Human-Lymphoblast.rda')
-lymphoblast=assay(geneCounts)
-load('Counts-Human-iPS.rda')
-ips=assay(geneCounts)
-load('Counts-Human-NPC.rda')
-npc=assay(geneCounts)
+load('Counts-Mouse-PrimaryP4.rda')
+primaryP4=assay(geneCounts)
+load('Counts-Mouse-immortP3.rda')
+immortP3=assay(geneCounts)
+load('Counts-Mouse-immortP5.rda')
+immortP5=assay(geneCounts)
 
-fibro.lympho=merge(fibroblast,lymphoblast,by.x=0,by.y=0)
-fibro.lympho.ips = merge(fibro.lympho,ips,by.x=1,by.y=0)
-fibro.lympho.ips.npc = merge(fibro.lympho.ips,npc,by.x=1,by.y=0)
+primaryP4.immortP3=merge(primaryP4,immortP3,by.x=0,by.y=0)
+primaryP4.immortP3.immortP5 = merge(primaryP4.immortP3,immortP5,by.x=1,by.y=0)
 
-geneCounts = fibro.lympho.ips.npc[,2:dim(fibro.lympho.ips.npc)[2]]
-rownames(geneCounts)=fibro.lympho.ips.npc[,1]
+geneCounts = primaryP4.immortP3.immortP5[,2:dim(primaryP4.immortP3.immortP5)[2]]
+rownames(geneCounts)=primaryP4.immortP3.immortP5[,1]
 
-save(geneCounts, file = 'geneCounts-Human.rda' )
+save(geneCounts, file = 'geneCounts-Mouse.rda' )
