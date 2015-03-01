@@ -4,21 +4,20 @@ load('res_NGLY1-KO_WT.rda')
 load('/g/steinmetz/hsun/Stanford/data/MouseGenome/MouseGTF.rda')
 ddsed.norm = counts(dds,norm=T)
 
-NGLY1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='NGLY1',1,],]))
+Ngly1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='Ngly1',1][1],]))
 
-PSMB1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMB1',1,],]))
+Psma1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='Psma1',1][1],]))
 
-PSMD1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMD1',1,],]))
+Psmb1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='Psmb1',1][1],]))
 
-PSMD11 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMD11',1,],]))
+Psmc2 = unname(unlist(ddsed.norm[ids[ids$gene_name=='Psmc2',1][1],]))
 
-PSMD14 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMD14',1,],]))
+Psmd1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='Psmd1',1,][1],]))
 
-PSMC2 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMC2',1,],]))
 
-data = data.frame(sampleAnnot,NGLY1,PSMB1, PSMC2, PSMD1, PSMD11, PSMD14)
+data = data.frame(sampleAnnot,Ngly1,Psma1, Psmb1, Psmc2, Psmd1)
 
-write.table(data, quote = F,row.names=F, col.names=T, sep = "\t", file = "NGLY1-PSM-Family.txt")
+write.table(data, quote = F,row.names=F, col.names=T, sep = "\t", file = "NGLY1-PSM-Family-Mouse.txt")
 
 
 
