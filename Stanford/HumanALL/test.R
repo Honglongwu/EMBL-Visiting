@@ -6,13 +6,14 @@ ddsed.norm = counts(dds,norm=T)
 
 gene.plot=function(gene)
 {
-pdf(paste0(gene,'-Normalized-Expression.pdf'))
+#pdf(paste0(gene,'-Normalized-Expression.pdf'))
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1)),cex=0.6))
-dev.off()
+res = lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1)))
+return(res)
 }
+
 
 #gene.plot("UCHL1")
 #gene.plot("AK4")
@@ -34,12 +35,16 @@ dev.off()
 #gene.plot("RBPJ")
 
 
-gene.plot("NGLY1")
-gene.plot("PSMB1")
-gene.plot("PSMD1")
-gene.plot("PSMD11")
-gene.plot("PSMD14")
-gene.plot("PSMC2")
+g1 = gene.plot("NGLY1")
+g2 = gene.plot("PSMB1")
+library(gridExtra)
+grid.arrange(g1,g2,nrow=2)
+
+
+#gene.plot("PSMD1")
+#gene.plot("PSMD11")
+#gene.plot("PSMD14")
+#gene.plot("PSMC2")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))

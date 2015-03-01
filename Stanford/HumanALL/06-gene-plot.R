@@ -4,15 +4,24 @@ load('resNGLY1.rda')
 load('/g/steinmetz/hsun/Stanford/data/HumanGTF.rda')
 ddsed.norm = counts(dds,norm=T)
 
-gene.plot=function(gene)
-{
-pdf(paste0(gene,'-Normalized-Expression.pdf'))
-gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
-data = data.frame(sampleAnnot,gn)
+pdf('NGLY1-PSM-Normalized-Expression.pdf')
 
-print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1)),cex=0.6))
+NGLY1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='NGLY1',1,],]))
+
+PSMB1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMB1',1,],]))
+
+PSMD1 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMD1',1,],]))
+
+PSMD11 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMD11',1,],]))
+
+PSMD14 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMD14',1,],]))
+
+PSMC2 = unname(unlist(ddsed.norm[ids[ids$gene_name=='PSMC2',1,],]))
+
+data = data.frame(sampleAnnot,NGLY1,PSMB1, PSMC2, PSMD1, PSMD11, PSMD14)
+
+print(lattice::dotplot(data[,seq(7,12)]~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,6))))
 dev.off()
-}
 
 #gene.plot("UCHL1")
 #gene.plot("AK4")
