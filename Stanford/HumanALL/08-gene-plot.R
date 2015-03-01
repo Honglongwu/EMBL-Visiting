@@ -10,9 +10,33 @@ gene.plot=function(gene)
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
 data = data.frame(sampleAnnot,gn)
 
-res = lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1)))
+res = lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=F,layout=(c(4,1)))
 return(res)
 }
+
+gene.plot.top=function(gene)
+{
+#pdf(paste0(gene,'-Normalized-Expression.pdf'))
+gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
+data = data.frame(sampleAnnot,gn)
+
+res = lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T,layout=(c(4,1)))
+return(res)
+}
+
+gene.plot.bottom=function(gene)
+{
+#pdf(paste0(gene,'-Normalized-Expression.pdf'))
+gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
+data = data.frame(sampleAnnot,gn)
+
+res = lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=F,layout=(c(4,1)))
+return(res)
+}
+
+
+
+
 
 
 #gene.plot("UCHL1")
@@ -35,10 +59,12 @@ return(res)
 #gene.plot("RBPJ")
 
 
-g1 = gene.plot("NGLY1")
+g1 = gene.plot.top("NGLY1")
 g2 = gene.plot("PSMB1")
+g3 = gene.plot.bottom("PSMD1")
+
 library(gridExtra)
-grid.arrange(g1,g2,nrow=2)
+grid.arrange(g1,g2,g3,nrow=3)
 
 
 #gene.plot("PSMD1")
