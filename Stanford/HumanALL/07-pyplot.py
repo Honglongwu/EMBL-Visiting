@@ -32,7 +32,7 @@ for i in range(0,6):
     ax.set_yticklabels([])
     AX.append(ax)
     
-    ax = fig.add_axes([0.81, 0.05+0.15*i, 0.08, 0.15])
+    ax = fig.add_axes([0.80, 0.05+0.15*i, 0.08, 0.15])
     ax.set_xlim(0,2)
     ax.set_xticks(range(0,2))
     ax.set_xticklabels([])
@@ -73,12 +73,14 @@ for i,gene in enumerate(G):
     color = ['b','b','b','b','r','r','r','r','r','r','r','r','r','r']
     AX[0+4*i].scatter([1,1,2,2,3,3,4,4,5,5,6,6,7,7],val,facecolor=color,edgecolor=color,linewidths=0 ,marker='o',s=20)
     Expression+=val
+    print(val)
     
     xy = df[df['cellType']=='lymphoblast'][['individual',gene]]
     val = xy.iloc[[4,5,6,7,8,9,0,1,2,3],1].tolist()
     color = ['b','b','b','b','b','b','r','r','r','r']
     AX[1+4*i].scatter([1,1,2,2,3,3,4,4,5,5],val,facecolor=color,edgecolor=color,linewidths=0,marker='o',s=20)
     Expression+=val
+    print(val)
     
     
     xy = df[df['cellType']=='iPS'][['individual',gene]]
@@ -86,6 +88,7 @@ for i,gene in enumerate(G):
     color = ['b','b','b','b','r','r']
     AX[2+4*i].scatter([1,1,2,2,3,3],val,facecolor=color,edgecolor=color,linewidths=0,marker='o',s=20)
     Expression+=val
+    print(val)
     
     xy = df[df['cellType']=='NPC'][['individual',gene]]
     val = xy.iloc[[0,1],1].tolist()
@@ -94,6 +97,7 @@ for i,gene in enumerate(G):
     AX[3+4*i].set_ylabel(gene)
     AX[3+4*i].yaxis.set_label_position('right')
     Expression+=val
+    print(val)
     
     #AX[0+4*i].set_ylim(min(Expression)-100, max(Expression)+100)
     #AX[1+4*i].set_ylim(min(Expression)-100, max(Expression)+100)
