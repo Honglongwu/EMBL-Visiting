@@ -10,7 +10,7 @@ pdf(paste0(gene,'-Normalized-Expression.pdf'))
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(1,4))))
+print(lattice::dotplot(gn~individual|cellType,group=sampleStatus,data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene, layout=(c(4,1),size)))
 dev.off()
 }
 
