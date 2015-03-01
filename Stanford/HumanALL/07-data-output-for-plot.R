@@ -20,7 +20,9 @@ data = data.frame(sampleAnnot,NGLY1,PSMB1, PSMC2, PSMD1, PSMD11, PSMD14)
 
 write.table(data, quote = F,row.names=F, col.names=T, sep = "\t", file = "NGLY1-PSM-Family.txt")
 
-
+data=data[c(11,12,13,14,1,2,3,4,5,6,7,8,9,10,19,20,21,22,23,24,15,16,17,18,27,28,29,30,25,26,31,32),]
+data.t=t(data)
+write.table(data.t[seq(7,12),],file='Check-Rdata.txt',quote=F,sep='\t',col.names=F)
 
 
 
