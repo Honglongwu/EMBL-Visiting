@@ -10,7 +10,7 @@ df = pd.read_table('NGLY1-PSM-Family-Mouse.txt')
 AX = []
 fig = pl.figure()
 for i in range(0,5):
-    ax = fig.add_axes([0.1, 0.1+0.16*i, 0.8, 0.16])
+    ax = fig.add_axes([0.2, 0.1+0.16*i, 0.6, 0.16])
     ax.set_xlim(0,3)
     ax.set_xticks(range(0,4))
     ax.set_xticklabels([])
@@ -41,7 +41,7 @@ for i,gene in enumerate(G):
     color = ['b','b','b','r','r','r']
     AX[i].scatter([1,1,1,2,2,2],val,facecolor=color,edgecolor=color,linewidths=0 ,marker='o',s=20)
     Expression=val
-    AX[i].set_ylim(0, max(Expression)+300)
+    AX[i].set_ylim(0, max(Expression)+500)
 
 for i,gene in enumerate(G):
     AX[i].text(3.05,AX[i].get_ylim()[1]/2.0, gene,verticalalignment='center')
@@ -50,7 +50,7 @@ AX[0].set_yticks([1000,3000,5000])
 AX[1].set_yticks([1000,2000,3000])	
 AX[2].set_yticks([1000,2000,3000])	
 AX[3].set_yticks([1000,2000])	
-AX[4].set_yticks([200,400,600])	
-AX[2].text(-0.35,AX[2].get_ylim()[1]/2,'Normalized gene expression', rotation='vertical',verticalalignment='center')
+AX[4].set_yticks([200,400,600,800])	
+AX[2].text(-0.47,AX[2].get_ylim()[1]/2,'Normalized gene expression', rotation='vertical',verticalalignment='center')
 
 pl.savefig('NGLY1-PSM-Normalized-Mouse.pdf')
