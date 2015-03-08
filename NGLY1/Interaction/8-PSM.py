@@ -1,6 +1,6 @@
 inFile = open('BIOGRID-ALL-Interaction')
 D = {}
-ouFile1 = open('BIOGRID-ALL-Interaction-PSM-1', 'w')
+ouFile1 = open('BIOGRID-ALL-Interaction-PSM', 'w')
 ouFile2 = open('BIOGRID-ALL-Interaction-PSM-2', 'w')
 for line in  inFile:
     line = line.strip()
