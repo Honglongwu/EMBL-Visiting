@@ -1,11 +1,11 @@
 library(DESeq2)
 folder = '/g/steinmetz/hsun/Stanford'
-load(file.path(folder,''))
+load(file.path(folder,'HumanALLNoNPC/resNGLY1.rda'))
 
 load(file.path(folder,'data/HumanGTF.rda'))
 
 
-ddsed.norm = counts(ddsed,norm=T)
+ddsed.norm = counts(dds,norm=T)
 
 #dds = DESeqDataSetFromMatrix(mat, sampleAnnot, design=~sample)
 #sf = estimateSizeFactors(dds)
@@ -13,11 +13,11 @@ ddsed.norm = counts(ddsed,norm=T)
 
 gene.plot=function(gene)
 {
-pdf(file.path(folder, paste0('/5-geneCheck/Human-Lymphoblast-',gene,'-Normalized-Expression-with-Ctrl.pdf')))
+pdf(file.path(folder, paste0('/5-geneCheck/Human-ALL-',gene,'.pdf')))
 gn = unname(unlist(ddsed.norm[ids[ids$gene_name==gene,1,],]))
 data = data.frame(sampleAnnot,gn)
 
-print(lattice::dotplot(gn~factor(individual,level=c("Ctrl-B","MCP1-B","CP1-B","CP3-B")),group=factor(sampleStatus),data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=paste0(gene," in lymphoblast cells")))
+print(lattice::dotplot(gn~factor(individual)|cellType,group=factor(sampleStatus),data=data, auto.key=T, pch=19, ylab="Normalized gene expression",xlab=gene))
 dev.off()
 }
 
@@ -31,7 +31,10 @@ dev.off()
 #gene.plot("SPARC")
 #gene.plot("ALDH1L2")
 #gene.plot("VLDLR")
-gene.plot("GPC4")
+gene.plot("RAD23A")
+gene.plot("RAD23B")
+gene.plot("VCP")
+gene.plot("UBC")
 
 
 #gene = unname(unlist(ddsed.norm["ENSG00000154277",]))
