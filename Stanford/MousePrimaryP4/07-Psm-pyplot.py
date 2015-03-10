@@ -29,7 +29,7 @@ AX[0].xaxis.set_ticks_position('bottom')
 AX[0].axes.get_xaxis().set_visible(True)
 
 
-for i in range(0,4):
+for i in range(0,5):
     AX[i].yaxis.set_ticks_position('left')
 
 

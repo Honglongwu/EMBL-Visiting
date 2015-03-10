@@ -46,11 +46,12 @@ for i,gene in enumerate(G):
 for i,gene in enumerate(G):
     AX[i].text(3.05,AX[i].get_ylim()[1]/2.0, gene,verticalalignment='center')
 
-#AX[0].set_yticks([1000,3000,5000])	
-#AX[1].set_yticks([1000,2000,3000])	
-#AX[2].set_yticks([1000,2000,3000])	
-#AX[3].set_yticks([1000,2000])	
-#AX[4].set_yticks([200,400,600,800])	
+AX[0].set_yticks([1000,2000])	
+AX[1].set_yticks([5000,10000])	
+AX[2].set_yticks([5000,10000,15000])	
+AX[3].set_yticks([5000,10000])	
+AX[4].set_yticks([1000,2000])	
+AX[5].set_yticks([500,1000])	
 AX[2].text(-0.47,AX[2].get_ylim()[1]/2,'Normalized gene expression', rotation='vertical',verticalalignment='center')
 
 pl.savefig('NGLY1-RADUBC-Normalized-Mouse.pdf')
