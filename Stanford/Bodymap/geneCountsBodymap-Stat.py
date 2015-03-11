@@ -18,15 +18,15 @@ for line in inFile:
 inFile.close()
 d = D.items()
 d.sort(cmp = lambda x,y :cmp(len(set(x[1])), len(set(y[1]))), reverse = True)
-ouFile1.write('tissue\tprotein_coding_gene_number' + '\n')
+ouFile1.write('tissue\tgene_expressed_number\t' + 'gene_expressed_percentage\n')
 for item in d:
-    ouFile1.write(item[0] + '\t' + str(len(set(item[1]))) + '\n')
+    ouFile1.write(item[0] + '\t' + str(len(set(item[1]))) +'\t'+'%.0f'%(float(len(set(item[1])))/len(set(Total))*100)+'%'+ '\n')
     Tissue.append(item[0])
-ouFile1.write('Total\t' + str(len(set(Total))) + '\n')
+ouFile1.write('Total\t' + str(len(set(Total))) +'\t'+'100%'+ '\n')
 
 def share(S1, S2):
     N = len(S1 & S2)
-    P = '%.2f'%(float(N)/len(S1)*100)
+    P = '%.0f'%(float(N)/len(S1)*100)
     return(str(N) + ' (' + P + '%)')
 ouFile2.write('' + '\t' + '\t'.join(Tissue) + '\n')
 for i in range(len(Tissue)):
