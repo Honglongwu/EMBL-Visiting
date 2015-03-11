@@ -24,9 +24,11 @@ for item in d:
     Tissue.append(item[0])
 ouFile1.write('Total\t' + str(len(set(Total))) +'\t'+'100%'+ '\n')
 
+X = []
 def share(S1, S2):
     N = len(S1 & S2)
     P = '%.0f'%(float(N)/len(S1)*100)
+    X.append(float(P))
     return(str(N) + ' (' + P + '%)')
 ouFile2.write('' + '\t' + '\t'.join(Tissue) + '\n')
 for i in range(len(Tissue)):
@@ -37,6 +39,8 @@ for i in range(len(Tissue)):
     ouFile2.write(Tissue[i] + '\t' + '\t'.join(L) + '\n')
 ouFile1.close()
 ouFile2.close()
+X.sort()
+print(X)
 
 
 
