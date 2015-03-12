@@ -12,10 +12,13 @@ for line in inFile:
     D[gene].append([gene,ch,strand,start,end])
 inFile.close()
 
+
 inFile = open('Genes-Will')
+ouFile = open('Genes-Will-Pos', 'w')
 for line in inFile:
     line = line.strip()
     gene = line
     if gene in D:
-        print(set(D[gene]))
+        ouFile.write('\t'.join(D[gene][0]) + '\n')
 inFile.close()
+ouFile.close()
