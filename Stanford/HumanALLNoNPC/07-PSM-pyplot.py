@@ -65,20 +65,20 @@ for i,gene in enumerate(G):
     xy = df[df['cellType']=='fibroblast'][['individual',gene]]
     val= xy.iloc[[10,11,12,13,0,1,2,3,4,5,6,7,8,9],1].tolist()
     color = ['b','b','b','b','r','r','r','r','r','r','r','r','r','r']
-    AX[0+3*i].scatter([1,1,2,2,3,3,4,4,5,5,6,6,7,7],val,facecolor=color,edgecolor=color,linewidths=0 ,marker='o',s=20)
+    AX[0+3*i].scatter([1,1,2,2,3,3,4,4,5,5,6,6,7,7],val,facecolor=color,edgecolor=color,linewidths=0 ,marker='o',s=40)
     Expression+=val
     
     xy = df[df['cellType']=='lymphoblast'][['individual',gene]]
     val = xy.iloc[[4,5,6,7,8,9,0,1,2,3],1].tolist()
     color = ['b','b','b','b','b','b','r','r','r','r']
-    AX[1+3*i].scatter([1,1,2,2,3,3,4,4,5,5],val,facecolor=color,edgecolor=color,linewidths=0,marker='o',s=20)
+    AX[1+3*i].scatter([1,1,2,2,3,3,4,4,5,5],val,facecolor=color,edgecolor=color,linewidths=0,marker='o',s=40)
     Expression+=val
     
     
     xy = df[df['cellType']=='iPS'][['individual',gene]]
     val = xy.iloc[[2,3,4,5,0,1],1].tolist()
     color = ['b','b','b','b','r','r']
-    AX[2+3*i].scatter([1,1,2,2,3,3],val,facecolor=color,edgecolor=color,linewidths=0,marker='o',s=20)
+    AX[2+3*i].scatter([1,1,2,2,3,3],val,facecolor=color,edgecolor=color,linewidths=0,marker='o',s=40)
     Expression+=val
     
     

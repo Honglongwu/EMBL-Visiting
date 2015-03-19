@@ -39,7 +39,7 @@ for i,gene in enumerate(G):
     xy = df[['sample',gene]]
     val= xy.iloc[[3,4,5,0,1,2],1].tolist()
     color = ['b','b','b','r','r','r']
-    AX[i].scatter([1,1,1,2,2,2],val,facecolor=color,edgecolor=color,linewidths=0 ,marker='o',s=20)
+    AX[i].scatter([1,1,1,2,2,2],val,facecolor=color,edgecolor=color,linewidths=0 ,marker='o',s=40)
     Expression=val
     AX[i].set_ylim(0, max(Expression)+500)
 
