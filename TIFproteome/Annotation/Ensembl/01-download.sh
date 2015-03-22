@@ -18,3 +18,5 @@ wget ftp://ftp.ensembl.org/pub/release-79/fasta/saccharomyces_cerevisiae/ncrna/S
 #wget ftp://ftp.ensembl.org/pub/release-79/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.chromosome.XV.fa.gz
 #wget ftp://ftp.ensembl.org/pub/release-79/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.chromosome.XVI.fa.gz
 wget ftp://ftp.ensembl.org/pub/release-79/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz
+wget ftp://ftp.ensembl.org/pub/release-79/variation/vcf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae_incl_consequences.vcf.gz
+wget ftp://ftp.ensembl.org/pub/release-79/variation/vcf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.vcf.gz
