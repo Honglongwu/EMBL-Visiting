@@ -27,9 +27,14 @@ group=tree.findall('group')
 for item in group :
     if item.get('id') :
         Spec = Spectrum()
-        s = item.findall('group/note')
-        if len(s) == 1:
-            Spec.name = s[0].text.strip()
+        #s = item.findall('group/note')
+        #if len(s) == 1:
+        #    Spec.name = s[0].text.strip()
+        #else:
+        #    print('spec error')
+        s = item.getchildren()[-1].getchildren()[0].get('label')
+        if s.find('.spectrum') != -1:
+            Spec.name=s
         else:
             print('spec error')
 
