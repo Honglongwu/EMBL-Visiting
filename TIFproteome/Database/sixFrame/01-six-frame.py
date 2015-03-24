@@ -27,7 +27,7 @@ def translate(seq):
     return six
 
 
-inF = 'Saccharomyces_cerevisiae.R64-1-1.ncrna.fa.fa'
+inF = 'Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.fa'
 inFile = open(inF)
 ouFile = open(inF+'.pep','w')
 while True:
