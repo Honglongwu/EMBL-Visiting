@@ -27,7 +27,7 @@ for inF in F:
         ouFile.write('\t<note type="input" label="spectrum, parent monoisotopic mass error minus">10</note>\n')
         ouFile.write('\t<note type="input" label="spectrum, parent monoisotopic mass isotope error">no</note>\n')
         ouFile.write('\t<note type="input" label="list path, default parameters">default_input.xml</note>\n')
-        ouFile.write('\t<note type="input" label="list path, taxonomy information">taxonomy.xml</note>\n')
+        ouFile.write('\t<note type="input" label="list path, taxonomy information">taxonomy-ncRNA.xml</note>\n')
         ouFile.write('\t<note type="input" label="residue, modification mass">57.022@C</note>\n')
         #ouFile.write('\t<note type="input" label="residue, modification mass 1">57.022@C,8@K,10@R</note>\n')
         ouFile.write('\t<note type="input" label="protein, cleavage site">[RK]|{P}</note>\n')

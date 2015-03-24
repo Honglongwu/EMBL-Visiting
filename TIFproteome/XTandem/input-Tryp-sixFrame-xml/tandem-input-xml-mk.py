@@ -2,8 +2,16 @@
 import sys
 import os
 
-DIR = '../input-Tryp'
+input_spec = 'input-Tryp'
 
+input_xml = os.getcwd().split('/')[-1]
+output_xml = 'output' + input_xml[5:]
+
+if not os.path.exists('../'+ output_xml):
+    os.makedirs('../'+ output_xml)
+
+
+DIR = '../' + input_spec
 F = os.listdir(DIR)
 
 L = []
@@ -25,8 +33,8 @@ for inF in F:
         ouFile.write('\t<note type="input" label="protein, cleavage site">[RK]|{P}</note>\n')
         ouFile.write('\t<note type="input" label="refine">no</note>\n')
         ouFile.write('\t<note type="input" label="protein, taxon">Saccharomyces cerevisiae</note>\n')
-        ouFile.write('\t<note type="input" label="spectrum, path">input-Tryp/%s</note>\n'%inF)
-        ouFile.write('\t<note type="input" label="output, path">output-Tryp-sixFrame/%s</note>\n'%ouF)
+        ouFile.write('\t<note type="input" label="spectrum, path">%s/%s</note>\n'%(input_spec,inF))
+        ouFile.write('\t<note type="input" label="output, path">%s/%s</note>\n'%(output_xml,ouF))
         ouFile.write('</bioml>\n')
 
         ouFile.close()
@@ -35,7 +43,7 @@ for inF in F:
         ouFile2 = open(ouF2,'w')
         cwd = '/'.join(os.getcwd().split('/')[0:-1])
         ouFile2.write('cd %s\n\n'%cwd)
-        ouFile2.write('tandem.exe input-Tryp-sixFrame-xml/%s\n'%ouF)
+        ouFile2.write('tandem.exe %s/%s\n'%(input_xml,ouF))
         ouFile2.close()
         L.append(ouF2)
 ouFile = open('qsub.sh','w')
