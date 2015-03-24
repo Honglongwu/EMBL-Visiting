@@ -1,0 +1,12 @@
+sh ch_09May2014_TIFyeast_GluC_HpH_10.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_11.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_12.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_1.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_2.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_3.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_4.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_5.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_6.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_7.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_8.sh
+sh ch_09May2014_TIFyeast_GluC_HpH_9.sh

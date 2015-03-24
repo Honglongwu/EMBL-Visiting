@@ -1,0 +1,8 @@
+sh ch_29May2014_ncRNA_LysC_HpH_1.sh
+sh ch_29May2014_ncRNA_LysC_HpH_2.sh
+sh ch_29May2014_ncRNA_LysC_HpH_3.sh
+sh ch_29May2014_ncRNA_LysC_HpH_4.sh
+sh ch_29May2014_ncRNA_LysC_HpH_5.sh
+sh ch_29May2014_ncRNA_LysC_HpH_6.sh
+sh ch_29May2014_ncRNA_LysC_HpH_7.sh
+sh ch_29May2014_ncRNA_LysC_HpH_8.sh
