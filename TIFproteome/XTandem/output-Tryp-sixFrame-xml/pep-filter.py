@@ -5,6 +5,7 @@ def check_exist(pep, D):
             flag = 1
     return flag
 def check_IL(pep, D):
+def check_IL(pep):
     L = []
     for i in range(len(pep)):
         if pep[i] == 'I' or pep[i] == 'L':
@@ -21,7 +22,9 @@ def check_IL(pep, D):
             S2.add(pep1)
             S2.add(pep2)
         S = S2
-    for pep in S:        
+    print(S)
+
+
 
                 
 
