@@ -5,7 +5,6 @@ def check_exist(pep, D):
             flag = 1
     return flag
 def check_IL(pep, D):
-def check_IL(pep):
     L = []
     for i in range(len(pep)):
         if pep[i] == 'I' or pep[i] == 'L':
@@ -22,13 +21,13 @@ def check_IL(pep):
             S2.add(pep1)
             S2.add(pep2)
         S = S2
-    print(S)
-
-
-
-                
-
-
+    res = []
+    for p in S:
+        for k in D:
+            if p in D:
+                res.append(p)
+                break
+    return res
 
 def filter(inF):
     D = {}
@@ -49,8 +48,12 @@ def filter(inF):
         fields = line.split('\t')
         pep = fields[0]
         flag = check_exist(pep, D)
+        res = check_IL(pep, D)
         if flag:
             print(line)
+            pass
+        elif res:
+            print(res)
         else:
             ouFile.write(line + '\n')
     inFile.close()
