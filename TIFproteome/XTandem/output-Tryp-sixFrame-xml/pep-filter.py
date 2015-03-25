@@ -24,7 +24,7 @@ def check_IL(pep, D):
     res = []
     for p in S:
         for k in D:
-            if p in D:
+            if p in k:
                 res.append(p)
                 break
     return res
@@ -51,9 +51,8 @@ def filter(inF):
         res = check_IL(pep, D)
         if flag:
             print(line)
-            pass
         elif res:
-            print(res)
+            print(pep + '\t' + '\t'.join(res))
         else:
             ouFile.write(line + '\n')
     inFile.close()
